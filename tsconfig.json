@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "target": "es2018",
+    "outDir": "./build",
+    "baseUrl": "src",
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths"
+      }
+    ],
+    "paths": {
+      "*": [
+        "*"
+      ]
+    },
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+  }
+}

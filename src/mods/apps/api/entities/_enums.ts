@@ -1,0 +1,23 @@
+import 'reflect-metadata';
+import { registerEnumType } from 'type-graphql';
+
+export enum AppStatus {
+  new = 'new',
+  waiting = 'waiting',
+  published = 'published',
+  deleted = 'deleted',
+}
+
+registerEnumType(AppStatus, { name: 'AppStatus' });
+export const APP_STATUS_VALUES = Object.values(AppStatus);
+
+export enum AppDraftStatus {
+  inProgress = 'inProgress',
+  submitted = 'submitted',
+  approved = 'approved',
+  published = 'published',
+  deleted = 'deleted',
+}
+
+registerEnumType(AppDraftStatus, { name: 'AppDraftStatus' });
+export const APP_DRAFT_STATUS_VALUES = Object.values(AppDraftStatus);
