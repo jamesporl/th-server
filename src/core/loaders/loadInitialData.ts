@@ -7,12 +7,10 @@ export default async function loadInitialData(): Promise<void> {
   const adminUserId = new Types.ObjectId();
   const adminPwHash = await hashPassword('admin123');
   const adminEmail = 'admin@techhustlers.ph';
-  const adminName = 'Tony Guzman';
 
   const adminUser = {
     _id: adminUserId,
     email: adminEmail,
-    name: adminName,
     password: adminPwHash,
     roles: [{ role: RoleKey.staff }],
   };
@@ -21,7 +19,6 @@ export default async function loadInitialData(): Promise<void> {
     email: adminEmail,
     firstName: 'Tony',
     lastName: 'Guzman',
-    name: adminName,
     userId: adminUserId,
   };
 

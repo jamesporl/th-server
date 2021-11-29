@@ -1,10 +1,11 @@
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
-import { GraphQLDate } from 'graphql-iso-date';
+import { GraphQLDateTime } from 'graphql-iso-date';
 import { Field, ID, InputType, ObjectType, Int } from 'type-graphql';
 import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import { AppDraftStatus, AppStatus } from './_enums';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
+import { AppTag } from './AppTags';
 
 @InputType()
 export class AddAppInput {
@@ -53,6 +54,9 @@ export class App extends Node {
   @Field({ nullable: true })
   desc?: string;
 
+  @Field(() => GraphQLDateTime, { nullable: true })
+  publishDate?: Date;
+
   @Field({ nullable: true })
   playStoreUrl?: string;
 
@@ -61,9 +65,6 @@ export class App extends Node {
     
   @Field({ nullable: true })
   websiteUrl?: string;
-
-  @Field(() => GraphQLDate, { nullable: true })
-  publishDate?: Image;
 
   @Field(() => Image, { nullable: true })
   logoImg?: Image;
@@ -76,6 +77,9 @@ export class App extends Node {
 
   @Field(() => AppStatusObject)
   status?: AppStatusObject;
+
+  @Field(() => [AppTag], { nullable: 'itemsAndList' })
+  tags?: AppTag[];
 }
 
 @ObjectType({ implements: Node })
@@ -101,9 +105,6 @@ export class AppDraft extends Node {
   @Field({ nullable: true })
   websiteUrl?: string;
 
-  @Field(() => GraphQLDate, { nullable: true })
-  publishDate?: Image;
-
   @Field(() => Image, { nullable: true })
   logoImg?: Image;
 
@@ -112,6 +113,9 @@ export class AppDraft extends Node {
 
   @Field(() => [BannerImg], { nullable: 'itemsAndList' })
   bannerImgs?: BannerImg[];
+
+  @Field(() => [AppTag], { nullable: 'itemsAndList' })
+  tags?: AppTag[];
 
   @Field(() => AppDraftStatusObject)
   status?: AppDraftStatusObject;
@@ -176,8 +180,8 @@ export class UpdateAppDraftInput {
   @Field({ nullable: true })
   websiteUrl?: string;
 
-  @Field(() => GraphQLDate, { nullable: true })
-  publishDate?: Image;
+  @Field(() => [ID], { nullable: 'itemsAndList' })
+  tagIds?: string[];
 }
 
 @InputType()

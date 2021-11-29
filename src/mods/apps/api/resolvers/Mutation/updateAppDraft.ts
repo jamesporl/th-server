@@ -3,7 +3,7 @@ import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import { RoleKey } from 'mods/base/api/entities/_enums';
-import { MApp, MAppDraft } from '../../../db';
+import { MApp, MAppDraft, MAppTag } from '../../../db';
 import { UpdateAppDraftInput, App, AppDraft } from '../../entities/Apps';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
 
@@ -15,7 +15,8 @@ export default class {
     @Ctx() { accountId, role }: Context,  // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftInput) input: UpdateAppDraftInput,
   ) {
-    const { appId, name, shortDesc, desc, ...rest  } = input;
+    const { appId, name, shortDesc, desc, tagIds, ...rest  } = input;
+
     if (name.length > 40) {
       throw new UserInputError('Name should not exceed 40 characters.');
     }
@@ -25,6 +26,10 @@ export default class {
 
     if (desc && desc.length > 1000) {
       throw new UserInputError('Description is too long.')
+    }
+
+    if (tagIds?.length > 3) {
+      throw new UserInputError('Maximum of 3 tags are allowed');
     }
 
     const appDraft = await MAppDraft.findOne({
@@ -38,9 +43,16 @@ export default class {
       throw new ForbiddenError('Forbidden.');
     }
 
+    if (tagIds?.length) {
+      const tagDocs = await MAppTag.find({ _id: { $in: tagIds } });
+      if (tagDocs.length !== tagIds.length) {
+        throw new UserInputError('Invalid tag');
+      }
+    }
+
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
       { appId },
-      { $set: { name, shortDesc, desc, ...rest } },
+      { $set: { name, shortDesc, desc, tagIds, ...rest } },
       { new: true, lean: true },
     );
 

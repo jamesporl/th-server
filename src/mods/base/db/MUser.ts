@@ -8,9 +8,8 @@ const RoleSchema = new Schema({
 
 const UserSchema = new Schema(
   {
-    email: { type: String, unique: true, required: true },
+    email: { type: String, trim: true, lowercase: true },
     isActive: { type: Boolean, default: true },
-    name: String,
     password: String,
     pwResetToken: String,
     roles: [RoleSchema],

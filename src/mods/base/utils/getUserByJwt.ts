@@ -1,10 +1,10 @@
 import { format } from 'date-fns';
 import jwt from 'jsonwebtoken';
 import config from 'core/config';
-import { Context } from 'core/graphql/_types';
+import { UserContext } from 'core/graphql/_types';
 import rolesList from './constants/rolesList';
 
-export default function getUserByJwt(token: string): Context {
+export default function getUserByJwt(token: string): UserContext {
   try {
     const result = jwt.verify(
       token,
