@@ -16,6 +16,7 @@ export interface Account {
   image?: Image;
   phone?: string;
   userId: Types.ObjectId;
+  username: string;
 }
 
 export type DbAccount = Account & Document;

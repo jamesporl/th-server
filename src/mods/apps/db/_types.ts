@@ -20,6 +20,7 @@ export interface App {
   appStoreUrl?: string;
   websiteUrl?: string;
   status: AppStatus;
+  tagIds?: Types.ObjectId[];
   createdBy: Types.ObjectId;
   updatedBy: Types.ObjectId;
 }
@@ -36,9 +37,16 @@ export interface AppDraft {
   bannerImgs?: BannerImg[];
   ownedBy: Types.ObjectId;
   publishDate?: Date;
-  playStoreUrl: string;
-  appStoreUrl: string;
-  websiteUrl: string;
+  playStoreUrl?: string;
+  appStoreUrl?: string;
+  websiteUrl?: string;
+  tagIds?: Types.ObjectId[];
 }
 
 export type DbAppDraft = AppDraft & Document;
+
+export interface AppTag {
+  name: string;
+}
+
+export type DbAppTag = AppTag & Document;

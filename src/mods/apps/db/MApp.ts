@@ -18,6 +18,7 @@ const AppSchema = new Schema(
     bannerImgs: [BannerImgSchema],
     ownedBy: { type: Schema.Types.ObjectId, required: true },
     status: { type: String, enum: APP_STATUS_VALUES, required: true, default: AppStatus.new },
+    tagIds: [Schema.Types.ObjectId],
     createdBy: Schema.Types.ObjectId,
     updatedBy: Schema.Types.ObjectId,
   },

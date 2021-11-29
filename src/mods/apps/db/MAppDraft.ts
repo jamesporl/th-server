@@ -13,7 +13,6 @@ const AppDraftSchema = new Schema(
     playStoreUrl: String,
     appStoreUrl: String,
     websiteUrl: String,
-    publishDate: Date,
     logoImg: ImageSchema,
     videoUrl: String,
     bannerImgs: [BannerImgSchema],
@@ -24,6 +23,7 @@ const AppDraftSchema = new Schema(
       default: AppDraftStatus.inProgress,
     },
     ownedBy: { type: Schema.Types.ObjectId, required: true },
+    tagIds: [Schema.Types.ObjectId],
   },
   {
     collection: 'AppDraft', timestamps: true,

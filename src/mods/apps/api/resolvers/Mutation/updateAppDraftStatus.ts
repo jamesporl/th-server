@@ -30,14 +30,14 @@ export default class {
       const appUpdate: { [key: string]: unknown } = {
         name: appDraft.name,
         shortDesc: appDraft.shortDesc,
-        publishDate: appDraft.publishDate,
-        desc: appDraft.publishDate,
+        desc: appDraft.desc,
         bannerImgs: appDraft.bannerImgs,
         logoImg: appDraft.logoImg,
         videoUrl: appDraft.videoUrl,
         websiteUrl: appDraft.websiteUrl,
         playStoreUrl: appDraft.playStoreUrl,
         appStoreUrl: appDraft.appStoreUrl,
+        tagIds: appDraft.tagIds,
       };
       if (app.status === AppStatus.new) {
         await MApp.updateOne(

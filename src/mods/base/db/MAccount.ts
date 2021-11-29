@@ -4,12 +4,12 @@ import ImageSchema from './common/Image';
 
 const AccountSchema = new Schema(
   {
-    email: String,
-    firstName: String,
-    lastName: String,
-    name: String,
+    email: { type: String, trim: true, lowercase: true },
+    firstName: { type: String, trim: true },
+    lastName: { type: String, trim: true },
     image: ImageSchema,
-    phone: String,
+    phone: { type: String, trim: true },
+    username: { type: String, trim: true, lowercase: true },
     userId: Schema.Types.ObjectId,
   },
   { collection: 'Account', timestamps: true },

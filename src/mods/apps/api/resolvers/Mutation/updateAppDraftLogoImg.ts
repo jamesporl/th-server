@@ -1,3 +1,4 @@
+import fs from 'fs';
 import { UserInputError } from 'apollo-server-express';
 import aws from 'aws-sdk';
 import { Types } from 'mongoose';
@@ -20,6 +21,7 @@ export default class {
   ) {
     const { appId, file } = input;
     const appDraft = await MAppDraft.findOne({ appId, ownedBy: accountId }, { _id: 1 });
+
     if (!appDraft) {
       throw new UserInputError('App not found.');
     }

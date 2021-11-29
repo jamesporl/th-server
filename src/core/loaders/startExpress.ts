@@ -4,12 +4,13 @@ import express from 'express';
 import { GraphQLSchema } from 'graphql';
 import getUserByJwt from 'mods/base/utils/getUserByJwt';
 import { graphqlUploadExpress } from 'graphql-upload';
-import { Context } from 'core/graphql/_types';
+import { Context, UserContext } from 'core/graphql/_types';
+import createDataloaders from '../graphql/createDataloaders';
 import config from '../config';
 import logger from '../logger';
 
 function addUserContextFromJwt(
-  req: express.Request & { userContext: Context },
+  req: express.Request & { userContext: UserContext },
   res: express.Response,
   next: express.NextFunction,
 ): void {
@@ -31,8 +32,10 @@ function addUserContextFromJwt(
 function buildGqlContext(
   { req }: { req: express.Request & { userContext: Context } },
 ): Context {
+  const dataloaders = createDataloaders();
   return {
     ...req.userContext,
+    dataloaders,
   };
 }
 
