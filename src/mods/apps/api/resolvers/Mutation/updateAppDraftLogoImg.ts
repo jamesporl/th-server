@@ -1,22 +1,23 @@
-import fs from 'fs';
 import { UserInputError } from 'apollo-server-express';
 import aws from 'aws-sdk';
 import { Types } from 'mongoose';
 import sharp from 'sharp';
-import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg, Ctx, Mutation, Resolver,
+} from 'type-graphql';
 import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
 import { MAppDraft } from '../../../db';
-import { UpdateAppDraftLogoImgInput } from '../../entities/Apps';
+import { UpdateAppDraftLogoImgInput } from '../../entities/AppDrafts';
 
 @Resolver()
 export default class {
   @Auth()
   @Mutation(() => DefaultMutationPayload)
   async updateAppDraftLogoImg(
-    @Ctx() { accountId }: Context,  // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftLogoImgInput) input: UpdateAppDraftLogoImgInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { appId, file } = input;
@@ -58,12 +59,12 @@ export default class {
     await Promise.all(
       Object.keys(imgSizes).map(async (size) => {
         const pipeline = sharp()
-          .resize(imgSizes[size].width, imgSizes[size].height, {
+          .resize(imgSizes[size].width as number, imgSizes[size].height as number, {
             fit: 'cover',
             background: {
               r: 0,
               g: 0,
-                b: 0,
+              b: 0,
               alpha: 0,
             },
           })

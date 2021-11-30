@@ -1,7 +1,18 @@
 import { Types, Document } from 'mongoose';
 import { RoleKey } from '../api/entities/_enums';
 
+export interface TimeStamps {
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface AccountStamps {
+  createdBy?: Types.ObjectId;
+  updatedBy: Types.ObjectId;
+}
+
 export interface Image extends Document {
+  _id: Types.ObjectId;
   thumbnail?: string;
   small?: string;
   medium?: string;
@@ -9,6 +20,7 @@ export interface Image extends Document {
 }
 
 export interface Account {
+  _id: Types.ObjectId;
   email: string;
   firstName: string;
   lastName: string;
@@ -19,7 +31,7 @@ export interface Account {
   username: string;
 }
 
-export type DbAccount = Account & Document;
+export type DbAccount = Document & Document;
 
 export interface Role {
   _id: Types.ObjectId;

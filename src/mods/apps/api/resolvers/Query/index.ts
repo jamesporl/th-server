@@ -6,4 +6,3 @@ import myAppDrafts from './myAppDrafts';
 import myApps from './myApps';
 
 export default [app, appDraft, apps, appTags, myAppDrafts, myApps];
-

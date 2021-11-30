@@ -1,11 +1,13 @@
 import { ForbiddenError, UserInputError } from 'apollo-server-express';
-import { Arg, Resolver, Ctx, Query, ID } from 'type-graphql';
+import {
+  Arg, Resolver, Ctx, Query, ID,
+} from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
-import { MApp, MAppDraft } from '../../../db';
-import { AppDraft } from '../../entities/Apps';
-import { AppStatus } from '../../entities/_enums';
 import { RoleKey } from 'mods/base/api/entities/_enums';
+import { MApp, MAppDraft } from '../../../db';
+import { AppDraft } from '../../entities/AppDrafts';
+import { AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {

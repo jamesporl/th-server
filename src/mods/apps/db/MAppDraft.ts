@@ -23,6 +23,7 @@ const AppDraftSchema = new Schema(
       default: AppDraftStatus.inProgress,
     },
     ownedBy: { type: Schema.Types.ObjectId, required: true },
+    submittedAt: Date,
     tagIds: [Schema.Types.ObjectId],
   },
   {

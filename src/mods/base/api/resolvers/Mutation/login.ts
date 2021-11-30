@@ -1,10 +1,10 @@
 import { ForbiddenError, UserInputError } from 'apollo-server-express';
 import bcrypt from 'bcrypt';
 import { Arg, Mutation, Resolver } from 'type-graphql';
+import generateAuthToken from '../../../utils/generateAuthToken';
 import { MUser, MAccount } from '../../../db';
 import validateEmailByRegex from '../../../utils/validateEmailByRegex';
 import { LoginInput } from '../../entities/Auth';
-import generateAuthToken from 'mods/base/utils/generateAuthToken';
 
 @Resolver()
 export default class {

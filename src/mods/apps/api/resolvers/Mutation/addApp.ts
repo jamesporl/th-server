@@ -1,6 +1,8 @@
 import { UserInputError } from 'apollo-server-express';
 import { Types } from 'mongoose';
-import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg, Ctx, Mutation, Resolver,
+} from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import { MApp, MAppDraft } from '../../../db';
@@ -12,7 +14,7 @@ export default class {
   @Auth()
   @Mutation(() => App)
   async addApp(
-    @Ctx() { accountId }: Context,  // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => AddAppInput) input: AddAppInput,
   ) {
     const { name, shortDesc } = input;
@@ -20,7 +22,7 @@ export default class {
       throw new UserInputError('Name should not exceed 40 characters.');
     }
     if (shortDesc.length > 80) {
-      throw new UserInputError('Short description should not exceed 80 characters.')
+      throw new UserInputError('Short description should not exceed 80 characters.');
     }
 
     const newApp = await new MApp({

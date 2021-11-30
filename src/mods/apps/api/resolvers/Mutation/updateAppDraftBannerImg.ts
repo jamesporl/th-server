@@ -2,20 +2,22 @@ import { UserInputError } from 'apollo-server-express';
 import aws from 'aws-sdk';
 import { Types } from 'mongoose';
 import sharp from 'sharp';
-import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg, Ctx, Mutation, Resolver,
+} from 'type-graphql';
 import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
 import { MAppDraft } from '../../../db';
-import { UpdateAppDraftBannerImgInput } from '../../entities/Apps';
+import { UpdateAppDraftBannerImgInput } from '../../entities/AppDrafts';
 
 @Resolver()
 export default class {
   @Auth()
   @Mutation(() => DefaultMutationPayload)
   async updateAppDraftBannerImg(
-    @Ctx() { accountId }: Context,  // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftBannerImgInput) input: UpdateAppDraftBannerImgInput,
   ) {
     const { appId, order, file } = input;
@@ -53,12 +55,12 @@ export default class {
     await Promise.all(
       Object.keys(imgSizes).map(async (size) => {
         const pipeline = sharp()
-          .resize(imgSizes[size].width, imgSizes[size].height, {
+          .resize(imgSizes[size].width as number, imgSizes[size].height as number, {
             fit: 'cover',
             background: {
               r: 0,
               g: 0,
-                b: 0,
+              b: 0,
               alpha: 0,
             },
           })
@@ -92,7 +94,7 @@ export default class {
     };
 
     const bannerImgExists = appDraft.bannerImgs?.find((img) => img.order === order);
-    console.log('====', bannerImgExists);
+
     if (bannerImgExists) {
       await MAppDraft.updateOne(
         { appId, 'bannerImgs.order': order },
@@ -101,7 +103,7 @@ export default class {
     } else {
       await MAppDraft.updateOne({ appId }, { $push: { bannerImgs: imgSubDoc } });
     }
-    
+
     return { isCompleted: true };
   }
 }

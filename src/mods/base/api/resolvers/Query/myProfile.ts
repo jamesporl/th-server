@@ -11,7 +11,7 @@ export default class {
   async myProfile(@Ctx() { roleId, userId }: Context) {
     const account = await MAccount.findOne({ userId });
     const user = await MUser.findOne({ _id: userId });
-    const role = user.roles.find(r => r._id.toHexString() === roleId)
+    const role = user.roles.find((r) => r._id.toHexString() === roleId);
 
     return {
       ...account.toObject(),

@@ -15,7 +15,9 @@ export default function getUserByJwt(token: string): UserContext {
       return {};
     }
     const roleDetail = rolesList.find((r) => r.shortKey === result.rnm);
-    return { userId: result.uid, roleId: result.rid, role: roleDetail.key, accountId: result.aid };
+    return {
+      userId: result.uid, roleId: result.rid, role: roleDetail.key, accountId: result.aid,
+    };
   } catch (error) {
     return {};
   }

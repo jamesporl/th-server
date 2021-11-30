@@ -1,14 +1,16 @@
-import { Resolver, Root, FieldResolver, Ctx } from 'type-graphql';
+import {
+  Resolver, Root, FieldResolver, Ctx,
+} from 'type-graphql';
 import { Context } from 'core/graphql/_types';
-import { DbApp} from '../../db/_types';
-import { App } from '../entities/Apps';
+import { DbAppDraft } from '../../db/_types';
+import { AppDraft } from '../entities/AppDrafts';
 
-@Resolver(() => App)
+@Resolver(() => AppDraft)
 export default class {
   @FieldResolver()
   tags(
-    @Ctx() { dataloaders }: Context,
-    @Root() { tagIds }: DbApp,
+    @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { tagIds }: DbAppDraft,
   ) {
     if (tagIds?.length) {
       const tagIdStrs = tagIds.map((tagId) => tagId.toHexString());

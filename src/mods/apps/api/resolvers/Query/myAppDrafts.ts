@@ -1,8 +1,10 @@
-import { Arg, Resolver, Ctx, Query, Int } from 'type-graphql';
+import {
+  Arg, Resolver, Ctx, Query, Int,
+} from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
 import { MAppDraft } from '../../../db';
-import { AppDraftConnection } from '../../entities/Apps';
+import { AppDraftConnection } from '../../entities/AppDrafts';
 import { AppDraftStatus } from '../../entities/_enums';
 
 @Resolver()

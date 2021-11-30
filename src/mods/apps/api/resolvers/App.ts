@@ -1,19 +1,29 @@
-import { Resolver, Root, FieldResolver, Ctx } from 'type-graphql';
+import {
+  Resolver, Root, FieldResolver, Ctx,
+} from 'type-graphql';
 import { Context } from 'core/graphql/_types';
-import { DbAppDraft } from '../../db/_types';
-import { AppDraft } from '../entities/Apps';
+import { DbApp } from '../../db/_types';
+import { App } from '../entities/Apps';
 
-@Resolver(() => AppDraft)
+@Resolver(() => App)
 export default class {
   @FieldResolver()
   tags(
-    @Ctx() { dataloaders }: Context,
-    @Root() { tagIds }: DbAppDraft
+    @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { tagIds }: DbApp,
   ) {
     if (tagIds?.length) {
       const tagIdStrs = tagIds.map((tagId) => tagId.toHexString());
       return dataloaders.tagByIdLoader.loadMany(tagIdStrs);
     }
     return [];
+  }
+
+  @FieldResolver()
+  isSupported(
+    @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { _id }: DbApp,
+  ) {
+    return dataloaders.appSupportLoader.load(`${_id}_${accountId}`);
   }
 }
