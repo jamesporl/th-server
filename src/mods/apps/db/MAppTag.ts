@@ -3,7 +3,9 @@ import { DbAppTag } from './_types';
 
 const AppTagSchema = new Schema(
   {
-    name: { type: String, required: true, index: true, unique: true },
+    name: {
+      type: String, required: true, index: true, unique: true,
+    },
   },
   {
     collection: 'AppTag',

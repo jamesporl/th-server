@@ -1,17 +1,17 @@
 import { Resolver, Root, FieldResolver } from 'type-graphql';
-import appDraftStatusMap from '../../utils/constants/appDraftStatusMap';
-import { AppDraftStatusObject } from '../entities/Apps';
-import { AppDraftStatus } from '../entities/_enums';
+import appStatusMap from '../../utils/constants/appStatusMap';
+import { AppStatusObject } from '../entities/Apps';
+import { AppStatus } from '../entities/_enums';
 
-@Resolver(() => AppDraftStatusObject)
+@Resolver(() => AppStatusObject)
 export default class {
   @FieldResolver()
-  key(@Root() status: AppDraftStatus) {
+  key(@Root() status: AppStatus) {
     return status;
   }
 
   @FieldResolver()
-  label(@Root() status: AppDraftStatus) {
-    return appDraftStatusMap.get(status);
+  label(@Root() status: AppStatus) {
+    return appStatusMap.get(status);
   }
 }

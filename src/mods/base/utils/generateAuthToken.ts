@@ -2,7 +2,7 @@ import { addDays, format } from 'date-fns';
 import jwt from 'jsonwebtoken';
 import config from 'core/config';
 import { User } from '../db/_types';
-import rolesList from '../utils/constants/rolesList';
+import rolesList from './constants/rolesList';
 
 export default function generateAuthToken(user: User, accountId: string, roleId?: string) {
   if (!user.roles?.length) {
@@ -14,7 +14,7 @@ export default function generateAuthToken(user: User, accountId: string, roleId?
   }
 
   const expiresAt = format(addDays(new Date(), config.JWT_EXPIRATION), 'yyyy-MM-dd HH:mm:ss');
-  const roleDetail = rolesList.find(r => r.key === activeRole.role);
+  const roleDetail = rolesList.find((r) => r.key === activeRole.role);
   const objToSign = {
     uid: user._id.toHexString(),
     aid: accountId,

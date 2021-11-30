@@ -1,4 +1,6 @@
-import { Arg, Resolver, Ctx, Query, Int } from 'type-graphql';
+import {
+  Arg, Resolver, Ctx, Query, Int,
+} from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
 import { MApp } from '../../../db';
@@ -17,10 +19,11 @@ export default class {
     const dbFilter = { ownedBy: accountId, status: AppStatus.published };
     const totalCount = await MApp.count(dbFilter);
     const apps = await MApp.find(dbFilter)
-      .sort({ publishDate: -1, _id: -1 })
+      .sort({ publishedAt: -1, _id: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize)
       .lean();
+
     return {
       totalCount,
       nodes: apps,

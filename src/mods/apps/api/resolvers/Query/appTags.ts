@@ -1,10 +1,9 @@
-
-
-
-import { Arg, Resolver, Ctx, Query, Int } from 'type-graphql';
+import {
+  Arg, Resolver, Query, Int,
+} from 'type-graphql';
+import Auth from 'core/graphql/Auth';
 import { MAppTag } from '../../../db';
 import { AppTagConnection } from '../../entities/AppTags';
-import Auth from 'core/graphql/Auth';
 
 @Resolver()
 export default class {

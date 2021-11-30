@@ -11,7 +11,6 @@ export class ProfileRole extends Node {
   label: string;
 }
 
-
 @ObjectType({ implements: Node })
 export default class Profile extends Node {
   @Field({ nullable: true })
