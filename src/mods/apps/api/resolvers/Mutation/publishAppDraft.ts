@@ -2,6 +2,7 @@ import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { RoleKey } from 'mods/base/api/entities/_enums';
 import Auth from 'core/graphql/Auth';
+import slugify from 'slugify';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -26,6 +27,12 @@ export default class {
       status: AppStatus.published,
       publishedAt: new Date(),
     };
+
+    const slug = slugify(appDraft.name, { lower: true, trim: true, strict: true });
+    const isSlugTaken = await MApp.findOne({ slug, _id: { $ne: app._id } });
+    if (isSlugTaken) {
+      throw new UserInputError('App name is already taken');
+    }
     if (app.status === AppStatus.published) {
       appUpdate = {
         name: appDraft.name,
@@ -38,6 +45,8 @@ export default class {
         playStoreUrl: appDraft.playStoreUrl,
         appStoreUrl: appDraft.appStoreUrl,
         tagIds: appDraft.tagIds,
+        socialUrls: appDraft.socialUrls,
+        slug,
         ...appUpdate,
       };
     }

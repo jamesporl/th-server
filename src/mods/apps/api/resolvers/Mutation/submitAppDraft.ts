@@ -47,6 +47,7 @@ export default class {
         playStoreUrl: appDraft.playStoreUrl,
         appStoreUrl: appDraft.appStoreUrl,
         tagIds: appDraft.tagIds,
+        socialUrls: appDraft.socialUrls,
       };
       await MApp.updateOne(
         { _id: appId },

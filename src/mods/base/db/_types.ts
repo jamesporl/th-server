@@ -49,3 +49,11 @@ export interface User {
 }
 
 export type DbUser = User & Document;
+
+export interface SocialUrls {
+  twitter?: string;
+  facebook?: string;
+  linkedIn?: string;
+  github?: string;
+  instagram?: string;
+}

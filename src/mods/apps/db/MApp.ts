@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import ImageSchema from 'mods/base/db/common/Image';
+import SocialUrlsSchema from 'mods/base/db/common/SocialUrls';
 import { AppStatus, APP_STATUS_VALUES } from '../api/entities/_enums';
 import { DbApp } from './_types';
 import BannerImgSchema from './common/BannerImg';
@@ -20,6 +21,8 @@ const AppSchema = new Schema(
     status: {
       type: String, enum: APP_STATUS_VALUES, required: true, default: AppStatus.new,
     },
+    slug: { type: String, index: true },
+    socialUrls: SocialUrlsSchema,
     supportsCount: { type: Number, default: 0 },
     tagIds: [Schema.Types.ObjectId],
     isSponsored: Boolean,

@@ -1,32 +1,18 @@
-import { ForbiddenError, UserInputError } from 'apollo-server-express';
-import {
-  Arg, Resolver, Ctx, Query, ID,
-} from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import Auth from 'core/graphql/Auth';
-import { RoleKey } from 'mods/base/api/entities/_enums';
+import { UserInputError } from 'apollo-server-express';
+import { Arg, Resolver, Query } from 'type-graphql';
 import { MApp } from '../../../db';
 import { App } from '../../entities/Apps';
 import { AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
-  @Auth()
-  @Query(() => App, { nullable: true })
+  @Query(() => App)
   async app(
-    @Ctx() { accountId, role }: Context, // eslint-disable-line @typescript-eslint/indent
-    @Arg('_id', () => ID, { nullable: true }) _id: string,
+    @Arg('slug') slug: string, // eslint-disable-line @typescript-eslint/indent
   ) {
-    const app = await MApp.findOne({ _id, status: { $ne: AppStatus.deleted } }).lean();
+    const app = await MApp.findOne({ slug, status: AppStatus.published }).lean();
     if (!app) {
       throw new UserInputError('App not found');
-    }
-
-    if (
-      [AppStatus.new, AppStatus.waiting].includes(app.status)
-      && (app.ownedBy.toHexString() !== accountId || role !== RoleKey.staff)
-    ) {
-      throw new ForbiddenError('Forbidden');
     }
     return app;
   }
