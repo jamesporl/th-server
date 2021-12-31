@@ -5,6 +5,7 @@ import {
 import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
+import SocialUrls from 'mods/base/api/entities/SocialUrls';
 import { AppStatus } from './_enums';
 import { AppTag } from './AppTags';
 
@@ -81,6 +82,12 @@ export class App extends Node {
 
   @Field(() => Boolean, { nullable: true })
   isSponsored?: boolean;
+
+  @Field({ nullable: true })
+  slug?: string;
+
+  @Field({ nullable: true })
+  socialUrls?: SocialUrls;
 }
 
 @ObjectType({ implements: NodeConnection })

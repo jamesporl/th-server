@@ -1,4 +1,6 @@
-import { Image, TimeStamps, AccountStamps } from 'mods/base/db/_types';
+import {
+  Image, TimeStamps, AccountStamps, SocialUrls,
+} from 'mods/base/db/_types';
 import { Types, Document } from 'mongoose';
 import { AppStatus } from '../api/entities/_enums';
 
@@ -23,6 +25,8 @@ export interface App extends TimeStamps, AccountStamps {
   tagIds?: Types.ObjectId[];
   supportsCount: number;
   isSponsored?: boolean;
+  slug?: string;
+  socialUrls?: SocialUrls;
 }
 
 export type DbApp = App & Document;
@@ -40,6 +44,7 @@ export interface AppDraft extends TimeStamps {
   appStoreUrl?: string;
   websiteUrl?: string;
   tagIds?: Types.ObjectId[];
+  socialUrls?: SocialUrls;
   submittedAt?: Date;
 }
 

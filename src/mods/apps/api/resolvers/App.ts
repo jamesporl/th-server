@@ -24,6 +24,9 @@ export default class {
     @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Root() { _id }: DbApp,
   ) {
-    return dataloaders.appSupportLoader.load(`${_id}_${accountId}`);
+    if (accountId) {
+      return dataloaders.appSupportLoader.load(`${_id}_${accountId}`);
+    }
+    return false;
   }
 }

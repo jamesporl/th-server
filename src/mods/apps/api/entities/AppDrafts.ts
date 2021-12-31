@@ -5,6 +5,8 @@ import {
 import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
+import SocialUrls from 'mods/base/api/entities/SocialUrls';
+import SocialUrlsInput from 'mods/base/api/entities/SocialUrlsInput';
 import { AppDraftStatus } from './_enums';
 import { AppTag } from './AppTags';
 import { BannerImg } from './Apps';
@@ -55,6 +57,9 @@ export class AppDraft extends Node {
 
   @Field(() => AppDraftStatusObject)
   status?: AppDraftStatusObject;
+
+  @Field({ nullable: true })
+  socialUrls?: SocialUrls;
 }
 
 @ObjectType({ implements: NodeConnection })
@@ -112,6 +117,9 @@ export class UpdateAppDraftInput {
 
   @Field(() => [ID], { nullable: 'itemsAndList' })
   tagIds?: string[];
+
+  @Field({ nullable: true })
+  socialUrls?: SocialUrlsInput;
 }
 
 @InputType()

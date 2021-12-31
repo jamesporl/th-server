@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import ImageSchema from 'mods/base/db/common/Image';
+import SocialUrlsSchema from 'mods/base/db/common/SocialUrls';
 import { DbAppDraft } from './_types';
 import BannerImgSchema from './common/BannerImg';
 import { AppDraftStatus, APP_DRAFT_STATUS_VALUES } from '../api/entities/_enums';
@@ -22,6 +23,7 @@ const AppDraftSchema = new Schema(
       required: true,
       default: AppDraftStatus.inProgress,
     },
+    socialUrls: SocialUrlsSchema,
     ownedBy: { type: Schema.Types.ObjectId, required: true },
     submittedAt: Date,
     tagIds: [Schema.Types.ObjectId],
