@@ -7,6 +7,5 @@ export default function reorderDocumentsByKeys<Doc extends { _id: Types.ObjectId
   keyToMapKey: (key: K) => string = (key) => key.toString(),
 ) {
   const docsMap = new Map(docs.map((doc) => [keyToMapKey(keySelector(doc)), doc] as [string, Doc]));
-
   return keys.map((key) => docsMap.get(keyToMapKey(key)));
 }
