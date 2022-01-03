@@ -14,7 +14,7 @@ export default class {
   @Auth()
   @Mutation(() => AppComment)
   async addCommentToApp(
-    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId, dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => AddCommentToAppInput) input: AddCommentToAppInput,
   ) {
     const { appId, parentCommentId, content } = input;
@@ -36,6 +36,10 @@ export default class {
       parentCommentId,
       createdBy: accountId,
     }).save();
+
+    if (parentCommentId) {
+      dataloaders.childCommentsByParentIdLoader.clear(parentCommentId);
+    }
 
     return newComment.toObject();
   }
