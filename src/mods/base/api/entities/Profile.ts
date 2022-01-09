@@ -1,4 +1,8 @@
-import { Field, ObjectType, ID } from 'type-graphql';
+import { FileUpload, GraphQLUpload } from 'graphql-upload';
+import {
+  Field, ObjectType, ID, InputType,
+} from 'type-graphql';
+import Image from './Image';
 import Node from './Node';
 import { RoleKey } from './_enums';
 
@@ -12,12 +16,18 @@ export class ProfileRole extends Node {
 }
 
 @ObjectType({ implements: Node })
-export default class Profile extends Node {
+export class Profile extends Node {
   @Field({ nullable: true })
   firstName?: string;
 
   @Field({ nullable: true })
   lastName?: string;
+
+  @Field({ nullable: true })
+  shortDesc?: string;
+
+  @Field(() => Image, { nullable: true })
+  image?: Image;
 
   @Field()
   email: string;
@@ -30,4 +40,22 @@ export default class Profile extends Node {
 
   @Field(() => [ProfileRole], { nullable: true })
   roles?: ProfileRole[];
+}
+
+@InputType()
+export class UpdatePersonalInfoInput {
+  @Field()
+  firstName: string;
+
+  @Field()
+  lastName: string;
+
+  @Field({ nullable: true })
+  shortDesc?: string;
+}
+
+@InputType()
+export class UpdateProfilePhotoInput {
+  @Field(() => GraphQLUpload)
+  file: FileUpload;
 }

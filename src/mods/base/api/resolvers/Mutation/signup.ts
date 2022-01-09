@@ -14,30 +14,19 @@ export default class {
     @Arg('input', () => SignupInput) input: SignupInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const {
-      firstName, lastName, username: iusername, email: iEmail, password,
+      firstName, lastName, email: iEmail, password,
     } = input;
 
     const email = iEmail.toLowerCase().trim();
-    const username = iusername.toLowerCase().trim();
 
     const isEmailValid = validateEmailByRegex(email);
     if (!isEmailValid) {
       throw new UserInputError('Invalid e-mail format.');
     }
 
-    const usernamePattern = /^\w+$/;
-    if (!usernamePattern.test(username)) {
-      throw new UserInputError('username should be alphanumeric.');
-    }
-
     const emailExists = await MUser.findOne({ email }, { _id: 1 }).lean();
     if (emailExists) {
       throw new UserInputError('E-mail already exists.');
-    }
-
-    const usernameExists = await MAccount.findOne({ username }, { _id: 1 }).lean();
-    if (usernameExists) {
-      throw new UserInputError('username already exists.');
     }
 
     const newUser = await new MUser({
@@ -49,7 +38,6 @@ export default class {
     const newAccount = await new MAccount({
       firstName,
       lastName,
-      username,
       email,
       userId: newUser._id,
     }).save();

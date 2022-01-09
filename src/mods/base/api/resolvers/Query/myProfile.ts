@@ -2,7 +2,7 @@ import { Resolver, Ctx, Query } from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
 import { MAccount, MUser } from '../../../db';
-import Profile from '../../entities/Profile';
+import { Profile } from '../../entities/Profile';
 
 @Resolver()
 export default class {

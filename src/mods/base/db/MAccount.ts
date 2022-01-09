@@ -9,7 +9,7 @@ const AccountSchema = new Schema(
     lastName: { type: String, trim: true },
     image: ImageSchema,
     phone: { type: String, trim: true },
-    username: { type: String, trim: true, lowercase: true },
+    shortDesc: { type: String, trim: true },
     userId: Schema.Types.ObjectId,
   },
   { collection: 'Account', timestamps: true },
