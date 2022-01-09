@@ -10,6 +10,12 @@ export class LoginInput {
 }
 
 @InputType()
+export class ResetPasswordWithAuthInput {
+  @Field()
+  newPassword: string;
+}
+
+@InputType()
 export class SignupInput {
   @Field()
   email: string;
@@ -21,8 +27,11 @@ export class SignupInput {
   lastName: string;
 
   @Field()
-  username: string;
-
-  @Field()
   password: string;
+}
+
+@InputType()
+export class UpdateEmailInput {
+  @Field()
+  newEmail: string;
 }

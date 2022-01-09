@@ -27,11 +27,11 @@ export interface Account {
   name: string;
   image?: Image;
   phone?: string;
+  shortDesc?: string;
   userId: Types.ObjectId;
-  username: string;
 }
 
-export type DbAccount = Document & Document;
+export type DbAccount = Account & Document;
 
 export interface Role {
   _id: Types.ObjectId;
