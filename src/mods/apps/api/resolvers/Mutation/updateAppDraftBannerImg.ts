@@ -9,7 +9,7 @@ import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import { MAppDraft } from '../../../db';
+import { MApp, MAppDraft } from '../../../db';
 import { UpdateAppDraftBannerImgInput } from '../../entities/AppDrafts';
 
 @Resolver()
@@ -93,15 +93,29 @@ export default class {
       },
     };
 
-    const bannerImgExists = appDraft.bannerImgs?.find((img) => img.order === order);
-
-    if (bannerImgExists) {
+    const draftBannerImg = appDraft.bannerImgs?.find((img) => img.order === order);
+    if (draftBannerImg) {
       await MAppDraft.updateOne(
         { appId, 'bannerImgs.order': order },
         { $set: { 'bannerImgs.$': imgSubDoc } },
       );
     } else {
       await MAppDraft.updateOne({ appId }, { $push: { bannerImgs: imgSubDoc } });
+    }
+
+    const app = await MApp.findOne({ _id: appId });
+    const appBannerImg = app.bannerImgs?.find((img) => img.order === order);
+    if (draftBannerImg) {
+      if (draftBannerImg.image.large !== appBannerImg?.image.large) {
+        await s3Config.deleteObject(
+          { Bucket: config.DO_SPACES_BUCKET, Key: draftBannerImg.image.large },
+        ).promise();
+      }
+      if (draftBannerImg.image.thumbnail !== appBannerImg?.image.thumbnail) {
+        await s3Config.deleteObject(
+          { Bucket: config.DO_SPACES_BUCKET, Key: draftBannerImg.image.thumbnail },
+        ).promise();
+      }
     }
 
     return { isCompleted: true };

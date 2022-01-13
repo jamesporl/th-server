@@ -77,6 +77,9 @@ export class App extends Node {
   @Field(() => Int)
   supportsCount: number;
 
+  @Field(() => Int)
+  commentsCount: number;
+
   @Field(() => Boolean)
   isSupported: boolean;
 
