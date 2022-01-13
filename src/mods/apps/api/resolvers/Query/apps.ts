@@ -9,10 +9,17 @@ import { AppStatus } from '../../entities/_enums';
 export default class {
   @Query(() => AppConnection, { nullable: true })
   async apps(
-    @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100, // eslint-disable-line @typescript-eslint/indent
+    @Arg('searchString', { nullable: true }) searchString: string, // eslint-disable-line @typescript-eslint/indent
+    @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100,
     @Arg('page', () => Int, { nullable: true }) page = 1,
   ) {
-    const dbFilter = { status: AppStatus.published };
+    const dbFilter: { [key: string]: unknown } = {};
+    if (searchString) {
+      const pattern = new RegExp(searchString, 'i');
+      dbFilter.name = pattern;
+    }
+    dbFilter.status = AppStatus.published;
+
     const totalCount = await MApp.count(dbFilter);
     const apps = await MApp.find(dbFilter)
       .sort({ publishedAt: -1 })

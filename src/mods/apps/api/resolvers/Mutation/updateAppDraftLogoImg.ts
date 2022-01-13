@@ -9,7 +9,7 @@ import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import { MAppDraft } from '../../../db';
+import { MApp, MAppDraft } from '../../../db';
 import { UpdateAppDraftLogoImgInput } from '../../entities/AppDrafts';
 
 @Resolver()
@@ -95,6 +95,25 @@ export default class {
       thumbnail: imgSizes.thumbnail.key,
     };
     await MAppDraft.updateOne({ appId }, { $set: { logoImg: imgSubDoc } });
+
+    const app = await MApp.findOne({ _id: appId });
+    if (appDraft.logoImg) {
+      if (appDraft.logoImg.large !== app.logoImg?.large) {
+        await s3Config.deleteObject(
+          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.large },
+        ).promise();
+      }
+      if (appDraft.logoImg.medium !== app.logoImg?.medium) {
+        await s3Config.deleteObject(
+          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.medium },
+        ).promise();
+      }
+      if (appDraft.logoImg.thumbnail !== app.logoImg?.thumbnail) {
+        await s3Config.deleteObject(
+          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.thumbnail },
+        ).promise();
+      }
+    }
     return { isCompleted: true };
   }
 }
