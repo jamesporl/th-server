@@ -1,5 +1,5 @@
 import { Types, Document } from 'mongoose';
-import { RoleKey } from '../api/entities/_enums';
+import { OAuthTokenType, OAuthWebsiteKey, RoleKey } from '../api/entities/_enums';
 
 export interface TimeStamps {
   createdAt: Date;
@@ -57,3 +57,21 @@ export interface SocialUrls {
   github?: string;
   instagram?: string;
 }
+
+export interface OAuthToken {
+  _id: Types.ObjectId;
+  accountId: Types.ObjectId;
+  token: string;
+  tokenType: OAuthTokenType;
+  websiteKey: OAuthWebsiteKey;
+}
+
+export type DbOAuthToken = OAuthToken & Document;
+
+export interface OAuthState {
+  _id: Types.ObjectId;
+  value: string;
+  websiteKey: OAuthWebsiteKey;
+}
+
+export type DbOAuthState = OAuthState & Document;
