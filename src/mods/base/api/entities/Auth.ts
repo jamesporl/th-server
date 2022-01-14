@@ -44,3 +44,21 @@ export class UpdateEmailInput {
   @Field()
   newEmail: string;
 }
+
+@InputType()
+export class SendPasswordResetLinkInput {
+  @Field()
+  email: string;
+}
+
+@InputType()
+export class ResetPasswordByTokenInput {
+  @Field()
+  token: string;
+
+  @Field()
+  email: string;
+
+  @Field()
+  newPassword: string;
+}

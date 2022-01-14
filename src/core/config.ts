@@ -20,6 +20,7 @@ const config = cleanEnv(process.env, {
   GOOGLE_OAUTH_CLIENT_ID: str({ default: 'client_id' }),
   GOOGLE_OAUTH_CLIENT_SECRET: str({ default: 'secret' }),
   GOOGLE_OAUTH_REDIRECT_URL: url({ default: 'https://techhustlers.ph/account/oauth/google/receive' }),
+  TH_CLIENT_BASE_URL: url({ default: 'http://localhost:3000' }),
 });
 
 export default config;

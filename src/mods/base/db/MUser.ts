@@ -12,6 +12,7 @@ const UserSchema = new Schema(
     isActive: { type: Boolean, default: true },
     password: String,
     pwResetToken: String,
+    pwResetTokenExpiresAt: Date,
     roles: [RoleSchema],
   },
   {
