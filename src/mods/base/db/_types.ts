@@ -45,6 +45,7 @@ export interface User {
   name: string;
   password?: string;
   pwResetToken?: string;
+  pwResetTokenExpiresAt?: Date;
   roles: Role[];
 }
 
