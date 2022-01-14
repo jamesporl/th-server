@@ -17,6 +17,9 @@ const config = cleanEnv(process.env, {
   DO_SPACES_SECRET: str({ default: 'CHANGE_ME' }),
   DO_SPACES_URL: url({ default: 'https://techhustlers.sgp1.digitaloceanspaces.com' }),
   DO_SPACES_PATH_PREFIX: str({ default: 'dev' }),
+  GOOGLE_OAUTH_CLIENT_ID: str({ default: 'client_id' }),
+  GOOGLE_OAUTH_CLIENT_SECRET: str({ default: 'secret' }),
+  GOOGLE_OAUTH_REDIRECT_URL: url({ default: 'https://techhustlers.ph/account/oauth/google/receive' }),
 });
 
 export default config;

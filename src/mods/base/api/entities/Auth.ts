@@ -31,6 +31,15 @@ export class SignupInput {
 }
 
 @InputType()
+export class LoginWithGoogleInput {
+  @Field()
+  code: string;
+
+  @Field()
+  state: string;
+}
+
+@InputType()
 export class UpdateEmailInput {
   @Field()
   newEmail: string;
