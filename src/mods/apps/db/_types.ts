@@ -73,3 +73,11 @@ export interface AppComment extends TimeStamps {
 }
 
 export type DbAppComment = AppComment & Document;
+
+export interface AppCommentSupport extends TimeStamps {
+  accountId: Types.ObjectId;
+  appId: Types.ObjectId;
+  commentId: Types.ObjectId;
+}
+
+export type DbAppCommentSupport = AppCommentSupport & Document;

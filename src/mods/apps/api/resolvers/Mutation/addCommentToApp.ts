@@ -41,7 +41,7 @@ export default class {
       dataloaders.childCommentsByParentIdLoader.clear(parentCommentId);
     }
 
-    await MApp.updateOne({ _id: appId }, { $inc: { supportsCount: 1 } });
+    await MApp.updateOne({ _id: appId }, { $inc: { commentsCount: 1 } });
 
     return newComment.toObject();
   }

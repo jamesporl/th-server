@@ -8,6 +8,14 @@ import { AppDraft } from '../entities/AppDrafts';
 @Resolver(() => AppDraft)
 export default class {
   @FieldResolver()
+  ownedBy(
+    @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { ownedBy }: DbAppDraft,
+  ) {
+    return dataloaders.accountByIdLoader.load(ownedBy.toHexString());
+  }
+
+  @FieldResolver()
   tags(
     @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
     @Root() { tagIds }: DbAppDraft,

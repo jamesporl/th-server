@@ -2,6 +2,7 @@ import addApp from './addApp';
 import addCommentToApp from './addCommentToApp';
 import publishAppDraft from './publishAppDraft';
 import submitAppDraft from './submitAppDraft';
+import toggleAppCommentSupport from './toggleAppCommentSupport';
 import toggleAppSupport from './toggleAppSupport';
 import undoSubmitAppDraft from './undoSubmitAppDraft';
 import updateAppDraft from './updateAppDraft';
@@ -13,6 +14,7 @@ export default [
   addCommentToApp,
   publishAppDraft,
   submitAppDraft,
+  toggleAppCommentSupport,
   toggleAppSupport,
   undoSubmitAppDraft,
   updateAppDraft,

@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType, Int } from 'type-graphql';
 import { GraphQLDateTime } from 'graphql-iso-date';
 import Node from 'mods/base/api/entities/Node';
 import { SimpleAccount } from 'mods/base/api/entities/Account';
@@ -21,9 +21,14 @@ export default class AppComment extends Node {
   @Field(() => AppCommentStatusObject)
   status: AppCommentStatusObject;
 
-  /* eslint-disable @typescript-eslint/no-use-before-define */
   @Field(() => AppCommentConnection, { nullable: true })
   comments: AppCommentConnection;
+
+  @Field(() => Int)
+  supportsCount: number;
+
+  @Field(() => Boolean)
+  isSupported: boolean;
 
   @Field(() => GraphQLDateTime)
   createdAt: Date;
