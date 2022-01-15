@@ -7,6 +7,7 @@ import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
 import SocialUrlsInput from 'mods/base/api/entities/SocialUrlsInput';
+import { SimpleAccount } from 'mods/base/api/entities/Account';
 import { AppDraftStatus } from './_enums';
 import { AppTag } from './AppTags';
 import { BannerImg } from './Apps';
@@ -60,6 +61,9 @@ export class AppDraft extends Node {
 
   @Field({ nullable: true })
   socialUrls?: SocialUrls;
+
+  @Field(() => SimpleAccount, { nullable: true })
+  ownedBy?: SimpleAccount;
 }
 
 @ObjectType({ implements: NodeConnection })

@@ -31,3 +31,9 @@ export class AddCommentToAppInput {
   @Field(() => ID, { nullable: true })
   parentCommentId?: string;
 }
+
+@InputType()
+export class ToggleAppCommentSupportInput {
+  @Field(() => ID)
+  commentId: string;
+}

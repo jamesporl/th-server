@@ -9,6 +9,7 @@ const AppCommentSchema = new Schema(
     content: String,
     isPinned: Boolean,
     createdBy: Schema.Types.ObjectId,
+    supportsCount: { type: Number, default: 0 },
     status: { type: String, enum: APP_COMMENT_STATUS_VALUES, default: AppCommentStatus.published },
   },
   {

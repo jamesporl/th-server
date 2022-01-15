@@ -26,4 +26,15 @@ export default class {
       totalCount: childComments.length,
     };
   }
+
+  @FieldResolver()
+  isSupported(
+    @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { _id }: DbAppComment,
+  ) {
+    if (accountId) {
+      return dataloaders.appCommentSupportLoader.load(`${_id}_${accountId}`);
+    }
+    return false;
+  }
 }

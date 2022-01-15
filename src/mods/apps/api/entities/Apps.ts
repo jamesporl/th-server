@@ -6,6 +6,7 @@ import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
+import { SimpleAccount } from 'mods/base/api/entities/Account';
 import { AppStatus } from './_enums';
 import { AppTag } from './AppTags';
 
@@ -91,6 +92,9 @@ export class App extends Node {
 
   @Field({ nullable: true })
   socialUrls?: SocialUrls;
+
+  @Field(() => SimpleAccount, { nullable: true })
+  ownedBy?: SimpleAccount;
 }
 
 @ObjectType({ implements: NodeConnection })
