@@ -18,7 +18,11 @@ export default class {
 
     const account = await MAccount.findOneAndUpdate(
       { userId },
-      { $set: { firstName, lastName, shortDesc } },
+      {
+        $set: {
+          firstName, lastName, name: `${firstName} ${lastName}`, shortDesc,
+        },
+      },
       { new: true, lean: true },
     );
 

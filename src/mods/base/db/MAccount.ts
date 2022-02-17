@@ -7,6 +7,7 @@ const AccountSchema = new Schema(
     email: { type: String, trim: true, lowercase: true },
     firstName: { type: String, trim: true },
     lastName: { type: String, trim: true },
+    name: { type: String },
     image: ImageSchema,
     phone: { type: String, trim: true },
     shortDesc: { type: String, trim: true },

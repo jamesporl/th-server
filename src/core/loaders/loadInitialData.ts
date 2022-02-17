@@ -19,6 +19,7 @@ export default async function loadInitialData(): Promise<void> {
     email: adminEmail,
     firstName: 'Tony',
     lastName: 'Guzman',
+    name: 'Tony Guzman',
     userId: adminUserId,
   };
 

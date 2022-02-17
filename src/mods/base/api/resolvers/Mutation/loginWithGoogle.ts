@@ -81,6 +81,7 @@ export default class {
       const newAccount = await new MAccount({
         firstName: profileBody.given_name,
         lastName: profileBody.family_name,
+        name: `${profileBody.given_name} ${profileBody.family_name}`,
         email: profileBody.email,
         userId: user._id,
       }).save();
