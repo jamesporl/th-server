@@ -25,7 +25,7 @@ export interface App extends TimeStamps, AccountStamps {
   tagIds?: Types.ObjectId[];
   supportsCount: number;
   commentsCount: number;
-  isSponsored?: boolean;
+  isFeatured?: boolean;
   slug?: string;
   socialUrls?: SocialUrls;
 }

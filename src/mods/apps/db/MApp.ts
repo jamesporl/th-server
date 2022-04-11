@@ -26,7 +26,7 @@ const AppSchema = new Schema(
     commentsCount: { type: Number, default: 0 },
     supportsCount: { type: Number, default: 0 },
     tagIds: [Schema.Types.ObjectId],
-    isSponsored: Boolean,
+    isFeatured: Boolean,
     createdBy: Schema.Types.ObjectId,
     updatedBy: Schema.Types.ObjectId,
   },
