@@ -8,6 +8,7 @@ import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
 import SocialUrlsInput from 'mods/base/api/entities/SocialUrlsInput';
 import { SimpleAccount } from 'mods/base/api/entities/Account';
+import { GraphQLDateTime } from 'graphql-iso-date';
 import { AppDraftStatus } from './_enums';
 import { AppTag } from './AppTags';
 import { BannerImg } from './Apps';
@@ -64,6 +65,12 @@ export class AppDraft extends Node {
 
   @Field(() => SimpleAccount, { nullable: true })
   ownedBy?: SimpleAccount;
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  createdAt?: Date;
+
+  @Field(() => GraphQLDateTime, { nullable: true })
+  updatedAt?: Date;
 }
 
 @ObjectType({ implements: NodeConnection })

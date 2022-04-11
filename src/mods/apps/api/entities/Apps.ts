@@ -85,7 +85,7 @@ export class App extends Node {
   isSupported: boolean;
 
   @Field(() => Boolean, { nullable: true })
-  isSponsored?: boolean;
+  isFeatured?: boolean;
 
   @Field({ nullable: true })
   slug?: string;

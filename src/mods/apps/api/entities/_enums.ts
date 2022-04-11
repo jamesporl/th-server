@@ -29,3 +29,10 @@ export enum AppCommentStatus {
 
 registerEnumType(AppCommentStatus, { name: 'AppCommentStatus' });
 export const APP_COMMENT_STATUS_VALUES = Object.values(AppCommentStatus);
+
+export enum AppsOtherFilter {
+  isFeatured = 'isFeatured',
+  excludeFeatured = 'excludeFeatured',
+}
+
+registerEnumType(AppsOtherFilter, { name: 'AppsOtherFilter' });
