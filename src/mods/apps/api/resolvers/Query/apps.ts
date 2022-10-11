@@ -1,7 +1,7 @@
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
-import { GraphQLDateTime } from 'graphql-iso-date';
+import { GraphQLDateTime } from 'graphql-scalars';
 import { MApp } from '../../../db';
 import { AppConnection } from '../../entities/Apps';
 import { AppsOtherFilter, AppStatus } from '../../entities/_enums';

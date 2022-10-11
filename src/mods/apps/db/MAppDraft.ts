@@ -9,7 +9,7 @@ const AppDraftSchema = new Schema(
   {
     appId: { type: Schema.Types.ObjectId, required: true },
     name: String,
-    desc: String,
+    jsonDesc: { type: Schema.Types.Mixed },
     shortDesc: String,
     playStoreUrl: String,
     appStoreUrl: String,

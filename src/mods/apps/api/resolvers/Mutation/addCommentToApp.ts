@@ -4,6 +4,8 @@ import {
 } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
+import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
+import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import { MApp, MAppComment } from '../../../db';
 import { AppStatus } from '../../entities/_enums';
 import { AddCommentToAppInput } from '../../entities/AppComments';
@@ -17,7 +19,7 @@ export default class {
     @Ctx() { accountId, dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => AddCommentToAppInput) input: AddCommentToAppInput,
   ) {
-    const { appId, parentCommentId, content } = input;
+    const { appId, parentCommentId, jsonContent } = input;
     const app = await MApp.findOne({ _id: appId, status: AppStatus.published });
     if (!app) {
       throw new UserInputError('App not found');
@@ -32,7 +34,9 @@ export default class {
 
     const newComment = await new MAppComment({
       appId,
-      content,
+      jsonContent,
+      htmlContent: serializeEditorContentToHtml(jsonContent),
+      textContent: serializeEditorContentToText(jsonContent),
       parentCommentId,
       createdBy: accountId,
     }).save();

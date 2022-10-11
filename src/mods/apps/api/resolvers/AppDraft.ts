@@ -2,6 +2,7 @@ import {
   Resolver, Root, FieldResolver, Ctx,
 } from 'type-graphql';
 import { Context } from 'core/graphql/_types';
+import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import { DbAppDraft } from '../../db/_types';
 import { AppDraft } from '../entities/AppDrafts';
 
@@ -25,5 +26,12 @@ export default class {
       return dataloaders.tagByIdLoader.loadMany(tagIdStrs);
     }
     return [];
+  }
+
+  @FieldResolver()
+  htmlDesc(
+    @Root() { jsonDesc }: DbAppDraft, // eslint-disable-line @typescript-eslint/indent
+  ) {
+    return serializeEditorContentToHtml(jsonDesc);
   }
 }

@@ -1,4 +1,4 @@
-import { GraphQLDateTime } from 'graphql-iso-date';
+import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 import {
   Field, InputType, ObjectType, Int,
 } from 'type-graphql';
@@ -45,8 +45,14 @@ export class App extends Node {
   @Field()
   shortDesc: string;
 
+  @Field(() => GraphQLJSON, { nullable: true })
+  jsonDesc?: unknown;
+
   @Field({ nullable: true })
-  desc?: string;
+  htmlDesc?: string;
+
+  @Field({ nullable: true })
+  textDesc?: string;
 
   @Field(() => GraphQLDateTime, { nullable: true })
   publishedAt?: Date;

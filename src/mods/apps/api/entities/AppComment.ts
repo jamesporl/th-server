@@ -1,5 +1,5 @@
 import { Field, ObjectType, Int } from 'type-graphql';
-import { GraphQLDateTime } from 'graphql-iso-date';
+import { GraphQLDateTime } from 'graphql-scalars';
 import Node from 'mods/base/api/entities/Node';
 import { SimpleAccount } from 'mods/base/api/entities/Account';
 import { AppCommentConnection, AppCommentStatusObject } from './AppComments'; // eslint-disable-line import/no-cycle
@@ -10,7 +10,10 @@ import { AppCommentConnection, AppCommentStatusObject } from './AppComments'; //
 @ObjectType({ implements: Node })
 export default class AppComment extends Node {
   @Field({ nullable: true })
-  content: string;
+  htmlContent?: string;
+
+  @Field({ nullable: true })
+  textContent?: string;
 
   @Field(() => Boolean, { nullable: true })
   isPinned: boolean;
