@@ -11,7 +11,9 @@ export interface BannerImg {
 
 export interface App extends TimeStamps, AccountStamps {
   name: string;
-  desc?: string;
+  jsonDesc?: unknown;
+  htmlDesc?: string;
+  textDesc?: string;
   shortDesc?: string;
   logoImg?: Image;
   videoUrl?: string;
@@ -35,7 +37,7 @@ export type DbApp = App & Document;
 export interface AppDraft extends TimeStamps {
   appId: Types.ObjectId;
   name: string;
-  desc?: string;
+  jsonDesc?: unknown;
   shortDesc?: string;
   logoImg?: Image;
   videoUrl?: string;

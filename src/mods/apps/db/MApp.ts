@@ -7,9 +7,11 @@ import BannerImgSchema from './common/BannerImg';
 
 const AppSchema = new Schema(
   {
-    name: String,
-    shortDesc: String,
-    desc: String,
+    name: { type: String, required: true },
+    shortDesc: { type: String, required: true },
+    jsonDesc: { type: Schema.Types.Mixed },
+    htmlDesc: { type: String },
+    textDesc: { type: String },
     playStoreUrl: String,
     appStoreUrl: String,
     websiteUrl: String,
@@ -21,7 +23,7 @@ const AppSchema = new Schema(
     status: {
       type: String, enum: APP_STATUS_VALUES, required: true, default: AppStatus.new,
     },
-    slug: { type: String, index: true },
+    slug: { type: String, index: true, unique: true },
     socialUrls: SocialUrlsSchema,
     commentsCount: { type: Number, default: 0 },
     supportsCount: { type: Number, default: 0 },

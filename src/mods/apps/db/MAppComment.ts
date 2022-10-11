@@ -6,7 +6,9 @@ const AppCommentSchema = new Schema(
   {
     appId: { type: Schema.Types.ObjectId, required: true },
     parentCommentId: Schema.Types.ObjectId,
-    content: String,
+    jsonContent: Schema.Types.Mixed,
+    htmlContent: String,
+    textContent: String,
     isPinned: Boolean,
     createdBy: Schema.Types.ObjectId,
     supportsCount: { type: Number, default: 0 },

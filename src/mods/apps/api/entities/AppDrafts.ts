@@ -8,7 +8,7 @@ import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
 import SocialUrlsInput from 'mods/base/api/entities/SocialUrlsInput';
 import { SimpleAccount } from 'mods/base/api/entities/Account';
-import { GraphQLDateTime } from 'graphql-iso-date';
+import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 import { AppDraftStatus } from './_enums';
 import { AppTag } from './AppTags';
 import { BannerImg } from './Apps';
@@ -33,8 +33,11 @@ export class AppDraft extends Node {
   @Field()
   shortDesc: string;
 
+  @Field(() => GraphQLJSON, { nullable: true })
+  jsonDesc?: unknown;
+
   @Field({ nullable: true })
-  desc?: string;
+  htmlDesc?: string;
 
   @Field({ nullable: true })
   playStoreUrl?: string;
@@ -111,8 +114,8 @@ export class UpdateAppDraftInput {
   @Field()
   shortDesc: string;
 
-  @Field({ nullable: true })
-  desc?: string;
+  @Field(() => GraphQLJSON, { nullable: true })
+  jsonDesc?: unknown;
 
   @Field({ nullable: true })
   videoUrl?: string;

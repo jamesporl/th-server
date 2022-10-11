@@ -4,6 +4,8 @@ import {
 } from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
+import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
+import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft, SubmitAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -39,7 +41,9 @@ export default class {
       const appUpdate: { [key: string]: unknown } = {
         name: appDraft.name,
         shortDesc: appDraft.shortDesc,
-        desc: appDraft.desc,
+        jsonDesc: appDraft.jsonDesc,
+        htmlDesc: serializeEditorContentToHtml(appDraft.jsonDesc),
+        textDesc: serializeEditorContentToText(appDraft.jsonDesc),
         bannerImgs: appDraft.bannerImgs,
         logoImg: appDraft.logoImg,
         videoUrl: appDraft.videoUrl,

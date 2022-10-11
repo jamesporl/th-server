@@ -5,6 +5,7 @@ import {
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import { RoleKey } from 'mods/base/api/entities/_enums';
+import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import { MApp, MAppDraft, MAppTag } from '../../../db';
 import { UpdateAppDraftInput, AppDraft } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -18,7 +19,7 @@ export default class {
     @Arg('input', () => UpdateAppDraftInput) input: UpdateAppDraftInput,
   ) {
     const {
-      appId, name, shortDesc, desc, tagIds, ...rest
+      appId, name, shortDesc, jsonDesc, tagIds, ...rest
     } = input;
 
     if (name.length > 40) {
@@ -28,7 +29,7 @@ export default class {
       throw new UserInputError('Short description should not exceed 80 characters.');
     }
 
-    if (desc && desc.length > 1000) {
+    if (jsonDesc && serializeEditorContentToText(jsonDesc).length > 10000) {
       throw new UserInputError('Description is too long.');
     }
 
@@ -60,7 +61,7 @@ export default class {
       { appId },
       {
         $set: {
-          name, shortDesc, desc, tagIds, ...rest,
+          name, shortDesc, jsonDesc, tagIds, ...rest,
         },
       },
       { new: true, lean: true },
