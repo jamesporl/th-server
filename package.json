@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "@typegoose/typegoose": "^9.12.1",
     "apollo-server-express": "^3.3.0",
     "aws-sdk": "^2.1004.0",

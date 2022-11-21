@@ -6,7 +6,7 @@ import rolesList from './constants/rolesList';
 
 export default function generateAuthToken(user: User, accountId: string, roleId?: string) {
   if (!user.roles?.length) {
-    return {};
+    return '';
   }
   let activeRole = user.roles[0];
   if (roleId) {
@@ -23,5 +23,5 @@ export default function generateAuthToken(user: User, accountId: string, roleId?
     rnm: roleDetail.shortKey,
   };
 
-  return jwt.sign(objToSign, config.JWT_SECRET);
+  return jwt.sign(objToSign, config.JWT_SECRET_AUTH);
 }

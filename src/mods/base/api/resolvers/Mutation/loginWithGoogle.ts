@@ -6,6 +6,7 @@ import config from 'core/config';
 import { MAccount, MOAuthState, MUser } from 'mods/base/db';
 import hashPassword from 'mods/base/utils/hashPassword';
 import generateAuthToken from 'mods/base/utils/generateAuthToken';
+import sendWelcomeForGoogleSignupEmail from 'mods/base/utils/sendWelcomeForGoogleSignupEmail';
 import { OAuthWebsiteKey, RoleKey } from '../../entities/_enums';
 import { LoginWithGoogleInput } from '../../entities/Auth';
 
@@ -76,6 +77,7 @@ export default class {
         email: profileBody.email,
         password: await hashPassword(randomPw),
         roles: [{ role: RoleKey.user }],
+        isVerified: true,
       }).save();
 
       const newAccount = await new MAccount({
@@ -87,6 +89,7 @@ export default class {
       }).save();
 
       accountId = newAccount._id.toHexString();
+      await sendWelcomeForGoogleSignupEmail(user._id);
     } else {
       const account = await MAccount.findOne({ userId: user._id });
       accountId = account._id.toHexString();

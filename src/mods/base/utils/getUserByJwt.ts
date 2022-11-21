@@ -8,7 +8,7 @@ export default function getUserByJwt(token: string): UserContext {
   try {
     const result = jwt.verify(
       token,
-      config.JWT_SECRET,
+      config.JWT_SECRET_AUTH,
     ) as { aid: string, uid: string; rid: string; exa: string, rnm: string };
     const now = format(new Date(), 'yyyy-MM-dd HH:mm:ss');
     if (now > result.exa) {
