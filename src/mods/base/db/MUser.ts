@@ -10,7 +10,13 @@ const UserSchema = new Schema(
   {
     email: { type: String, trim: true, lowercase: true },
     isActive: { type: Boolean, default: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCodeSentAt: { type: Date },
+    verificationCode: { type: String },
+    verificationCodeExpiry: { type: Date },
+    verificationAttempts: { type: Number, default: 0 },
     password: String,
+    pwResetLinkSentAt: { type: Date },
     pwResetToken: String,
     pwResetTokenExpiresAt: Date,
     roles: [RoleSchema],

@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = cleanEnv(process.env, {
-  JWT_SECRET: str({ default: 'ChaNg3MePlea$e' }),
+  JWT_SECRET_AUTH: str({ default: 'ChaNg3MePlea$e' }),
   JWT_EXPIRATION: num({ default: 24 }),
   PORT: port({ default: 4000 }),
   MONGODB_URI: str({ default: 'mongodb://localhost:27017/th' }),
@@ -20,6 +20,9 @@ const config = cleanEnv(process.env, {
   GOOGLE_OAUTH_CLIENT_ID: str({ default: 'client_id' }),
   GOOGLE_OAUTH_CLIENT_SECRET: str({ default: 'secret' }),
   GOOGLE_OAUTH_REDIRECT_URL: url({ default: 'https://techhustlers.ph/account/oauth/google/receive' }),
+  SENDGRID_API_KEY: str({ default: '' }),
+  SENDGRID_FROM_EMAIL: str({ default: 'admin@techhustlers.ph' }),
+  SENDGRID_FROM_NAME: str({ default: '' }),
   TH_CLIENT_BASE_URL: url({ default: 'http://localhost:3000' }),
 });
 

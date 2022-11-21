@@ -1,23 +1,26 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import generateAuthToken from 'mods/base/utils/generateAuthToken';
+import sendWelcomeWithVerificationCodeEmail from '../../../utils/sendWelcomeWithVerificationCodeEmail';
 import { MUser, MAccount } from '../../../db';
 import validateEmailByRegex from '../../../utils/validateEmailByRegex';
 import hashPassword from '../../../utils/hashPassword';
 import { SignupInput } from '../../entities/Auth';
 import { RoleKey } from '../../entities/_enums';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
 
 @Resolver()
 export default class {
-  @Mutation(() => String)
+  @Mutation(() => DefaultMutationPayload)
   async signup(
     @Arg('input', () => SignupInput) input: SignupInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const {
-      firstName, lastName, email: iEmail, password,
+      firstName: iFirstName, lastName: iLastName, email: iEmail, password,
     } = input;
 
     const email = iEmail.toLowerCase().trim();
+    const firstName = iFirstName.trim();
+    const lastName = iLastName.trim();
 
     const isEmailValid = validateEmailByRegex(email);
     if (!isEmailValid) {
@@ -33,9 +36,10 @@ export default class {
       email,
       password: await hashPassword(password),
       roles: [{ role: RoleKey.user }],
+      isVerified: false,
     }).save();
 
-    const newAccount = await new MAccount({
+    await new MAccount({
       firstName,
       lastName,
       name: `${firstName} ${lastName}`,
@@ -43,8 +47,8 @@ export default class {
       userId: newUser._id,
     }).save();
 
-    const authToken = generateAuthToken(newUser, newAccount._id.toHexString());
+    await sendWelcomeWithVerificationCodeEmail(newUser._id);
 
-    return authToken;
+    return { isCompleted: true };
   }
 }

@@ -44,9 +44,15 @@ export interface User {
   isActive: boolean;
   name: string;
   password?: string;
+  pwResetLinkSentAt?: Date;
   pwResetToken?: string;
   pwResetTokenExpiresAt?: Date;
   roles: Role[];
+  isVerified?: boolean;
+  verificationCodeSentAt?: Date;
+  verificationCode?: string;
+  verificationCodeExpiry?: Date;
+  verificationAttempts?: number;
 }
 
 export type DbUser = User & Document;

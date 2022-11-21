@@ -10,6 +10,21 @@ export class LoginInput {
 }
 
 @InputType()
+export class VerifyAccountByCodeInput {
+  @Field()
+  email: string;
+
+  @Field()
+  code: string;
+}
+
+@InputType()
+export class SendVerificationCodeInput {
+  @Field()
+  email: string;
+}
+
+@InputType()
 export class ResetPasswordWithAuthInput {
   @Field()
   newPassword: string;
