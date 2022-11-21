@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start:dev": "tsc-watch --compiler .bin/ttsc --onSuccess \"node build/server.js\"",
+    "build": "ttsc -p .",
     "lint": "eslint ."
   },
   "author": "",
