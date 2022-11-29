@@ -38,3 +38,9 @@ export class ToggleAppCommentSupportInput {
   @Field(() => ID)
   commentId: string;
 }
+
+@InputType()
+export class TogglePinAppCommentInput {
+  @Field(() => ID)
+  commentId: string;
+}

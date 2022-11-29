@@ -37,4 +37,11 @@ export default class {
     }
     return false;
   }
+
+  @FieldResolver()
+  isParent(
+    @Root() { parentCommentId }: DbAppComment, // eslint-disable-line @typescript-eslint/indent
+  ) {
+    return !parentCommentId;
+  }
 }
