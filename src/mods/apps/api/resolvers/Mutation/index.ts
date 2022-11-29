@@ -4,6 +4,7 @@ import publishAppDraft from './publishAppDraft';
 import submitAppDraft from './submitAppDraft';
 import toggleAppCommentSupport from './toggleAppCommentSupport';
 import toggleAppSupport from './toggleAppSupport';
+import togglePinAppComment from './togglePinAppComment';
 import undoSubmitAppDraft from './undoSubmitAppDraft';
 import updateAppDraft from './updateAppDraft';
 import updateAppDraftBannerImg from './updateAppDraftBannerImg';
@@ -16,6 +17,7 @@ export default [
   submitAppDraft,
   toggleAppCommentSupport,
   toggleAppSupport,
+  togglePinAppComment,
   undoSubmitAppDraft,
   updateAppDraft,
   updateAppDraftBannerImg,

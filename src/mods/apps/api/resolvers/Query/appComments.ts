@@ -15,7 +15,7 @@ export default class {
     const dbFilter = { appId, parentCommentId: null };
     const totalCount = await MApp.count(dbFilter);
     const comments = await MAppComment.find(dbFilter)
-      .sort({ createdAt: -1 })
+      .sort({ isPinned: -1, createdAt: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize)
       .lean();

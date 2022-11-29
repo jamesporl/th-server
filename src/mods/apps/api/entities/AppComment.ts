@@ -18,6 +18,9 @@ export default class AppComment extends Node {
   @Field(() => Boolean, { nullable: true })
   isPinned: boolean;
 
+  @Field(() => Boolean, { nullable: true })
+  isParent: boolean;
+
   @Field(() => SimpleAccount)
   createdBy: SimpleAccount;
 
