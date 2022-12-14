@@ -25,15 +25,19 @@ export default class {
       throw new UserInputError('Short description should not exceed 80 characters.');
     }
 
+    const appId = new Types.ObjectId();
+
     const newApp = await new MApp({
+      _id: appId,
       name,
       shortDesc,
       status: AppStatus.new,
+      slug: appId.toHexString(),
       ownedBy: new Types.ObjectId(accountId),
     }).save();
 
     await new MAppDraft({
-      appId: newApp._id,
+      appId,
       name,
       shortDesc,
       status: AppDraftStatus.inProgress,
