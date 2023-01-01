@@ -6,6 +6,11 @@ const AppTagSchema = new Schema(
     name: {
       type: String, required: true, index: true, unique: true,
     },
+    slug: {
+      type: String, required: true, index: true, unique: true,
+    },
+    imgUrl: { type: String, required: true },
+    appsCount: { type: Number, required: true, default: 0 },
   },
   {
     collection: 'AppTag',

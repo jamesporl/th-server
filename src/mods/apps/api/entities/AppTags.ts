@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType, Int } from 'type-graphql';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 
@@ -6,6 +6,15 @@ import NodeConnection from 'mods/base/api/entities/NodeConnection';
 export class AppTag extends Node {
   @Field()
   name: string;
+
+  @Field()
+  slug: string;
+
+  @Field()
+  imgUrl: string;
+
+  @Field(() => Int)
+  appsCount: number;
 }
 
 @ObjectType({ implements: NodeConnection })
