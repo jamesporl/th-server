@@ -1,13 +1,11 @@
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
 import { MAppTag } from '../../../db';
 import { AppTagConnection } from '../../entities/AppTags';
 
 @Resolver()
 export default class {
-  @Auth()
   @Query(() => AppTagConnection, { nullable: true })
   async appTags(
     @Arg('searchString', { nullable: true }) searchString: string, // eslint-disable-line @typescript-eslint/indent
@@ -22,7 +20,7 @@ export default class {
 
     const totalCount = await MAppTag.count(dbFilter);
     const tags = await MAppTag.find(dbFilter)
-      .sort({ _id: -1 })
+      .sort({ name: 1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize)
       .lean();

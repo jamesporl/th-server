@@ -2,9 +2,11 @@ import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
 import { GraphQLDateTime } from 'graphql-scalars';
-import { MApp } from '../../../db';
+import { UserInputError } from 'apollo-server-express';
+import { SortOrder } from 'mongoose';
+import { MApp, MAppTag } from '../../../db';
 import { AppConnection } from '../../entities/Apps';
-import { AppsOtherFilter, AppStatus } from '../../entities/_enums';
+import { AppsOtherFilter, AppsSortBy, AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
@@ -15,10 +17,12 @@ export default class {
     publishedFromDate?: Date,
     @Arg('publishedToDate', () => GraphQLDateTime, { nullable: true })
     publishedToDate?: Date,
+    @Arg('tagSlug', { nullable: true }) tagSlug?: string,
     @Arg('otherFilters', () => [AppsOtherFilter], { nullable: true })
     otherFilters?: AppsOtherFilter[],
     @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100,
     @Arg('page', () => Int, { nullable: true }) page = 1,
+    @Arg('sortBy', () => AppsSortBy, { nullable: true }) sortBy = AppsSortBy.publishedDate,
   ) {
     const dbFilter: { [key: string]: unknown } = {};
     if (searchString) {
@@ -37,6 +41,14 @@ export default class {
       dbFilter.publishedAt = publishedAtFilter;
     }
 
+    if (tagSlug) {
+      const appTag = await MAppTag.findOne({ slug: tagSlug });
+      if (!appTag) {
+        throw new UserInputError('Tag not found');
+      }
+      dbFilter.tagIds = appTag._id;
+    }
+
     if (otherFilters?.length) {
       if (otherFilters.includes(AppsOtherFilter.isFeatured)) {
         dbFilter.isFeatured = true;
@@ -46,12 +58,16 @@ export default class {
       }
     }
 
-    // if (publishedFromDate )
     dbFilter.status = AppStatus.published;
+
+    let dbSort: { [key:string]: SortOrder } = { publishedAt: -1 };
+    if (sortBy === AppsSortBy.name) {
+      dbSort = { name: 1 };
+    }
 
     const totalCount = await MApp.count(dbFilter);
     const apps = await MApp.find(dbFilter)
-      .sort({ publishedAt: -1 })
+      .sort(dbSort)
       .limit(pageSize)
       .skip((page - 1) * pageSize)
       .lean();

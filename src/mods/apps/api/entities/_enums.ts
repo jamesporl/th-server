@@ -36,3 +36,11 @@ export enum AppsOtherFilter {
 }
 
 registerEnumType(AppsOtherFilter, { name: 'AppsOtherFilter' });
+
+export enum AppsSortBy {
+  name = 'name',
+  relevance = 'relevance',
+  publishedDate = 'publishedDate',
+}
+
+registerEnumType(AppsSortBy, { name: 'AppsSortBy' });
