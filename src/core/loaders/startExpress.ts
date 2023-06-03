@@ -2,15 +2,15 @@ import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
 import express from 'express';
 import { GraphQLSchema } from 'graphql';
-import getUserByJwt from 'mods/base/utils/getUserByJwt';
+import getUserByJwt from 'mods/base/utils/getAccountByJwt';
 import { graphqlUploadExpress } from 'graphql-upload';
-import { Context, UserContext } from 'core/graphql/_types';
+import { Context, AccountContext } from 'core/graphql/_types';
 import createDataloaders from '../graphql/createDataloaders';
 import config from '../config';
 import logger from '../logger';
 
 function addUserContextFromJwt(
-  req: express.Request & { userContext: UserContext },
+  req: express.Request & { userContext: AccountContext },
   res: express.Response,
   next: express.NextFunction,
 ): void {
@@ -18,7 +18,7 @@ function addUserContextFromJwt(
   const { authorization: authToken } = headers;
   if (authToken) {
     const userContext = getUserByJwt(authToken);
-    if (userContext.userId) {
+    if (userContext.accountId) {
       req.userContext = userContext;
       next();
       return;

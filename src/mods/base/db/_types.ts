@@ -1,5 +1,5 @@
 import { Types, Document } from 'mongoose';
-import { OAuthTokenType, OAuthWebsiteKey, RoleKey } from '../api/entities/_enums';
+import { OAuthTokenType, OAuthWebsiteKey } from '../api/entities/_enums';
 
 export interface TimeStamps {
   createdAt: Date;
@@ -11,43 +11,21 @@ export interface AccountStamps {
   updatedBy: Types.ObjectId;
 }
 
-export interface Image extends Document {
-  _id: Types.ObjectId;
-  thumbnail?: string;
-  small?: string;
-  medium?: string;
-  large?: string;
-}
-
 export interface Account {
   _id: Types.ObjectId;
   email: string;
   firstName: string;
   lastName: string;
   name: string;
-  image?: Image;
+  image?: string;
   phone?: string;
   shortDesc?: string;
-  userId: Types.ObjectId;
-}
-
-export type DbAccount = Account & Document;
-
-export interface Role {
-  _id: Types.ObjectId;
-  role: RoleKey;
-}
-
-export interface User {
-  _id: Types.ObjectId;
-  email: string;
   isActive: boolean;
-  name: string;
+  isAdmin: boolean;
   password?: string;
   pwResetLinkSentAt?: Date;
   pwResetToken?: string;
   pwResetTokenExpiresAt?: Date;
-  roles: Role[];
   isVerified?: boolean;
   verificationCodeSentAt?: Date;
   verificationCode?: string;
@@ -55,7 +33,7 @@ export interface User {
   verificationAttempts?: number;
 }
 
-export type DbUser = User & Document;
+export type DbAccount = Account & Document;
 
 export interface SocialUrls {
   twitter?: string;

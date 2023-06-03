@@ -2,9 +2,9 @@ import { UserInputError } from 'apollo-server-express';
 import { isBefore } from 'date-fns';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import hashPassword from '../../../utils/hashPassword';
-import { MUser } from '../../../db';
 import { ResetPasswordByTokenInput } from '../../entities/Auth';
 import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
+import { MAccount } from 'mods/base/db';
 
 @Resolver()
 export default class {
@@ -13,13 +13,13 @@ export default class {
   @Arg('input', () => ResetPasswordByTokenInput) input: ResetPasswordByTokenInput,
   ) {
     const { newPassword, email, token } = input;
-    const user = await MUser.findOne({ email: email.toLowerCase(), isActive: true }).lean();
-    if (!user) {
+    const account = await MAccount.findOne({ email: email.toLowerCase().trim(), isActive: true }).lean();
+    if (!account) {
       throw new UserInputError('E-mail not found.');
     }
-    if (user.pwResetToken === token && isBefore(new Date(), user.pwResetTokenExpiresAt)) {
-      await MUser.updateOne(
-        { _id: user._id },
+    if (account.pwResetToken === token && isBefore(new Date(), account.pwResetTokenExpiresAt)) {
+      await MAccount.updateOne(
+        { _id: account._id },
         {
           $set: { password: await hashPassword(newPassword) },
           $unset: { pwResetToken: 1, pwResetTokenExpiresAt: 1 },

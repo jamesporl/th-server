@@ -9,8 +9,11 @@ import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
+import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { UpdateAppDraftLogoImgInput } from '../../entities/AppDrafts';
+import { AppStatus } from '../../entities/_enums';
+import s3Config from 'core/s3Config';
 
 @Resolver()
 export default class {
@@ -32,88 +35,51 @@ export default class {
     const stream = createReadStream();
 
     const imgId = new Types.ObjectId();
-    const imgSizes = {
-      large: {
-        width: 512,
-        height: 512,
-        key: `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/logo/${imgId.toHexString()}.jpg`,
-      },
-      medium: {
-        width: 200,
-        height: 200,
-        key: `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/logo/${imgId.toHexString()}-md.jpg`,
-      },
-      thumbnail: {
-        width: 80,
-        height: 80,
-        key: `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/logo/${imgId.toHexString()}-tn.jpg`,
-      },
-    };
+    const imgKey = `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/logo/${imgId.toHexString()}.jpg`;
 
-    const s3Config = new aws.S3({
-      endpoint: config.DO_SPACES_ENDPOINT,
-      accessKeyId: config.DO_SPACES_KEY,
-      secretAccessKey: config.DO_SPACES_SECRET,
-    });
+    const pipeline = sharp()
+      .resize(512, 512, {
+        fit: 'cover',
+        background: {
+          r: 0,
+          g: 0,
+          b: 0,
+          alpha: 0,
+        },
+      })
+      .flatten({
+        background: '#ffffff',
+      })
+      .jpeg();
 
-    await Promise.all(
-      Object.keys(imgSizes).map(async (size) => {
-        const pipeline = sharp()
-          .resize(imgSizes[size].width as number, imgSizes[size].height as number, {
-            fit: 'cover',
-            background: {
-              r: 0,
-              g: 0,
-              b: 0,
-              alpha: 0,
-            },
-          })
-          .flatten({
-            background: '#ffffff',
-          })
-          .jpeg();
+    const piped = await stream.pipe(pipeline).toBuffer();
 
-        const piped = await stream.pipe(pipeline).toBuffer();
+    await s3Config
+      .putObject({
+        Bucket: config.DO_SPACES_BUCKET,
+        Key: imgKey,
+        Body: piped,
+        ACL: 'public-read',
+        ContentDisposition: 'inline',
+        ContentType: 'image/jpeg',
+      })
+      .promise();
 
-        await s3Config
-          .putObject({
-            Bucket: config.DO_SPACES_BUCKET,
-            Key: imgSizes[size].key,
-            Body: piped,
-            ACL: 'public-read',
-            ContentDisposition: 'inline',
-            ContentType: 'image/jpeg',
-          })
-          .promise();
-      }),
+    await MAppDraft.updateOne(
+      { appId },
+      { $set: { logoImg: `${config.DO_SPACES_URL}/${imgKey}` } },
     );
 
-    const imgSubDoc = {
-      _id: imgId,
-      large: imgSizes.large.key,
-      medium: imgSizes.medium.key,
-      thumbnail: imgSizes.thumbnail.key,
-    };
-    await MAppDraft.updateOne({ appId }, { $set: { logoImg: imgSubDoc } });
-
+    // if current logo is not being used in published app, delete them
     const app = await MApp.findOne({ _id: appId });
-    if (appDraft.logoImg) {
-      if (appDraft.logoImg.large !== app.logoImg?.large) {
-        await s3Config.deleteObject(
-          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.large },
-        ).promise();
-      }
-      if (appDraft.logoImg.medium !== app.logoImg?.medium) {
-        await s3Config.deleteObject(
-          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.medium },
-        ).promise();
-      }
-      if (appDraft.logoImg.thumbnail !== app.logoImg?.thumbnail) {
-        await s3Config.deleteObject(
-          { Bucket: config.DO_SPACES_BUCKET, Key: appDraft.logoImg.thumbnail },
-        ).promise();
-      }
+    if (app.status === AppStatus.published
+      && app.logoImg
+      && appDraft.logoImg
+      && appDraft.logoImg !== app.logoImg
+    ) {
+      await deleteLogoImgFromDOSpace(appDraft.logoImg);
     }
+
     return { isCompleted: true };
   }
 }

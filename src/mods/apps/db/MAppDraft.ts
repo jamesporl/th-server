@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import ImageSchema from 'mods/base/db/common/Image';
 import SocialUrlsSchema from 'mods/base/db/common/SocialUrls';
 import { DbAppDraft } from './_types';
 import BannerImgSchema from './common/BannerImg';
@@ -14,7 +13,7 @@ const AppDraftSchema = new Schema(
     playStoreUrl: String,
     appStoreUrl: String,
     websiteUrl: String,
-    logoImg: ImageSchema,
+    logoImg: String,
     videoUrl: String,
     bannerImgs: [BannerImgSchema],
     status: {

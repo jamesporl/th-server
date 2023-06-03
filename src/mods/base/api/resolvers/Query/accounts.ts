@@ -1,14 +1,13 @@
-import Auth from 'core/graphql/Auth';
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
 import { MAccount } from '../../../db';
 import { AccountConnection } from '../../entities/Account';
-import { RoleKey } from '../../entities/_enums';
+import IsAdmin from 'core/graphql/IsAdmin';
 
 @Resolver()
 export default class {
-  @Auth([RoleKey.staff])
+  @IsAdmin()
   @Query(() => AccountConnection, { nullable: true })
   async accounts(
     @Arg('searchString', { nullable: true }) searchString: string, // eslint-disable-line @typescript-eslint/indent

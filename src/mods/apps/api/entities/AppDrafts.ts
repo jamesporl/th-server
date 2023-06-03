@@ -2,7 +2,6 @@ import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import {
   Field, ID, InputType, ObjectType, Int,
 } from 'type-graphql';
-import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
@@ -48,8 +47,8 @@ export class AppDraft extends Node {
   @Field({ nullable: true })
   websiteUrl?: string;
 
-  @Field(() => Image, { nullable: true })
-  logoImg?: Image;
+  @Field({ nullable: true })
+  logoImg?: string;
 
   @Field({ nullable: true })
   videoUrl?: string;
@@ -83,12 +82,9 @@ export class AppDraftConnection extends NodeConnection<AppDraft> {
 }
 
 @InputType()
-export class UpdateAppDraftBannerImgInput {
+export class AddAppDraftBannerImgInput {
   @Field(() => ID)
   appId: string;
-
-  @Field(() => Int)
-  order: number;
 
   @Field(() => GraphQLUpload)
   file: FileUpload;
@@ -101,6 +97,12 @@ export class UpdateAppDraftLogoImgInput {
 
   @Field(() => GraphQLUpload)
   file: FileUpload;
+}
+
+@InputType()
+export class DeleteAppDraftLogoImgInput {
+  @Field(() => ID)
+  appId: string;
 }
 
 @InputType()

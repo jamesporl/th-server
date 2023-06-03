@@ -27,7 +27,7 @@ export default class {
     }
 
     const app = await MApp.findOne({ _id: comment.appId });
-    if (app.ownedBy.toHexString() !== accountId) {
+    if (app.ownedBy.toHexString() !== accountId.toHexString()) {
       throw new ForbiddenError('Only the owner of the app can pin comments');
     }
 

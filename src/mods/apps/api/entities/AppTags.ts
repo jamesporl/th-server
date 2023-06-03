@@ -1,4 +1,4 @@
-import { Field, ObjectType, Int } from 'type-graphql';
+import { Field, ObjectType, Int, InputType } from 'type-graphql';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 
@@ -21,4 +21,10 @@ export class AppTag extends Node {
 export class AppTagConnection extends NodeConnection<AppTag> {
   @Field(() => [AppTag])
   nodes: AppTag[];
+}
+
+@InputType()
+export class AddAppTagInput {
+  @Field()
+  name: string;
 }

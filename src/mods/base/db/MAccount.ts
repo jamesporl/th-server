@@ -1,17 +1,26 @@
 import { model, Schema } from 'mongoose';
 import { DbAccount } from './_types';
-import ImageSchema from './common/Image';
 
 const AccountSchema = new Schema(
   {
     email: { type: String, trim: true, lowercase: true },
+    isAdmin: { type: Boolean, default: false },
     firstName: { type: String, trim: true },
     lastName: { type: String, trim: true },
-    name: { type: String },
-    image: ImageSchema,
+    name: { type: String, trim: true },
+    image: { type: String },
     phone: { type: String, trim: true },
     shortDesc: { type: String, trim: true },
-    userId: Schema.Types.ObjectId,
+    isActive: { type: Boolean, default: true },
+    isVerified: { type: Boolean, default: false },
+    verificationCodeSentAt: { type: Date },
+    verificationCode: { type: String },
+    verificationCodeExpiry: { type: Date },
+    verificationAttempts: { type: Number, default: 0 },
+    password: String,
+    pwResetLinkSentAt: { type: Date },
+    pwResetToken: String,
+    pwResetTokenExpiresAt: Date,
   },
   { collection: 'Account', timestamps: true },
 );

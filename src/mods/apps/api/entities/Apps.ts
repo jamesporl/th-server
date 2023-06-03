@@ -2,7 +2,6 @@ import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 import {
   Field, InputType, ObjectType, Int,
 } from 'type-graphql';
-import Image from 'mods/base/api/entities/Image';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
 import SocialUrls from 'mods/base/api/entities/SocialUrls';
@@ -29,12 +28,21 @@ export class AppStatusObject {
 }
 
 @ObjectType()
-export class BannerImg {
+export class BannerImageUrls {
+  @Field()
+  large: string;
+
+  @Field()
+  thumbnail: string;
+}
+
+@ObjectType({ implements: Node })
+export class BannerImg extends Node {
   @Field(() => Int)
   order: number;
 
-  @Field(() => Image)
-  image: Image;
+  @Field(() => BannerImageUrls)
+  image: BannerImageUrls;
 }
 
 @ObjectType({ implements: Node })
@@ -66,8 +74,8 @@ export class App extends Node {
   @Field({ nullable: true })
   websiteUrl?: string;
 
-  @Field(() => Image, { nullable: true })
-  logoImg?: Image;
+  @Field({ nullable: true })
+  logoImg?: string;
 
   @Field({ nullable: true })
   videoUrl?: string;

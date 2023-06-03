@@ -1,17 +1,17 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import { RoleKey } from 'mods/base/api/entities/_enums';
-import Auth from 'core/graphql/Auth';
 import slugify from 'slugify';
+import Auth from 'core/graphql/Auth';
 import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
+import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
-  @Auth([RoleKey.staff])
+  @Auth()
   @Mutation(() => AppDraft)
   async publishAppDraft(
     @Arg('input', () => PublishAppDraftInput) input: PublishAppDraftInput, // eslint-disable-line @typescript-eslint/indent
@@ -51,6 +51,11 @@ export default class {
     };
 
     await MApp.updateOne({ _id: appId }, { $set: appUpdate });
+
+    // delete old logo if it was changed
+    if (app.logoImg) {
+      await deleteLogoImgFromDOSpace(app.logoImg);
+    }
 
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
       { appId },

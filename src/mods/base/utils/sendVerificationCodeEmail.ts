@@ -1,19 +1,17 @@
 import { addMinutes, differenceInSeconds } from 'date-fns';
 import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { Types } from 'mongoose';
-import { MAccount, MUser } from '../db';
 import generateSixDigitCode from './generateSixDigitCode';
+import { Account } from '../db/_types';
+import { MAccount } from '../db';
 
-export default async function sendVerificationCodeEmail(userId: Types.ObjectId) {
+export default async function sendVerificationCodeEmail(account: Account) {
   const verificationCode = generateSixDigitCode();
-  const user = await MUser.findOne({ _id: userId });
-  if (user.verificationCodeSentAt
-    && differenceInSeconds(new Date(), user.verificationCodeSentAt) < 60) {
+  if (account.verificationCodeSentAt
+    && differenceInSeconds(new Date(), account.verificationCodeSentAt) < 60) {
     return;
   }
-  const account = await MAccount.findOne({ userId });
-  await MUser.updateOne(
-    { _id: userId },
+  await MAccount.updateOne(
+    { _id: account._id },
     {
       verificationCodeSentAt: new Date(),
       verificationCode,
@@ -22,7 +20,7 @@ export default async function sendVerificationCodeEmail(userId: Types.ObjectId) 
     },
   );
   await sendMail({
-    to: user.email,
+    to: account.email,
     templateKey: 'verificationCode',
     dynamicTemplateData: { firstName: account.firstName, verificationCode },
   });

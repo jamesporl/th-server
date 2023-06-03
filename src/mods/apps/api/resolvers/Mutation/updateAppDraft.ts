@@ -4,7 +4,6 @@ import {
 } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
-import { RoleKey } from 'mods/base/api/entities/_enums';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import { MApp, MAppDraft, MAppTag } from '../../../db';
 import { UpdateAppDraftInput, AppDraft } from '../../entities/AppDrafts';
@@ -15,7 +14,7 @@ export default class {
   @Auth()
   @Mutation(() => AppDraft)
   async updateAppDraft(
-    @Ctx() { accountId, role }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId, isAdmin }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftInput) input: UpdateAppDraftInput,
   ) {
     const {
@@ -46,7 +45,7 @@ export default class {
 
     const app = await MApp.findOne({ _id: appId });
 
-    if (role === RoleKey.user && appDraft.ownedBy.toHexString() !== accountId) {
+    if (!isAdmin && appDraft.ownedBy.toHexString() !== accountId.toHexString()) {
       throw new ForbiddenError('Forbidden.');
     }
 
