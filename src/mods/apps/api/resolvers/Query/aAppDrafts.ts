@@ -1,15 +1,14 @@
-import Auth from 'core/graphql/Auth';
-import { MAppDraft } from 'mods/apps/db';
-import { RoleKey } from 'mods/base/api/entities/_enums';
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
+import { MAppDraft } from 'mods/apps/db';
 import { AppDraftConnection } from '../../entities/AppDrafts';
 import { AppDraftStatus } from '../../entities/_enums';
+import IsAdmin from 'core/graphql/IsAdmin';
 
 @Resolver()
 export default class {
-  @Auth([RoleKey.staff])
+  @IsAdmin()
   @Query(() => AppDraftConnection, { nullable: true })
   async aAppDrafts(
     @Arg('searchString', { nullable: true }) searchString: string, // eslint-disable-line @typescript-eslint/indent

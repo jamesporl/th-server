@@ -1,12 +1,13 @@
-import {
-  Image, TimeStamps, AccountStamps, SocialUrls,
-} from 'mods/base/db/_types';
+import { TimeStamps, AccountStamps, SocialUrls } from 'mods/base/db/_types';
 import { Types, Document } from 'mongoose';
 import { AppStatus } from '../api/entities/_enums';
 
 export interface BannerImg {
   order: number;
-  image: Image;
+  image: {
+    large: string;
+    thumbnail: string;
+  };
 }
 
 export interface App extends TimeStamps, AccountStamps {
@@ -15,7 +16,7 @@ export interface App extends TimeStamps, AccountStamps {
   htmlDesc?: string;
   textDesc?: string;
   shortDesc?: string;
-  logoImg?: Image;
+  logoImg?: string;
   videoUrl?: string;
   bannerImgs?: BannerImg[];
   ownedBy: Types.ObjectId;
@@ -39,7 +40,7 @@ export interface AppDraft extends TimeStamps {
   name: string;
   jsonDesc?: unknown;
   shortDesc?: string;
-  logoImg?: Image;
+  logoImg?: string;
   videoUrl?: string;
   bannerImgs?: BannerImg[];
   ownedBy: Types.ObjectId;
@@ -55,6 +56,8 @@ export type DbAppDraft = AppDraft & Document;
 
 export interface AppTag {
   name: string;
+  slug: string;
+  imgUrl?: string;
 }
 
 export type DbAppTag = AppTag & Document;

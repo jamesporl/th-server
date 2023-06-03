@@ -2,7 +2,7 @@ import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { isAfter } from 'date-fns';
 import generateAuthToken from '../../../utils/generateAuthToken';
-import { MUser, MAccount } from '../../../db';
+import { MAccount } from '../../../db';
 import { VerifyAccountByCodeInput } from '../../entities/Auth';
 
 @Resolver()
@@ -14,20 +14,20 @@ export default class {
     const { email, code } = input;
 
     const errorMessage = 'Invalid code';
-    const user = await MUser.findOne({ email });
-    if (!user) {
+    const account = await MAccount.findOne({ email });
+    if (!account) {
       throw new UserInputError(errorMessage);
     }
 
-    if (!user.isVerified) {
-      if (isAfter(new Date(), user.verificationCodeExpiry)) {
+    if (!account.isVerified) {
+      if (isAfter(new Date(), account.verificationCodeExpiry)) {
         throw new UserInputError(errorMessage);
       }
-      if ((user.verificationAttempts || 0) > 5) {
+      if ((account.verificationAttempts || 0) > 5) {
         throw new UserInputError(errorMessage);
       }
-      if (user.verificationCode === code) {
-        await MUser.updateOne(
+      if (account.verificationCode === code) {
+        await MAccount.updateOne(
           { email },
           {
             $set: { isVerified: true, verificationAttempts: 0 },
@@ -38,16 +38,15 @@ export default class {
           },
         );
       } else {
-        const verificationAttempts = user.verificationAttempts ? 1 : user.verificationAttempts + 1;
-        await MUser.updateOne({ email }, { $set: { verificationAttempts } });
+        const verificationAttempts = account.verificationAttempts ? 1 : account.verificationAttempts + 1;
+        await MAccount.updateOne({ email }, { $set: { verificationAttempts } });
         throw new UserInputError(errorMessage);
       }
     } else {
       throw new UserInputError(errorMessage);
     }
 
-    const account = await MAccount.findOne({ userId: user._id });
-    const authToken = generateAuthToken(user, account._id.toHexString());
+    const authToken = generateAuthToken(account);
 
     return authToken;
   }

@@ -3,11 +3,11 @@ import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation } from 'type-graphql';
 import fetch from 'node-fetch';
 import config from 'core/config';
-import { MAccount, MOAuthState, MUser } from 'mods/base/db';
+import { MAccount, MOAuthState } from 'mods/base/db';
 import hashPassword from 'mods/base/utils/hashPassword';
 import generateAuthToken from 'mods/base/utils/generateAuthToken';
 import sendWelcomeForGoogleSignupEmail from 'mods/base/utils/sendWelcomeForGoogleSignupEmail';
-import { OAuthWebsiteKey, RoleKey } from '../../entities/_enums';
+import { OAuthWebsiteKey } from '../../entities/_enums';
 import { LoginWithGoogleInput } from '../../entities/Auth';
 
 export interface GoogleAccessTokenResponseData {
@@ -68,34 +68,25 @@ export default class {
 
     const profileBody = await profileResp.json() as GoogleProfileResponseData;
 
-    let accountId: string;
-    let user = await MUser.findOne({ email: profileBody.email });
+    let account = await MAccount.findOne({ email: profileBody.email });
 
-    if (!user) {
+    if (!account) {
       const randomPw = randomBytes(8).toString('hex');
-      user = await new MUser({
-        email: profileBody.email,
-        password: await hashPassword(randomPw),
-        roles: [{ role: RoleKey.user }],
-        isVerified: true,
-      }).save();
 
-      const newAccount = await new MAccount({
+      account = await new MAccount({
         firstName: profileBody.given_name,
         lastName: profileBody.family_name,
         name: `${profileBody.given_name} ${profileBody.family_name}`,
         email: profileBody.email,
-        userId: user._id,
+        password: await hashPassword(randomPw),
+        isVerified: true,
+        isAdmin: false,
       }).save();
 
-      accountId = newAccount._id.toHexString();
-      await sendWelcomeForGoogleSignupEmail(user._id);
-    } else {
-      const account = await MAccount.findOne({ userId: user._id });
-      accountId = account._id.toHexString();
+      await sendWelcomeForGoogleSignupEmail(account);
     }
 
-    const authToken = generateAuthToken(user, accountId);
+    const authToken = generateAuthToken(account);
 
     return authToken;
   }

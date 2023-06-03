@@ -1,9 +1,13 @@
 import { Schema } from 'mongoose';
-import ImageSchema from 'mods/base/db/common/Image';
+
+const BannerImageUrlsSchema = new Schema({
+  large: { type: String, required: true },
+  thumbnail: { type: String, required: true },
+}, { _id: false });
 
 const BannerImgSchema = new Schema({
   order: { type: Number, required: true },
-  image: { type: ImageSchema, required: true },
+  image: { type: BannerImageUrlsSchema, required: true },
 });
 
 export default BannerImgSchema;

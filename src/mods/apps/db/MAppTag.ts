@@ -9,7 +9,7 @@ const AppTagSchema = new Schema(
     slug: {
       type: String, required: true, index: true, unique: true,
     },
-    imgUrl: { type: String, required: true },
+    imgUrl: { type: String },
     appsCount: { type: Number, required: true, default: 0 },
   },
   {

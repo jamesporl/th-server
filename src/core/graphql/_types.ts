@@ -1,13 +1,11 @@
-import { RoleKey } from 'mods/base/api/entities/_enums';
+import { Types } from 'mongoose';
 import createDataloaders from './createDataloaders';
 
-export interface UserContext {
-  roleId?: string;
-  role?: RoleKey;
-  userId?: string;
-  accountId?: string;
+export interface AccountContext {
+  isAdmin?: boolean;
+  accountId?: Types.ObjectId;
 }
 
-export interface Context extends UserContext {
+export interface Context extends AccountContext {
   dataloaders: ReturnType<typeof createDataloaders>;
 }

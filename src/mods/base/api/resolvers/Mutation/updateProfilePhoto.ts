@@ -10,6 +10,7 @@ import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
 import { MAccount } from 'mods/base/db';
 import { UpdateProfilePhotoInput } from '../../entities/Profile';
+import s3Config from 'core/s3Config';
 
 @Resolver()
 export default class {
@@ -26,82 +27,46 @@ export default class {
     const stream = createReadStream();
 
     const imgId = new Types.ObjectId();
-    const imgSizes = {
-      large: {
-        width: 512,
-        height: 512,
-        key: `${config.DO_SPACES_PATH_PREFIX}/profile/${accountId}/${imgId.toHexString()}.jpg`,
-      },
-      medium: {
-        width: 200,
-        height: 200,
-        key: `${config.DO_SPACES_PATH_PREFIX}/profile/${accountId}/${imgId.toHexString()}-md.jpg`,
-      },
-      thumbnail: {
-        width: 80,
-        height: 80,
-        key: `${config.DO_SPACES_PATH_PREFIX}/profile/${accountId}/${imgId.toHexString()}-tn.jpg`,
-      },
-    };
 
-    const s3Config = new aws.S3({
-      endpoint: config.DO_SPACES_ENDPOINT,
-      accessKeyId: config.DO_SPACES_KEY,
-      secretAccessKey: config.DO_SPACES_SECRET,
-    });
+    const imgKey = `${config.DO_SPACES_PATH_PREFIX}/profile/${accountId}/${imgId.toHexString()}.jpg`;
 
-    await Promise.all(
-      Object.keys(imgSizes).map(async (size) => {
-        const pipeline = sharp()
-          .resize(imgSizes[size].width as number, imgSizes[size].height as number, {
-            fit: 'cover',
-            background: {
-              r: 0,
-              g: 0,
-              b: 0,
-              alpha: 0,
-            },
-          })
-          .flatten({
-            background: '#ffffff',
-          })
-          .jpeg();
+    const pipeline = sharp()
+      .resize(512, 512, {
+        fit: 'cover',
+        background: {
+          r: 0,
+          g: 0,
+          b: 0,
+          alpha: 0,
+        },
+      })
+      .flatten({
+        background: '#ffffff',
+      })
+      .jpeg();
 
-        const piped = await stream.pipe(pipeline).toBuffer();
+    const piped = await stream.pipe(pipeline).toBuffer();
 
-        await s3Config
-          .putObject({
-            Bucket: config.DO_SPACES_BUCKET,
-            Key: imgSizes[size].key,
-            Body: piped,
-            ACL: 'public-read',
-            ContentDisposition: 'inline',
-            ContentType: 'image/jpeg',
-          })
-          .promise();
-      }),
-    );
+    await s3Config
+      .putObject({
+        Bucket: config.DO_SPACES_BUCKET,
+        Key: imgKey,
+        Body: piped,
+        ACL: 'public-read',
+        ContentDisposition: 'inline',
+        ContentType: 'image/jpeg',
+      })
+      .promise();
 
-    const imgSubDoc = {
-      _id: imgId,
-      large: imgSizes.large.key,
-      medium: imgSizes.medium.key,
-      thumbnail: imgSizes.thumbnail.key,
-    };
+    
     const account = await MAccount.findOne({ _id: accountId });
     if (account.image) {
       await s3Config.deleteObject(
-        { Bucket: config.DO_SPACES_BUCKET, Key: account.image.thumbnail },
-      ).promise();
-      await s3Config.deleteObject(
-        { Bucket: config.DO_SPACES_BUCKET, Key: account.image.medium },
-      ).promise();
-      await s3Config.deleteObject(
-        { Bucket: config.DO_SPACES_BUCKET, Key: account.image.large },
+        { Bucket: config.DO_SPACES_BUCKET, Key: account.image },
       ).promise();
     }
 
-    await MAccount.updateOne({ _id: accountId }, { $set: { image: imgSubDoc } });
+    await MAccount.updateOne({ _id: accountId }, { $set: { image: imgKey } });
     return { isCompleted: true };
   }
 }

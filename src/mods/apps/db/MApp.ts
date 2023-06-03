@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import ImageSchema from 'mods/base/db/common/Image';
 import SocialUrlsSchema from 'mods/base/db/common/SocialUrls';
 import { AppStatus, APP_STATUS_VALUES } from '../api/entities/_enums';
 import { DbApp } from './_types';
@@ -16,7 +15,7 @@ const AppSchema = new Schema(
     appStoreUrl: String,
     websiteUrl: String,
     publishedAt: Date,
-    logoImg: ImageSchema,
+    logoImg: String,
     videoUrl: String,
     bannerImgs: [BannerImgSchema],
     ownedBy: { type: Schema.Types.ObjectId, required: true },

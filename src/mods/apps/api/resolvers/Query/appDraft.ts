@@ -4,7 +4,6 @@ import {
 } from 'type-graphql';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
-import { RoleKey } from 'mods/base/api/entities/_enums';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft } from '../../entities/AppDrafts';
 import { AppStatus } from '../../entities/_enums';
@@ -14,7 +13,7 @@ export default class {
   @Auth()
   @Query(() => AppDraft, { nullable: true })
   async appDraft(
-    @Ctx() { accountId, role }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId, isAdmin }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('_id', () => ID, { nullable: true }) _id: string,
   ) {
     const app = await MApp.findOne(
@@ -25,7 +24,7 @@ export default class {
       throw new UserInputError('App not found.');
     }
 
-    if (role === RoleKey.user && app.ownedBy.toHexString() !== accountId) {
+    if (!isAdmin && app.ownedBy.toHexString() !== accountId.toHexString()) {
       throw new ForbiddenError('Forbidden');
     }
     const appDraft = await MAppDraft.findOne({ appId: _id }).lean();
