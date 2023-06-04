@@ -9,6 +9,7 @@ import toggleAppSupport from './toggleAppSupport';
 import togglePinAppComment from './togglePinAppComment';
 import undoSubmitAppDraft from './undoSubmitAppDraft';
 import updateAppDraft from './updateAppDraft';
+import updateAppDraftBannerImgsOrder from './updateAppDraftBannerImgsOrder';
 import updateAppDraftLogoImg from './updateAppDraftLogoImg';
 
 export default [
@@ -22,6 +23,7 @@ export default [
   toggleAppSupport,
   togglePinAppComment,
   undoSubmitAppDraft,
+  updateAppDraftBannerImgsOrder,
   updateAppDraft,
   updateAppDraftLogoImg,
 ];

@@ -14,7 +14,7 @@ export default class {
   @Auth()
   @Mutation(() => AppDraft)
   async updateAppDraft(
-    @Ctx() { accountId, isAdmin }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftInput) input: UpdateAppDraftInput,
   ) {
     const {
@@ -37,17 +37,13 @@ export default class {
     }
 
     const appDraft = await MAppDraft.findOne({
-      appId, status: AppDraftStatus.inProgress,
+      appId, ownedBy: accountId, status: AppDraftStatus.inProgress,
     });
     if (!appDraft) {
       throw new UserInputError('App not found.');
     }
 
     const app = await MApp.findOne({ _id: appId });
-
-    if (!isAdmin && appDraft.ownedBy.toHexString() !== accountId.toHexString()) {
-      throw new ForbiddenError('Forbidden.');
-    }
 
     if (tagIds?.length) {
       const tagDocs = await MAppTag.find({ _id: { $in: tagIds } });
@@ -57,7 +53,7 @@ export default class {
     }
 
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
-      { appId },
+      { _id: appDraft._id },
       {
         $set: {
           name, shortDesc, jsonDesc, tagIds, ...rest,

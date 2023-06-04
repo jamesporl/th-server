@@ -1,25 +1,30 @@
 import { UserInputError } from 'apollo-server-express';
-import { Arg, Mutation, Resolver } from 'type-graphql';
+import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import slugify from 'slugify';
-import Auth from 'core/graphql/Auth';
 import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import IsAdmin from 'core/graphql/IsAdmin';
+import { Context } from 'core/graphql/_types';
 
 @Resolver()
 export default class {
-  @Auth()
+  @IsAdmin()
   @Mutation(() => AppDraft)
   async publishAppDraft(
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => PublishAppDraftInput) input: PublishAppDraftInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { appId } = input;
 
     const app = await MApp.findOne({ _id: appId });
-    const appDraft = await MAppDraft.findOne({ appId });
+    const appDraft = await MAppDraft.findOne(
+      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress},
+      { _id: 1 },
+    );
 
     if (!app) {
       throw new UserInputError('App not found.');
@@ -53,7 +58,7 @@ export default class {
     await MApp.updateOne({ _id: appId }, { $set: appUpdate });
 
     // delete old logo if it was changed
-    if (app.logoImg) {
+    if (app.logoImg !== appDraft.logoImg) {
       await deleteLogoImgFromDOSpace(app.logoImg);
     }
 

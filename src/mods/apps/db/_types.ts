@@ -3,6 +3,7 @@ import { Types, Document } from 'mongoose';
 import { AppStatus } from '../api/entities/_enums';
 
 export interface BannerImg {
+  _id: Types.ObjectId;
   order: number;
   image: {
     large: string;

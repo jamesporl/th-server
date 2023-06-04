@@ -100,6 +100,15 @@ export class UpdateAppDraftLogoImgInput {
 }
 
 @InputType()
+export class UpdateAppDraftBannerImgsOrderInput {
+  @Field(() => ID)
+  appId: string;
+
+  @Field(() => [ID])
+  bannerImgIds: string[];
+}
+
+@InputType()
 export class DeleteAppDraftLogoImgInput {
   @Field(() => ID)
   appId: string;
