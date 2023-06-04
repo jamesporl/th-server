@@ -12,7 +12,7 @@ import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayloa
 import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { UpdateAppDraftLogoImgInput } from '../../entities/AppDrafts';
-import { AppStatus } from '../../entities/_enums';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums';
 import s3Config from 'core/s3Config';
 
 @Resolver()
@@ -24,7 +24,10 @@ export default class {
     @Arg('input', () => UpdateAppDraftLogoImgInput) input: UpdateAppDraftLogoImgInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { appId, file } = input;
-    const appDraft = await MAppDraft.findOne({ appId, ownedBy: accountId }, { _id: 1 });
+    const appDraft = await MAppDraft.findOne(
+      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress},
+      { _id: 1 },
+    );
 
     if (!appDraft) {
       throw new UserInputError('App not found.');
@@ -66,7 +69,7 @@ export default class {
       .promise();
 
     await MAppDraft.updateOne(
-      { appId },
+      { _id: appDraft._id },
       { $set: { logoImg: `${config.DO_SPACES_URL}/${imgKey}` } },
     );
 

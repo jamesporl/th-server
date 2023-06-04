@@ -18,12 +18,14 @@ const batchGetAppSupports = async (appIdAndAccountIds: string[]) => {
     docs = [...docs, ...docsForAccountId];
   }
 
-  return idObjs.map((s) => {
+  const res = idObjs.map((s) => {
     const doc = docs.find(
       (d) => d.appId.toHexString() === s.appId && d.accountId.toHexString() === s.accountId,
     );
     return !!doc;
   });
+
+  return res;
 };
 
 const appSupportsLoader = new DataLoader(batchGetAppSupports);

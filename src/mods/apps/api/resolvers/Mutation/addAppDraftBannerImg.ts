@@ -24,8 +24,6 @@ export default class {
   ) {
     const { appId, file } = input;
 
-    console.log(appId);
-
     const appDraft = await MAppDraft.findOne({ appId, ownedBy: accountId }).lean();
 
     if (!appDraft) {
