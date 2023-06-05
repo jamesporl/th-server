@@ -1,32 +1,30 @@
 import { UserInputError } from 'apollo-server-express';
-import { Arg, Ctx, Mutation, Resolver } from 'type-graphql';
+import {
+  Arg, Ctx, Mutation, Resolver,
+} from 'type-graphql';
 import slugify from 'slugify';
 import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
+import IsAdmin from 'core/graphql/IsAdmin';
+import { Context } from 'core/graphql/_types';
 import { MApp, MAppDraft } from '../../../db';
 import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
-import IsAdmin from 'core/graphql/IsAdmin';
-import { Context } from 'core/graphql/_types';
 
 @Resolver()
 export default class {
   @IsAdmin()
   @Mutation(() => AppDraft)
   async publishAppDraft(
-    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => PublishAppDraftInput) input: PublishAppDraftInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { appId } = input;
 
     const app = await MApp.findOne({ _id: appId });
-    const appDraft = await MAppDraft.findOne(
-      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress},
-      { _id: 1 },
-    );
+    const appDraft = await MAppDraft.findOne({ appId, status: AppDraftStatus.submitted });
 
-    if (!app) {
+    if (!app || !appDraft) {
       throw new UserInputError('App not found.');
     }
 

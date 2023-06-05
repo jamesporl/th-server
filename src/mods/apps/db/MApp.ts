@@ -22,6 +22,7 @@ const AppSchema = new Schema(
     status: {
       type: String, enum: APP_STATUS_VALUES, required: true, default: AppStatus.new,
     },
+    randomId: { type: Number, required: true },
     slug: { type: String, index: true, unique: true },
     socialUrls: SocialUrlsSchema,
     commentsCount: { type: Number, default: 0 },
