@@ -1,3 +1,4 @@
+import addJob from './addJob';
 import createGoogleOAuthUrl from './createGoogleOAuthUrl';
 import login from './login';
 import loginWithGoogle from './loginWithGoogle';
@@ -12,6 +13,7 @@ import updateProfilePhoto from './updateProfilePhoto';
 import verifyAccountByCode from './verifyAccountByCode';
 
 export default [
+  addJob,
   createGoogleOAuthUrl,
   login,
   loginWithGoogle,

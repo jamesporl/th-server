@@ -5,6 +5,7 @@ import {
 } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
+import generateSixDigitCode from 'mods/base/utils/generateSixDigitCode';
 import { MApp, MAppDraft } from '../../../db';
 import { AddAppInput, App } from '../../entities/Apps';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -34,6 +35,7 @@ export default class {
       status: AppStatus.new,
       slug: appId.toHexString(),
       ownedBy: new Types.ObjectId(accountId),
+      randomId: generateSixDigitCode(),
     }).save();
 
     await new MAppDraft({
