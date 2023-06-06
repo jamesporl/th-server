@@ -1,4 +1,4 @@
-import { ForbiddenError, UserInputError } from 'apollo-server-express';
+import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';

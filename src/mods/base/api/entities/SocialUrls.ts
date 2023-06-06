@@ -3,17 +3,17 @@ import { Field, ObjectType } from 'type-graphql';
 @ObjectType()
 export default class SocialUrls {
   @Field({ nullable: true })
-  facebook?: string;
+    facebook?: string;
 
   @Field({ nullable: true })
-  linkedIn?: string;
+    linkedIn?: string;
 
   @Field({ nullable: true })
-  twitter?: string;
+    twitter?: string;
 
   @Field({ nullable: true })
-  instagram?: string;
+    instagram?: string;
 
   @Field({ nullable: true })
-  github?: string;
+    github?: string;
 }

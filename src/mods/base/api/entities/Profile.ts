@@ -1,44 +1,42 @@
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
-import {
-  Field, ObjectType, ID, InputType,
-} from 'type-graphql';
+import { Field, ObjectType, InputType } from 'type-graphql';
 import Node from './Node';
 
 @ObjectType({ implements: Node })
 export class Profile extends Node {
   @Field({ nullable: true })
-  firstName?: string;
+    firstName?: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+    lastName?: string;
 
   @Field({ nullable: true })
-  shortDesc?: string;
+    shortDesc?: string;
 
   @Field({ nullable: true })
-  image?: string;
+    image?: string;
 
   @Field()
-  email: string;
+    email: string;
 
   @Field()
-  isAdmin?: boolean;
+    isAdmin?: boolean;
 }
 
 @InputType()
 export class UpdatePersonalInfoInput {
   @Field()
-  firstName: string;
+    firstName: string;
 
   @Field()
-  lastName: string;
+    lastName: string;
 
   @Field({ nullable: true })
-  shortDesc?: string;
+    shortDesc?: string;
 }
 
 @InputType()
 export class UpdateProfilePhotoInput {
   @Field(() => GraphQLUpload)
-  file: FileUpload;
+    file: FileUpload;
 }

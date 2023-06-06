@@ -9,38 +9,38 @@ import { AppCommentStatus } from './_enums';
 @ObjectType()
 export class AppCommentStatusObject {
   @Field(() => AppCommentStatus)
-  key: AppCommentStatus;
+    key: AppCommentStatus;
 
   @Field()
-  label: string;
+    label: string;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AppCommentConnection extends NodeConnection<AppComment> {
   @Field(() => [AppComment])
-  nodes: AppComment[];
+    nodes: AppComment[];
 }
 
 @InputType()
 export class AddCommentToAppInput {
   @Field(() => ID)
-  appId?: string;
+    appId?: string;
 
   @Field(() => GraphQLJSON)
-  jsonContent: unknown;
+    jsonContent: unknown;
 
   @Field(() => ID, { nullable: true })
-  parentCommentId?: string;
+    parentCommentId?: string;
 }
 
 @InputType()
 export class ToggleAppCommentSupportInput {
   @Field(() => ID)
-  commentId: string;
+    commentId: string;
 }
 
 @InputType()
 export class TogglePinAppCommentInput {
   @Field(() => ID)
-  commentId: string;
+    commentId: string;
 }

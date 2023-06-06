@@ -3,77 +3,77 @@ import { Field, InputType } from 'type-graphql';
 @InputType()
 export class LoginInput {
   @Field()
-  email: string;
+    email: string;
 
   @Field()
-  password: string;
+    password: string;
 }
 
 @InputType()
 export class VerifyAccountByCodeInput {
   @Field()
-  email: string;
+    email: string;
 
   @Field()
-  code: string;
+    code: string;
 }
 
 @InputType()
 export class SendVerificationCodeInput {
   @Field()
-  email: string;
+    email: string;
 }
 
 @InputType()
 export class ResetPasswordWithAuthInput {
   @Field()
-  newPassword: string;
+    newPassword: string;
 }
 
 @InputType()
 export class SignupInput {
   @Field()
-  email: string;
+    email: string;
 
   @Field()
-  firstName: string;
+    firstName: string;
 
   @Field()
-  lastName: string;
+    lastName: string;
 
   @Field()
-  password: string;
+    password: string;
 }
 
 @InputType()
 export class LoginWithGoogleInput {
   @Field()
-  code: string;
+    code: string;
 
   @Field()
-  state: string;
+    state: string;
 }
 
 @InputType()
 export class UpdateEmailInput {
   @Field()
-  newEmail: string;
+    newEmail: string;
 }
 
 @InputType()
 export class SendPasswordResetLinkInput {
   @Field()
-  email: string;
+    email: string;
 }
 
 @InputType()
 export class ResetPasswordByTokenInput {
   @Field()
-  token: string;
+    token: string;
 
   @Field()
-  email: string;
+    email: string;
 
   @Field()
-  newPassword: string;
+    newPassword: string;
 }

@@ -3,10 +3,10 @@ import {
 } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
+import { MAccount } from 'mods/base/db';
 import hashPassword from '../../../utils/hashPassword';
 import { ResetPasswordWithAuthInput } from '../../entities/Auth';
 import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
-import { MAccount } from 'mods/base/db';
 
 @Resolver()
 export default class {
@@ -18,7 +18,10 @@ export default class {
   ) {
     const { newPassword } = input;
 
-    await MAccount.updateOne({ _id: accountId }, { $set: { password: await hashPassword(newPassword) } });
+    await MAccount.updateOne(
+      { _id: accountId },
+      { $set: { password: await hashPassword(newPassword) } },
+    );
 
     return { isCompleted: true };
   }

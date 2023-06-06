@@ -15,152 +15,152 @@ import { BannerImg } from './Apps';
 @ObjectType()
 export class AppDraftStatusObject {
   @Field(() => AppDraftStatus)
-  key: AppDraftStatus;
+    key: AppDraftStatus;
 
   @Field()
-  label: string;
+    label: string;
 }
 
 @ObjectType({ implements: Node })
 export class AppDraft extends Node {
   @Field()
-  appId: string;
+    appId: string;
 
   @Field()
-  name: string;
+    name: string;
 
   @Field()
-  shortDesc: string;
+    shortDesc: string;
 
   @Field(() => GraphQLJSON, { nullable: true })
-  jsonDesc?: unknown;
+    jsonDesc?: unknown;
 
   @Field({ nullable: true })
-  htmlDesc?: string;
+    htmlDesc?: string;
 
   @Field({ nullable: true })
-  playStoreUrl?: string;
+    playStoreUrl?: string;
 
   @Field({ nullable: true })
-  appStoreUrl?: string;
+    appStoreUrl?: string;
 
   @Field({ nullable: true })
-  websiteUrl?: string;
+    websiteUrl?: string;
 
   @Field({ nullable: true })
-  logoImg?: string;
+    logoImg?: string;
 
   @Field({ nullable: true })
-  videoUrl?: string;
+    videoUrl?: string;
 
   @Field(() => [BannerImg], { nullable: 'itemsAndList' })
-  bannerImgs?: BannerImg[];
+    bannerImgs?: BannerImg[];
 
   @Field(() => [AppTag], { nullable: 'itemsAndList' })
-  tags?: AppTag[];
+    tags?: AppTag[];
 
   @Field(() => AppDraftStatusObject)
-  status?: AppDraftStatusObject;
+    status?: AppDraftStatusObject;
 
   @Field({ nullable: true })
-  socialUrls?: SocialUrls;
+    socialUrls?: SocialUrls;
 
   @Field(() => SimpleAccount, { nullable: true })
-  ownedBy?: SimpleAccount;
+    ownedBy?: SimpleAccount;
 
   @Field(() => GraphQLDateTime, { nullable: true })
-  createdAt?: Date;
+    createdAt?: Date;
 
   @Field(() => GraphQLDateTime, { nullable: true })
-  updatedAt?: Date;
+    updatedAt?: Date;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AppDraftConnection extends NodeConnection<AppDraft> {
   @Field(() => [AppDraft])
-  nodes: AppDraft[];
+    nodes: AppDraft[];
 }
 
 @InputType()
 export class AddAppDraftBannerImgInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 
   @Field(() => GraphQLUpload)
-  file: FileUpload;
+    file: FileUpload;
 }
 
 @InputType()
 export class UpdateAppDraftLogoImgInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 
   @Field(() => GraphQLUpload)
-  file: FileUpload;
+    file: FileUpload;
 }
 
 @InputType()
 export class UpdateAppDraftBannerImgsOrderInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 
   @Field(() => [ID])
-  bannerImgIds: string[];
+    bannerImgIds: string[];
 }
 
 @InputType()
 export class DeleteAppDraftLogoImgInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 }
 
 @InputType()
 export class UpdateAppDraftInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 
   @Field()
-  name: string;
+    name: string;
 
   @Field()
-  shortDesc: string;
+    shortDesc: string;
 
   @Field(() => GraphQLJSON, { nullable: true })
-  jsonDesc?: unknown;
+    jsonDesc?: unknown;
 
   @Field({ nullable: true })
-  videoUrl?: string;
+    videoUrl?: string;
 
   @Field({ nullable: true })
-  playStoreUrl?: string;
+    playStoreUrl?: string;
 
   @Field({ nullable: true })
-  appStoreUrl?: string;
+    appStoreUrl?: string;
 
   @Field({ nullable: true })
-  websiteUrl?: string;
+    websiteUrl?: string;
 
   @Field(() => [ID], { nullable: 'itemsAndList' })
-  tagIds?: string[];
+    tagIds?: string[];
 
   @Field({ nullable: true })
-  socialUrls?: SocialUrlsInput;
+    socialUrls?: SocialUrlsInput;
 }
 
 @InputType()
 export class SubmitAppDraftInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 }
 
 @InputType()
 export class UndoSubmitAppDraftInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 }
 
 @InputType()
 export class PublishAppDraftInput {
   @Field(() => ID)
-  appId: string;
+    appId: string;
 }

@@ -11,108 +11,100 @@ import { AppTag } from './AppTags';
 
 @InputType()
 export class AddAppInput {
-  @Field()
-  name: string;
+  @Field() name: string;
 
-  @Field()
-  shortDesc: string;
+  @Field() shortDesc: string;
 }
 
 @ObjectType()
 export class AppStatusObject {
-  @Field(() => AppStatus)
-  key: AppStatus;
+  @Field(() => AppStatus) key: AppStatus;
 
-  @Field()
-  label: string;
+  @Field() label: string;
 }
 
 @ObjectType()
 export class BannerImageUrls {
-  @Field()
-  large: string;
+  @Field() large: string;
 
-  @Field()
-  thumbnail: string;
+  @Field() thumbnail: string;
 }
 
 @ObjectType({ implements: Node })
 export class BannerImg extends Node {
-  @Field(() => Int)
-  order: number;
+  @Field(() => Int) order: number;
 
-  @Field(() => BannerImageUrls)
-  image: BannerImageUrls;
+  @Field(() => BannerImageUrls) image: BannerImageUrls;
 }
 
 @ObjectType({ implements: Node })
 export class App extends Node {
   @Field()
-  name: string;
+    name: string;
 
   @Field()
-  shortDesc: string;
+    shortDesc: string;
 
   @Field(() => GraphQLJSON, { nullable: true })
-  jsonDesc?: unknown;
+    jsonDesc?: unknown;
 
   @Field({ nullable: true })
-  htmlDesc?: string;
+    htmlDesc?: string;
 
   @Field({ nullable: true })
-  textDesc?: string;
+    textDesc?: string;
 
   @Field(() => GraphQLDateTime, { nullable: true })
-  publishedAt?: Date;
+    publishedAt?: Date;
 
   @Field({ nullable: true })
-  playStoreUrl?: string;
+    playStoreUrl?: string;
 
   @Field({ nullable: true })
-  appStoreUrl?: string;
+    appStoreUrl?: string;
 
   @Field({ nullable: true })
-  websiteUrl?: string;
+    websiteUrl?: string;
 
   @Field({ nullable: true })
-  logoImg?: string;
+    logoImg?: string;
 
   @Field({ nullable: true })
-  videoUrl?: string;
+    videoUrl?: string;
 
   @Field(() => [BannerImg], { nullable: 'itemsAndList' })
-  bannerImgs?: BannerImg[];
+    bannerImgs?: BannerImg[];
 
   @Field(() => AppStatusObject)
-  status?: AppStatusObject;
+    status?: AppStatusObject;
 
   @Field(() => [AppTag], { nullable: 'itemsAndList' })
-  tags?: AppTag[];
+    tags?: AppTag[];
 
   @Field(() => Int)
-  supportsCount: number;
+    supportsCount: number;
 
   @Field(() => Int)
-  commentsCount: number;
+    commentsCount: number;
 
   @Field(() => Boolean)
-  isSupported: boolean;
+    isSupported: boolean;
 
   @Field(() => Boolean, { nullable: true })
-  isFeatured?: boolean;
+    isFeatured?: boolean;
 
   @Field({ nullable: true })
-  slug?: string;
+    slug?: string;
 
   @Field({ nullable: true })
-  socialUrls?: SocialUrls;
+    socialUrls?: SocialUrls;
 
   @Field(() => SimpleAccount, { nullable: true })
-  ownedBy?: SimpleAccount;
+    ownedBy?: SimpleAccount;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AppConnection extends NodeConnection<App> {
   @Field(() => [App])
-  nodes: App[];
+    nodes: App[];
 }

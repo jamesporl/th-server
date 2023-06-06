@@ -1,4 +1,3 @@
-import aws from 'aws-sdk';
 import { Types } from 'mongoose';
 import sharp from 'sharp';
 import {
@@ -9,8 +8,8 @@ import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
 import { MAccount } from 'mods/base/db';
-import { UpdateProfilePhotoInput } from '../../entities/Profile';
 import s3Config from 'core/s3Config';
+import { UpdateProfilePhotoInput } from '../../entities/Profile';
 
 @Resolver()
 export default class {
@@ -58,7 +57,6 @@ export default class {
       })
       .promise();
 
-    
     const account = await MAccount.findOne({ _id: accountId });
     if (account.image) {
       await s3Config.deleteObject(

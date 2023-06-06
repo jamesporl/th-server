@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "tsc-watch --compiler .bin/ttsc --onSuccess \"node build/server.js\"",
     "build": "ttsc -p .",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "author": "",
   "license": "ISC",

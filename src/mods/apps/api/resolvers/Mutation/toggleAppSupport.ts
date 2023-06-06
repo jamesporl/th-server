@@ -25,7 +25,7 @@ export default class {
     }
 
     const appSupportDoc = await MAppSupport.findOne({ appId, accountId });
-  
+
     if (appSupportDoc) {
       await MAppSupport.deleteOne({ _id: appSupportDoc._id });
       await MApp.updateOne({ _id: appId }, { $inc: { supportsCount: -1 } });

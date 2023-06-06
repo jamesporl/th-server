@@ -6,7 +6,7 @@ import { UserInputError } from 'apollo-server-express';
 import { SortOrder } from 'mongoose';
 import { MApp, MAppTag } from '../../../db';
 import { AppConnection } from '../../entities/Apps';
-import { AppsOtherFilter, AppStatus } from '../../entities/_enums';
+import { AppsOtherFilter, AppsSortBy, AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
@@ -22,7 +22,7 @@ export default class {
     otherFilters?: AppsOtherFilter[],
     @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100,
     @Arg('page', () => Int, { nullable: true }) page = 1,
-    // @Arg('sortBy', () => AppsSortBy, { nullable: true }) sortBy = AppsSortBy.publishedDate,
+    @Arg('sortBy', () => AppsSortBy, { nullable: true }) sortBy = AppsSortBy.random,
   ) {
     const dbFilter: { [key: string]: unknown } = {};
     if (searchString) {
@@ -60,7 +60,12 @@ export default class {
 
     dbFilter.status = AppStatus.published;
 
-    const dbSort: { [key:string]: SortOrder } = { randomId: 1 };
+    let dbSort: { [key:string]: SortOrder } = { randomId: 1 };
+    if (sortBy === AppsSortBy.publishedDate) {
+      dbSort = { publishedAt: -1 };
+    } else if (sortBy === AppsSortBy.name) {
+      dbSort = { name: 1 };
+    }
 
     const totalCount = await MApp.count(dbFilter);
     const apps = await MApp.find(dbFilter)
