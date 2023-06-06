@@ -37,7 +37,9 @@ export default class {
     }
 
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
-      { appId }, { $set: { status: AppDraftStatus.inProgress } }, { new: true, lean: true },
+      { appId },
+      { $set: { status: AppDraftStatus.inProgress } },
+      { new: true, lean: true },
     );
 
     return updatedAppDraft;

@@ -1,9 +1,9 @@
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
+import IsAdmin from 'core/graphql/IsAdmin';
 import { MAccount } from '../../../db';
 import { AccountConnection } from '../../entities/Account';
-import IsAdmin from 'core/graphql/IsAdmin';
 
 @Resolver()
 export default class {

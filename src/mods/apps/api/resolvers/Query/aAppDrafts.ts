@@ -2,9 +2,9 @@ import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
 import { MAppDraft } from 'mods/apps/db';
+import IsAdmin from 'core/graphql/IsAdmin';
 import { AppDraftConnection } from '../../entities/AppDrafts';
 import { AppDraftStatus } from '../../entities/_enums';
-import IsAdmin from 'core/graphql/IsAdmin';
 
 @Resolver()
 export default class {

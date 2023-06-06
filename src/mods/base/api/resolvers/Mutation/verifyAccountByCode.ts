@@ -38,7 +38,8 @@ export default class {
           },
         );
       } else {
-        const verificationAttempts = account.verificationAttempts ? 1 : account.verificationAttempts + 1;
+        const verificationAttempts = account.verificationAttempts ? 1
+          : account.verificationAttempts + 1;
         await MAccount.updateOne({ email }, { $set: { verificationAttempts } });
         throw new UserInputError(errorMessage);
       }

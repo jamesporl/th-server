@@ -20,7 +20,9 @@ export default class {
     if (!isEmailValid) {
       throw new UserInputError('Invalid e-mail format.');
     }
-    const account = await MAccount.findOne({ email: email.toLowerCase().trim(), isActive: true }).lean();
+    const account = await MAccount.findOne(
+      { email: email.toLowerCase().trim(), isActive: true },
+    ).lean();
 
     if (account) {
       let moreSeconds = 0;

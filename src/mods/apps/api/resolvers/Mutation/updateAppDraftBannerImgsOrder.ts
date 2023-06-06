@@ -14,9 +14,9 @@ export default class {
   @Auth()
   @Mutation(() => DefaultMutationPayload)
   async updateAppDraftBannerImgsOrder(
-    @Ctx() { accountId, dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftBannerImgsOrderInput)
-    input:  UpdateAppDraftBannerImgsOrderInput,
+    input: UpdateAppDraftBannerImgsOrderInput,
   ) {
     const { appId, bannerImgIds } = input;
 
@@ -37,10 +37,10 @@ export default class {
       return {
         ...bannerImg,
         order: index,
-      }
+      };
     });
 
-    await MAppDraft.updateOne({ _id: appDraft._id }, { $set: { bannerImgs} });
+    await MAppDraft.updateOne({ _id: appDraft._id }, { $set: { bannerImgs } });
 
     return { isCompleted: true };
   }

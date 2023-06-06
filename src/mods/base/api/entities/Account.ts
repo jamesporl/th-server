@@ -6,32 +6,32 @@ import NodeConnection from './NodeConnection';
 @ObjectType({ implements: Node })
 export class SimpleAccount extends Node {
   @Field({ nullable: true })
-  firstName?: string;
+    firstName?: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+    lastName?: string;
 
   @Field({ nullable: true })
-  image?: string;
+    image?: string;
 }
 
 @ObjectType({ implements: Node })
 export class Account extends Node {
   @Field({ nullable: true })
-  firstName?: string;
+    firstName?: string;
 
   @Field({ nullable: true })
-  lastName?: string;
+    lastName?: string;
 
   @Field()
-  email: string;
+    email: string;
 
   @Field({ nullable: true })
-  image?: string;
+    image?: string;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AccountConnection extends NodeConnection<Account> {
   @Field(() => [Account])
-  nodes: Account[];
+    nodes: Account[];
 }

@@ -9,33 +9,23 @@ import { AppCommentConnection, AppCommentStatusObject } from './AppComments'; //
 // See https://github.com/MichalLytek/type-graphql/issues/57
 @ObjectType({ implements: Node })
 export default class AppComment extends Node {
-  @Field({ nullable: true })
-  htmlContent?: string;
+  @Field({ nullable: true }) htmlContent?: string;
 
-  @Field({ nullable: true })
-  textContent?: string;
+  @Field({ nullable: true }) textContent?: string;
 
-  @Field(() => Boolean, { nullable: true })
-  isPinned: boolean;
+  @Field(() => Boolean, { nullable: true }) isPinned: boolean;
 
-  @Field(() => Boolean, { nullable: true })
-  isParent: boolean;
+  @Field(() => Boolean, { nullable: true }) isParent: boolean;
 
-  @Field(() => SimpleAccount)
-  createdBy: SimpleAccount;
+  @Field(() => SimpleAccount) createdBy: SimpleAccount;
 
-  @Field(() => AppCommentStatusObject)
-  status: AppCommentStatusObject;
+  @Field(() => AppCommentStatusObject) status: AppCommentStatusObject;
 
-  @Field(() => AppCommentConnection, { nullable: true })
-  comments: AppCommentConnection;
+  @Field(() => AppCommentConnection, { nullable: true }) comments: AppCommentConnection;
 
-  @Field(() => Int)
-  supportsCount: number;
+  @Field(() => Int) supportsCount: number;
 
-  @Field(() => Boolean)
-  isSupported: boolean;
+  @Field(() => Boolean) isSupported: boolean;
 
-  @Field(() => GraphQLDateTime)
-  createdAt: Date;
+  @Field(() => GraphQLDateTime) createdAt: Date;
 }

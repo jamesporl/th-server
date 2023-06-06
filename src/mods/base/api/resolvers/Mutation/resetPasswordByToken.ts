@@ -1,10 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
 import { isBefore } from 'date-fns';
 import { Arg, Mutation, Resolver } from 'type-graphql';
+import { MAccount } from 'mods/base/db';
 import hashPassword from '../../../utils/hashPassword';
 import { ResetPasswordByTokenInput } from '../../entities/Auth';
 import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
-import { MAccount } from 'mods/base/db';
 
 @Resolver()
 export default class {
@@ -13,7 +13,9 @@ export default class {
   @Arg('input', () => ResetPasswordByTokenInput) input: ResetPasswordByTokenInput,
   ) {
     const { newPassword, email, token } = input;
-    const account = await MAccount.findOne({ email: email.toLowerCase().trim(), isActive: true }).lean();
+    const account = await MAccount.findOne(
+      { email: email.toLowerCase().trim(), isActive: true },
+    ).lean();
     if (!account) {
       throw new UserInputError('E-mail not found.');
     }

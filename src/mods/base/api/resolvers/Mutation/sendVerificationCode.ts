@@ -2,9 +2,9 @@ import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { differenceInSeconds } from 'date-fns';
 import sendVerificationCodeEmail from 'mods/base/utils/sendVerificationCodeEmail';
+import { MAccount } from 'mods/base/db';
 import { SendVerificationCodeInput } from '../../entities/Auth';
 import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
-import { MAccount } from 'mods/base/db';
 
 @Resolver()
 export default class {

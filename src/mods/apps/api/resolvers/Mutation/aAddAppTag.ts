@@ -1,15 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
-import { Types } from 'mongoose';
-import {
-  Arg, Ctx, Mutation, Resolver,
-} from 'type-graphql';
+import { Arg, Mutation, Resolver } from 'type-graphql';
 import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import { MApp, MAppDraft, MAppTag } from '../../../db';
-import { AddAppInput, App } from '../../entities/Apps';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
-import { AddAppTagInput } from '../../entities/AppTags';
 import slugify from 'slugify';
+import { MAppTag } from '../../../db';
+import { App } from '../../entities/Apps';
+import { AddAppTagInput } from '../../entities/AppTags';
 
 @Resolver()
 export default class {
@@ -19,7 +14,7 @@ export default class {
     @Arg('input', () => AddAppTagInput) input: AddAppTagInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { name } = input;
-    
+
     const slug = slugify(name, { lower: true, trim: true, strict: true });
 
     const slugExists = await MAppTag.findOne({ slug });

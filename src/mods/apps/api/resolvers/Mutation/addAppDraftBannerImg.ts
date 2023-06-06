@@ -8,10 +8,9 @@ import {
 import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
-import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
+import s3Config from 'core/s3Config';
 import { MAppDraft } from '../../../db';
 import { AddAppDraftBannerImgInput } from '../../entities/AppDrafts';
-import s3Config from 'core/s3Config';
 import { BannerImg } from '../../entities/Apps';
 
 @Resolver()

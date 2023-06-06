@@ -1,5 +1,4 @@
 import { UserInputError } from 'apollo-server-express';
-import aws from 'aws-sdk';
 import { Types } from 'mongoose';
 import sharp from 'sharp';
 import {
@@ -9,11 +8,11 @@ import config from 'core/config';
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
+import s3Config from 'core/s3Config';
 import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { UpdateAppDraftLogoImgInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
-import s3Config from 'core/s3Config';
 
 @Resolver()
 export default class {
@@ -25,7 +24,7 @@ export default class {
   ) {
     const { appId, file } = input;
     const appDraft = await MAppDraft.findOne(
-      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress},
+      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress },
       { _id: 1 },
     );
 

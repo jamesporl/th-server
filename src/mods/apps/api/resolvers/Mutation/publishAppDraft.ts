@@ -1,14 +1,11 @@
 import { UserInputError } from 'apollo-server-express';
-import {
-  Arg, Ctx, Mutation, Resolver,
-} from 'type-graphql';
+import { Arg, Mutation, Resolver } from 'type-graphql';
 import slugify from 'slugify';
 import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
 import IsAdmin from 'core/graphql/IsAdmin';
-import { Context } from 'core/graphql/_types';
-import { MApp, MAppDraft } from '../../../db';
+import { MApp, MAppDraft, MAppTag } from '../../../db';
 import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
 
@@ -65,6 +62,23 @@ export default class {
       { $set: { status: AppDraftStatus.published } },
       { new: true, lean: true },
     );
+
+    let prevTagIds = [];
+    if (app.status === AppStatus.published) {
+      prevTagIds = (app.tagIds || []).map((tagId) => tagId.toHexString());
+    }
+
+    const currentTagIds = (appDraft.tagIds || []).map((tagId) => tagId.toHexString());
+
+    const removedTagIds = prevTagIds.filter((tagId) => !currentTagIds.includes(tagId));
+    if (removedTagIds.length) {
+      await MAppTag.updateMany({ _id: { $in: removedTagIds } }, { $inc: { appsCount: -1 } });
+    }
+
+    const newTagIds = currentTagIds.filter((tagId) => !prevTagIds.includes(tagId));
+    if (newTagIds.length) {
+      await MAppTag.updateMany({ _id: { $in: newTagIds } }, { $inc: { appsCount: 1 } });
+    }
 
     return updatedAppDraft;
   }
