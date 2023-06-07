@@ -1,6 +1,6 @@
 import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 import {
-  Field, InputType, ObjectType, Int,
+  Field, InputType, ObjectType, Int, ID,
 } from 'type-graphql';
 import Node from 'mods/base/api/entities/Node';
 import NodeConnection from 'mods/base/api/entities/NodeConnection';
@@ -39,72 +39,60 @@ export class BannerImg extends Node {
 
 @ObjectType({ implements: Node })
 export class App extends Node {
-  @Field()
-    name: string;
+  @Field() name: string;
 
-  @Field()
-    shortDesc: string;
+  @Field() shortDesc: string;
 
-  @Field(() => GraphQLJSON, { nullable: true })
-    jsonDesc?: unknown;
+  @Field(() => GraphQLJSON, { nullable: true }) jsonDesc?: unknown;
 
-  @Field({ nullable: true })
-    htmlDesc?: string;
+  @Field({ nullable: true }) htmlDesc?: string;
 
-  @Field({ nullable: true })
-    textDesc?: string;
+  @Field({ nullable: true }) textDesc?: string;
 
-  @Field(() => GraphQLDateTime, { nullable: true })
-    publishedAt?: Date;
+  @Field(() => GraphQLDateTime, { nullable: true }) publishedAt?: Date;
 
-  @Field({ nullable: true })
-    playStoreUrl?: string;
+  @Field({ nullable: true }) playStoreUrl?: string;
 
-  @Field({ nullable: true })
-    appStoreUrl?: string;
+  @Field({ nullable: true }) appStoreUrl?: string;
 
-  @Field({ nullable: true })
-    websiteUrl?: string;
+  @Field({ nullable: true }) websiteUrl?: string;
 
-  @Field({ nullable: true })
-    logoImg?: string;
+  @Field({ nullable: true }) logoImg?: string;
 
-  @Field({ nullable: true })
-    videoUrl?: string;
+  @Field({ nullable: true }) videoUrl?: string;
 
-  @Field(() => [BannerImg], { nullable: 'itemsAndList' })
-    bannerImgs?: BannerImg[];
+  @Field(() => [BannerImg], { nullable: 'itemsAndList' }) bannerImgs?: BannerImg[];
 
-  @Field(() => AppStatusObject)
-    status?: AppStatusObject;
+  @Field(() => AppStatusObject) status?: AppStatusObject;
 
-  @Field(() => [AppTag], { nullable: 'itemsAndList' })
-    tags?: AppTag[];
+  @Field(() => [AppTag], { nullable: 'itemsAndList' }) tags?: AppTag[];
 
-  @Field(() => Int)
-    supportsCount: number;
+  @Field(() => Int) supportsCount: number;
 
-  @Field(() => Int)
-    commentsCount: number;
+  @Field(() => Int) commentsCount: number;
 
-  @Field(() => Boolean)
-    isSupported: boolean;
+  @Field(() => Boolean) isSupported: boolean;
 
-  @Field(() => Boolean, { nullable: true })
-    isFeatured?: boolean;
+  @Field(() => Boolean, { nullable: true }) isFeatured?: boolean;
 
-  @Field({ nullable: true })
-    slug?: string;
+  @Field({ nullable: true }) slug?: string;
 
-  @Field({ nullable: true })
-    socialUrls?: SocialUrls;
+  @Field({ nullable: true }) socialUrls?: SocialUrls;
 
-  @Field(() => SimpleAccount, { nullable: true })
-    ownedBy?: SimpleAccount;
+  @Field(() => SimpleAccount, { nullable: true }) ownedBy?: SimpleAccount;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AppConnection extends NodeConnection<App> {
-  @Field(() => [App])
-    nodes: App[];
+  @Field(() => [App]) nodes: App[];
+}
+
+@InputType()
+export class UnpublishAppInput {
+  @Field(() => ID) appId: string;
+}
+
+@InputType()
+export class CreateAppDraftFromPublishedAppInput {
+  @Field(() => ID) appId: string;
 }

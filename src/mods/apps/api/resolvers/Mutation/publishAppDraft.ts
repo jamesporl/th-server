@@ -52,16 +52,13 @@ export default class {
 
     await MApp.updateOne({ _id: appId }, { $set: appUpdate });
 
-    // delete old logo if it was changed
-    if (app.logoImg !== appDraft.logoImg) {
-      await deleteLogoImgFromDOSpace(app.logoImg);
-    }
-
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
       { appId },
       { $set: { status: AppDraftStatus.published } },
       { new: true, lean: true },
     );
+
+    // Update Tag Computations
 
     let prevTagIds = [];
     if (app.status === AppStatus.published) {
@@ -79,6 +76,13 @@ export default class {
     if (newTagIds.length) {
       await MAppTag.updateMany({ _id: { $in: newTagIds } }, { $inc: { appsCount: 1 } });
     }
+
+    // delete old logo if it was changed
+    if (app.logoImg !== appDraft.logoImg) {
+      await deleteLogoImgFromDOSpace(app.logoImg);
+    }
+
+    // delete old banner images
 
     return updatedAppDraft;
   }
