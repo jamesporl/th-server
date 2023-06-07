@@ -14,153 +14,120 @@ import { BannerImg } from './Apps';
 
 @ObjectType()
 export class AppDraftStatusObject {
-  @Field(() => AppDraftStatus)
-    key: AppDraftStatus;
+  @Field(() => AppDraftStatus) key: AppDraftStatus;
 
-  @Field()
-    label: string;
+  @Field() label: string;
 }
 
 @ObjectType({ implements: Node })
 export class AppDraft extends Node {
-  @Field()
-    appId: string;
+  @Field() appId: string;
 
-  @Field()
-    name: string;
+  @Field() name: string;
 
-  @Field()
-    shortDesc: string;
+  @Field() shortDesc: string;
 
-  @Field(() => GraphQLJSON, { nullable: true })
-    jsonDesc?: unknown;
+  @Field(() => GraphQLJSON, { nullable: true }) jsonDesc?: unknown;
 
-  @Field({ nullable: true })
-    htmlDesc?: string;
+  @Field({ nullable: true }) htmlDesc?: string;
 
-  @Field({ nullable: true })
-    playStoreUrl?: string;
+  @Field({ nullable: true }) playStoreUrl?: string;
 
-  @Field({ nullable: true })
-    appStoreUrl?: string;
+  @Field({ nullable: true }) appStoreUrl?: string;
 
-  @Field({ nullable: true })
-    websiteUrl?: string;
+  @Field({ nullable: true }) websiteUrl?: string;
 
-  @Field({ nullable: true })
-    logoImg?: string;
+  @Field({ nullable: true }) logoImg?: string;
 
-  @Field({ nullable: true })
-    videoUrl?: string;
+  @Field({ nullable: true }) videoUrl?: string;
 
-  @Field(() => [BannerImg], { nullable: 'itemsAndList' })
-    bannerImgs?: BannerImg[];
+  @Field(() => [BannerImg], { nullable: 'itemsAndList' }) bannerImgs?: BannerImg[];
 
-  @Field(() => [AppTag], { nullable: 'itemsAndList' })
-    tags?: AppTag[];
+  @Field(() => [AppTag], { nullable: 'itemsAndList' }) tags?: AppTag[];
 
-  @Field(() => AppDraftStatusObject)
-    status?: AppDraftStatusObject;
+  @Field(() => AppDraftStatusObject) status?: AppDraftStatusObject;
 
-  @Field({ nullable: true })
-    socialUrls?: SocialUrls;
+  @Field({ nullable: true }) socialUrls?: SocialUrls;
 
-  @Field(() => SimpleAccount, { nullable: true })
-    ownedBy?: SimpleAccount;
+  @Field(() => SimpleAccount, { nullable: true }) ownedBy?: SimpleAccount;
 
-  @Field(() => GraphQLDateTime, { nullable: true })
-    createdAt?: Date;
+  @Field(() => GraphQLDateTime, { nullable: true }) createdAt?: Date;
 
-  @Field(() => GraphQLDateTime, { nullable: true })
-    updatedAt?: Date;
+  @Field(() => GraphQLDateTime, { nullable: true }) updatedAt?: Date;
 }
 
 @ObjectType({ implements: NodeConnection })
 export class AppDraftConnection extends NodeConnection<AppDraft> {
-  @Field(() => [AppDraft])
-    nodes: AppDraft[];
+  @Field(() => [AppDraft]) nodes: AppDraft[];
 }
 
 @InputType()
 export class AddAppDraftBannerImgInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 
-  @Field(() => GraphQLUpload)
-    file: FileUpload;
+  @Field(() => GraphQLUpload) file: FileUpload;
 }
 
 @InputType()
 export class UpdateAppDraftLogoImgInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 
-  @Field(() => GraphQLUpload)
-    file: FileUpload;
+  @Field(() => GraphQLUpload) file: FileUpload;
+}
+
+@InputType()
+export class DeleteAppDraftBannerImgInput {
+  @Field(() => ID) appId: string;
+
+  @Field(() => ID) bannerImgId: string;
 }
 
 @InputType()
 export class UpdateAppDraftBannerImgsOrderInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 
-  @Field(() => [ID])
-    bannerImgIds: string[];
+  @Field(() => [ID]) bannerImgIds: string[];
 }
 
 @InputType()
 export class DeleteAppDraftLogoImgInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 }
 
 @InputType()
 export class UpdateAppDraftInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 
-  @Field()
-    name: string;
+  @Field() name: string;
 
-  @Field()
-    shortDesc: string;
+  @Field() shortDesc: string;
 
-  @Field(() => GraphQLJSON, { nullable: true })
-    jsonDesc?: unknown;
+  @Field(() => GraphQLJSON, { nullable: true }) jsonDesc?: unknown;
 
-  @Field({ nullable: true })
-    videoUrl?: string;
+  @Field({ nullable: true }) videoUrl?: string;
 
-  @Field({ nullable: true })
-    playStoreUrl?: string;
+  @Field({ nullable: true }) playStoreUrl?: string;
 
-  @Field({ nullable: true })
-    appStoreUrl?: string;
+  @Field({ nullable: true }) appStoreUrl?: string;
 
-  @Field({ nullable: true })
-    websiteUrl?: string;
+  @Field({ nullable: true }) websiteUrl?: string;
 
-  @Field(() => [ID], { nullable: 'itemsAndList' })
-    tagIds?: string[];
+  @Field(() => [ID], { nullable: 'itemsAndList' }) tagIds?: string[];
 
-  @Field({ nullable: true })
-    socialUrls?: SocialUrlsInput;
+  @Field({ nullable: true }) socialUrls?: SocialUrlsInput;
 }
 
 @InputType()
 export class SubmitAppDraftInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 }
 
 @InputType()
 export class UndoSubmitAppDraftInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 }
 
 @InputType()
 export class PublishAppDraftInput {
-  @Field(() => ID)
-    appId: string;
+  @Field(() => ID) appId: string;
 }

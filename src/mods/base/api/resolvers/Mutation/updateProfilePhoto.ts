@@ -64,7 +64,10 @@ export default class {
       ).promise();
     }
 
-    await MAccount.updateOne({ _id: accountId }, { $set: { image: imgKey } });
+    await MAccount.updateOne(
+      { _id: accountId },
+      { $set: { image: `${config.DO_SPACES_URL}/${imgKey}` } },
+    );
     return { isCompleted: true };
   }
 }

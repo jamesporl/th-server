@@ -8,7 +8,7 @@ import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayloa
 import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
 import { MApp, MAppDraft } from '../../../db';
 import { DeleteAppDraftLogoImgInput } from '../../entities/AppDrafts';
-import { AppStatus } from '../../entities/_enums';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
@@ -19,7 +19,10 @@ export default class {
     @Arg('input', () => DeleteAppDraftLogoImgInput) input: DeleteAppDraftLogoImgInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { appId } = input;
-    const appDraft = await MAppDraft.findOne({ appId, ownedBy: accountId }, { _id: 1, logoImg: 1 });
+    const appDraft = await MAppDraft.findOne(
+      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress },
+      { _id: 1, logoImg: 1 },
+    );
 
     if (!appDraft) {
       throw new UserInputError('App not found.');
@@ -33,9 +36,12 @@ export default class {
 
     // if current logo is not being used in published app, delete them
     const app = await MApp.findOne({ _id: appId });
-    if (app.status === AppStatus.published
-      && app.logoImg
-      && appDraft.logoImg !== app.logoImg
+    if (
+      app.status !== AppStatus.published || (
+        app.status === AppStatus.published
+        && app.logoImg
+        && appDraft.logoImg !== app.logoImg
+      )
     ) {
       await deleteLogoImgFromDOSpace(appDraft.logoImg);
     }
