@@ -16,10 +16,13 @@ export default class {
     @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100,
     @Arg('page', () => Int, { nullable: true }) page = 1,
   ) {
-    const dbFilter = { ownedBy: accountId, status: AppStatus.published };
+    const dbFilter = {
+      ownedBy: accountId,
+      status: { $in: [AppStatus.published, AppStatus.unpublished] },
+    };
     const totalCount = await MApp.count(dbFilter);
     const apps = await MApp.find(dbFilter)
-      .sort({ publishedAt: -1, _id: -1 })
+      .sort({ _id: -1 })
       .limit(pageSize)
       .skip((page - 1) * pageSize)
       .lean();

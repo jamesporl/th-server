@@ -93,6 +93,16 @@ export class UnpublishAppInput {
 }
 
 @InputType()
+export class RepublishAppInput {
+  @Field(() => ID) appId: string;
+}
+
+@InputType()
+export class DeleteAppInput {
+  @Field(() => ID) appId: string;
+}
+
+@InputType()
 export class CreateAppDraftFromPublishedAppInput {
   @Field(() => ID) appId: string;
 }

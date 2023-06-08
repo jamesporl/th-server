@@ -44,7 +44,7 @@ export default class {
     // if current image is not being used in published app, delete them
     const app = await MApp.findOne({ _id: appId });
     let isUsedInPublishedApp = false;
-    if (app.status === AppStatus.published) {
+    if ([AppStatus.published, AppStatus.unpublished].includes(app.status)) {
       isUsedInPublishedApp = !!(app.bannerImgs || []).find(
         (img) => img._id.toHexString() === bannerImgId,
       );
