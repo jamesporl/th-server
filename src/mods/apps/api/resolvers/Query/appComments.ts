@@ -3,6 +3,7 @@ import {
 } from 'type-graphql';
 import { MApp, MAppComment } from '../../../db';
 import { AppCommentConnection } from '../../entities/AppComments';
+import { AppCommentStatus } from '../../entities/_enums';
 
 @Resolver()
 export default class {
@@ -12,7 +13,7 @@ export default class {
     @Arg('pageSize', () => Int, { nullable: true }) pageSize = 100,
     @Arg('page', () => Int, { nullable: true }) page = 1,
   ) {
-    const dbFilter = { appId, parentCommentId: null };
+    const dbFilter = { appId, parentCommentId: null, status: AppCommentStatus.published };
     const totalCount = await MApp.count(dbFilter);
     const comments = await MAppComment.find(dbFilter)
       .sort({ isPinned: -1, createdAt: -1 })

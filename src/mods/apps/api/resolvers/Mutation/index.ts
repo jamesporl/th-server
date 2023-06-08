@@ -3,6 +3,7 @@ import addAppDraftBannerImg from './addAppDraftBannerImg';
 import addCommentToApp from './addCommentToApp';
 import createAppDraftFromPublishedApp from './createAppDraftFromPublishedApp';
 import deleteApp from './deleteApp';
+import deleteAppComment from './deleteAppComment';
 import deleteAppDraft from './deleteAppDraft';
 import deleteAppDraftBannerImg from './deleteAppDraftBannerImg';
 import deleteAppDraftLogoImg from './deleteAppDraftLogoImg';
@@ -24,6 +25,7 @@ export default [
   addCommentToApp,
   createAppDraftFromPublishedApp,
   deleteApp,
+  deleteAppComment,
   deleteAppDraft,
   deleteAppDraftBannerImg,
   deleteAppDraftLogoImg,
