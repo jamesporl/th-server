@@ -1,6 +1,6 @@
 import { TimeStamps, AccountStamps, SocialUrls } from 'mods/base/db/_types';
 import { Types, Document } from 'mongoose';
-import { AppStatus } from '../api/entities/_enums';
+import { AppDraftStatus, AppStatus } from '../api/entities/_enums';
 
 export interface BannerImg {
   _id: Types.ObjectId;
@@ -51,6 +51,7 @@ export interface AppDraft extends TimeStamps {
   tagIds?: Types.ObjectId[];
   socialUrls?: SocialUrls;
   submittedAt?: Date;
+  status: AppDraftStatus;
 }
 
 export type DbAppDraft = AppDraft & Document;

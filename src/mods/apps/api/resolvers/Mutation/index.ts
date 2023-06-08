@@ -2,9 +2,12 @@ import addApp from './addApp';
 import addAppDraftBannerImg from './addAppDraftBannerImg';
 import addCommentToApp from './addCommentToApp';
 import createAppDraftFromPublishedApp from './createAppDraftFromPublishedApp';
+import deleteApp from './deleteApp';
+import deleteAppDraft from './deleteAppDraft';
 import deleteAppDraftBannerImg from './deleteAppDraftBannerImg';
 import deleteAppDraftLogoImg from './deleteAppDraftLogoImg';
 import publishAppDraft from './publishAppDraft';
+import republishApp from './republishApp';
 import submitAppDraft from './submitAppDraft';
 import toggleAppCommentSupport from './toggleAppCommentSupport';
 import toggleAppSupport from './toggleAppSupport';
@@ -20,9 +23,12 @@ export default [
   addAppDraftBannerImg,
   addCommentToApp,
   createAppDraftFromPublishedApp,
+  deleteApp,
+  deleteAppDraft,
   deleteAppDraftBannerImg,
   deleteAppDraftLogoImg,
   publishAppDraft,
+  republishApp,
   submitAppDraft,
   toggleAppCommentSupport,
   toggleAppSupport,

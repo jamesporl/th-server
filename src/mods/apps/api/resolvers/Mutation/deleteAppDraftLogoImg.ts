@@ -36,9 +36,10 @@ export default class {
 
     // if current logo is not being used in published app, delete them
     const app = await MApp.findOne({ _id: appId });
+    const hasBeenPublished = [AppStatus.published, AppStatus.unpublished].includes(app.status);
     if (
-      app.status !== AppStatus.published || (
-        app.status === AppStatus.published
+      !hasBeenPublished || (
+        hasBeenPublished
         && app.logoImg
         && appDraft.logoImg !== app.logoImg
       )

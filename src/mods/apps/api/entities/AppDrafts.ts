@@ -131,3 +131,8 @@ export class UndoSubmitAppDraftInput {
 export class PublishAppDraftInput {
   @Field(() => ID) appId: string;
 }
+
+@InputType()
+export class DeleteAppDraftInput {
+  @Field(() => ID) appId: string;
+}

@@ -26,11 +26,19 @@ export default class {
     }
 
     const appDraft = await MAppDraft.findOne(
-      { appId, ownedBy: accountId, status: AppDraftStatus.inProgress },
+      {
+        appId,
+        ownedBy: accountId,
+        status: { $in: [AppDraftStatus.inProgress, AppDraftStatus.submitted] },
+      },
     );
 
     if (appDraft) {
-      throw new UserInputError('Draft already exists.');
+      if (appDraft.status === AppDraftStatus.inProgress) {
+        throw new UserInputError('Draft already exists.');
+      } else {
+        throw new UserInputError('A submitted draft pending approval already exists.');
+      }
     }
 
     const newAppDraft = await new MAppDraft({
