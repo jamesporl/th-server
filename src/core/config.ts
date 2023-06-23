@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = cleanEnv(process.env, {
+  ADMIN_EMAIL: str({ default: 'admin@techhustlers.ph' }),
   DO_SPACES_BUCKET: str({ default: 'techhustlers' }),
   DO_SPACES_ENDPOINT: str({ default: 'sgp1.digitaloceanspaces.com' }),
   DO_SPACES_KEY: str({ default: 'CHANGE_ME' }),

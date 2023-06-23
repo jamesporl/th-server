@@ -7,6 +7,8 @@ import { MAccount, MOAuthState } from 'mods/base/db';
 import hashPassword from 'mods/base/utils/hashPassword';
 import generateAuthToken from 'mods/base/utils/generateAuthToken';
 import sendWelcomeForGoogleSignupEmail from 'mods/base/utils/sendWelcomeForGoogleSignupEmail';
+import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
 import { OAuthWebsiteKey } from '../../entities/_enums';
 import { LoginWithGoogleInput } from '../../entities/Auth';
 
@@ -84,6 +86,15 @@ export default class {
       }).save();
 
       await sendWelcomeForGoogleSignupEmail(account);
+
+      await sendMail({
+        to: config.ADMIN_EMAIL,
+        templateKey: SendGridTemplateKey.adminNewUser,
+        dynamicTemplateData: {
+          name: account.name,
+          email: account.email,
+        },
+      });
     }
 
     const authToken = generateAuthToken(account);

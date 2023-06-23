@@ -62,7 +62,7 @@ export default class {
 
     let dbSort: { [key:string]: SortOrder } = { randomId: 1 };
     if (sortBy === AppsSortBy.publishedDate) {
-      dbSort = { publishedAt: -1 };
+      dbSort = { publishedAt: -1, _id: -1 };
     } else if (sortBy === AppsSortBy.name) {
       dbSort = { name: 1 };
     }

@@ -4,6 +4,7 @@ import { addDays, differenceInSeconds } from 'date-fns';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import config from 'core/config';
 import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
 import { MAccount } from '../../../db';
 import validateEmailByRegex from '../../../utils/validateEmailByRegex';
 import { SendPasswordResetLinkInput } from '../../entities/Auth';
@@ -43,7 +44,7 @@ export default class {
       url.searchParams.append('email', email);
       await sendMail({
         to: account.email,
-        templateKey: 'pwResetLink',
+        templateKey: SendGridTemplateKey.pwResetLink,
         dynamicTemplateData: { firstName: account.firstName, pwResetLink: url },
       });
     }

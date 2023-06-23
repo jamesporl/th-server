@@ -1,5 +1,8 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
+import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import config from 'core/config';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
 import sendWelcomeWithVerificationCodeEmail from '../../../utils/sendWelcomeWithVerificationCodeEmail';
 import { MAccount } from '../../../db';
 import validateEmailByRegex from '../../../utils/validateEmailByRegex';
@@ -43,6 +46,15 @@ export default class {
     }).save();
 
     await sendWelcomeWithVerificationCodeEmail(account);
+
+    await sendMail({
+      to: config.ADMIN_EMAIL,
+      templateKey: SendGridTemplateKey.adminNewUser,
+      dynamicTemplateData: {
+        name: account.name,
+        email: account.email,
+      },
+    });
 
     return { isCompleted: true };
   }
