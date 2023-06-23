@@ -1,5 +1,6 @@
 import { addMinutes, differenceInSeconds } from 'date-fns';
 import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
 import generateSixDigitCode from './generateSixDigitCode';
 import { Account } from '../db/_types';
 import { MAccount } from '../db';
@@ -21,7 +22,7 @@ export default async function sendVerificationCodeEmail(account: Account) {
   );
   await sendMail({
     to: account.email,
-    templateKey: 'verificationCode',
+    templateKey: SendGridTemplateKey.verificationCode,
     dynamicTemplateData: { firstName: account.firstName, verificationCode },
   });
 }

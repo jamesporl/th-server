@@ -5,9 +5,12 @@ import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContent
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
 import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
 import IsAdmin from 'core/graphql/IsAdmin';
-import { MApp, MAppDraft, MAppTag } from '../../../db';
-import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
+import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
+import { MAccount } from 'mods/base/db';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
+import { MApp, MAppDraft, MAppTag } from '../../../db';
 
 @Resolver()
 export default class {
@@ -84,7 +87,17 @@ export default class {
       await deleteLogoImgFromDOSpace(app.logoImg);
     }
 
-    // delete old banner images
+    // TODO: delete old banner images
+
+    const account = await MAccount.findOne({ _id: app.ownedBy });
+    await sendMail({
+      to: account.email,
+      templateKey: SendGridTemplateKey.appPublished,
+      dynamicTemplateData: {
+        firstName: account.firstName,
+        appName: app.name,
+      },
+    });
 
     return updatedAppDraft;
   }

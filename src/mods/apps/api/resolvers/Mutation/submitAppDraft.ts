@@ -2,10 +2,14 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
+import config from 'core/config';
 import { Context } from 'core/graphql/_types';
 import Auth from 'core/graphql/Auth';
 import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
+import sendMail from 'mods/external/sendGrid/utils/sendMail';
+import { MAccount } from 'mods/base/db';
+import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
 import { MApp, MAppDraft } from '../../../db';
 import { SubmitAppDraftInput, SubmitAppDraftPayload } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -170,6 +174,26 @@ export default class {
       { $set: { status: AppDraftStatus.submitted, submittedAt: new Date() } },
       { new: true, lean: true },
     );
+
+    const account = await MAccount.findOne({ _id: accountId });
+    await sendMail({
+      to: account.email,
+      templateKey: SendGridTemplateKey.receivedAppSubmission,
+      dynamicTemplateData: {
+        firstName: account.firstName,
+        appName: app.name,
+      },
+    });
+
+    await sendMail({
+      to: config.ADMIN_EMAIL,
+      templateKey: SendGridTemplateKey.adminNewAppSubmission,
+      dynamicTemplateData: {
+        email: account.email,
+        name: account.name,
+        appName: app.name,
+      },
+    });
 
     return {
       errors,

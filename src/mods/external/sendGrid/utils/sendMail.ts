@@ -1,11 +1,11 @@
 import config from 'core/config';
 import sgMail from '@sendgrid/mail';
 import logger from 'core/logger';
-import sendGridTemplates from './sendGridTemplates';
+import sendGridTemplates, { SendGridTemplateKey } from './sendGridTemplates';
 
 export default async function sendMail({ to, templateKey, dynamicTemplateData }: {
   to: string,
-  templateKey: string,
+  templateKey: SendGridTemplateKey,
   dynamicTemplateData: unknown,
 }) {
   sgMail.setApiKey(config.SENDGRID_API_KEY);
@@ -14,7 +14,10 @@ export default async function sendMail({ to, templateKey, dynamicTemplateData }:
     try {
       await sgMail.send({
         to,
-        from: config.SENDGRID_FROM_EMAIL,
+        from: {
+          email: config.SENDGRID_FROM_EMAIL,
+          name: 'TechHustlers PH Admin',
+        },
         templateId,
         dynamicTemplateData,
       });
