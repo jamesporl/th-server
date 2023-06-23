@@ -36,7 +36,10 @@ function serializeEditorNodeToHtml(node: any, parentType?: string) {
   return `<p>${children}</p>`;
 }
 
-export default function serializeEditorContentToHtml(nodes) {
-  const res = (nodes || []).map((node) => serializeEditorNodeToHtml(node)).join('');
+export default function serializeEditorContentToHtml(nodes: unknown) {
+  let res = '';
+  if (Array.isArray(nodes)) {
+    res = (nodes || []).map((node) => serializeEditorNodeToHtml(node)).join('');
+  }
   return res;
 }

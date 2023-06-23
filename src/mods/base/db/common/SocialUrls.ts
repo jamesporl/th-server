@@ -6,6 +6,6 @@ const SocialUrlsSchema = new Schema({
   linkedIn: String,
   github: String,
   instagram: String,
-});
+}, { _id: false });
 
 export default SocialUrlsSchema;

@@ -18,7 +18,11 @@ export default class {
     @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => AddAppInput) input: AddAppInput,
   ) {
-    const { name, shortDesc } = input;
+    const { name: iName, shortDesc: iShortDesc } = input;
+
+    const name = iName.trim();
+    const shortDesc = iShortDesc.trim();
+
     if (name.length > 40) {
       throw new UserInputError('Name should not exceed 40 characters.');
     }

@@ -27,7 +27,7 @@ export default class {
 
     const slug = slugify(appDraft.name, { lower: true, trim: true, strict: true });
     const isSlugTaken = await MApp.findOne({
-      slug, _id: { $ne: app._id, status: { $ne: AppStatus.deleted } },
+      slug, _id: { $ne: app._id }, status: { $ne: AppStatus.deleted },
     });
     if (isSlugTaken) {
       throw new UserInputError('App name is already taken');

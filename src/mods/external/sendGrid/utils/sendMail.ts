@@ -10,7 +10,7 @@ export default async function sendMail({ to, templateKey, dynamicTemplateData }:
 }) {
   sgMail.setApiKey(config.SENDGRID_API_KEY);
   const templateId = sendGridTemplates.get(templateKey);
-  if (templateId) {
+  if (templateId && !to.includes('test')) {
     try {
       await sgMail.send({
         to,
