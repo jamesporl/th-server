@@ -5,6 +5,7 @@ import {
 import Auth from 'core/graphql/Auth';
 import { Context } from 'core/graphql/_types';
 import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
+import trimEditorJsonContent from 'mods/apps/utils/trimEditorJsonContent';
 import { MApp, MAppDraft, MAppTag } from '../../../db';
 import { UpdateAppDraftInput, AppDraft } from '../../entities/AppDrafts';
 import { AppDraftStatus, AppStatus } from '../../entities/_enums';
@@ -18,8 +19,37 @@ export default class {
     @Arg('input', () => UpdateAppDraftInput) input: UpdateAppDraftInput,
   ) {
     const {
-      appId, name, shortDesc, jsonDesc, tagIds, ...rest
+      appId,
+      name: iName,
+      shortDesc: iShortDesc,
+      jsonDesc: iJsonDesc,
+      tagIds,
+      videoUrl: iVideoUrl,
+      websiteUrl: iWebsiteUrl,
+      playStoreUrl: iPlayStoreUrl,
+      appStoreUrl: iAppStoreUrl,
+      socialUrls: iSocialUrls,
     } = input;
+
+    const name = iName.trim();
+    const shortDesc = iShortDesc.trim();
+    const jsonDesc = trimEditorJsonContent(iJsonDesc);
+    const videoUrl = iVideoUrl?.trim();
+    const appStoreUrl = iAppStoreUrl?.trim();
+    const playStoreUrl = iPlayStoreUrl?.trim();
+    const websiteUrl = iWebsiteUrl?.trim();
+
+    const {
+      github, linkedIn, facebook, twitter, instagram,
+    } = iSocialUrls || {};
+
+    const socialUrls = {
+      github: github?.trim(),
+      linkedIn: linkedIn?.trim(),
+      facebook: facebook?.trim(),
+      twitter: twitter?.trim(),
+      instagram: instagram?.trim(),
+    };
 
     if (name.length > 40) {
       throw new UserInputError('Name should not exceed 40 characters.');
@@ -56,7 +86,15 @@ export default class {
       { _id: appDraft._id },
       {
         $set: {
-          name, shortDesc, jsonDesc, tagIds, ...rest,
+          name,
+          shortDesc,
+          jsonDesc,
+          tagIds,
+          videoUrl,
+          appStoreUrl,
+          playStoreUrl,
+          websiteUrl,
+          socialUrls,
         },
       },
       { new: true, lean: true },

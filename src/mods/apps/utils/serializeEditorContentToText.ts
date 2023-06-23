@@ -11,7 +11,10 @@ function serializeEditorNodeToText(node: any) {
   return children;
 }
 
-export default function serializeEditorContentToText(nodes) {
-  const res = (nodes || []).map((node) => serializeEditorNodeToText(node)).join(' ');
+export default function serializeEditorContentToText(nodes: unknown) {
+  let res = '';
+  if (Array.isArray(nodes)) {
+    res = (nodes || []).map((node) => serializeEditorNodeToText(node)).join(' ');
+  }
   return res;
 }

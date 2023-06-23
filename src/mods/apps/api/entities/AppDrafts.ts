@@ -122,6 +122,13 @@ export class SubmitAppDraftInput {
   @Field(() => ID) appId: string;
 }
 
+@ObjectType()
+export class SubmitAppDraftPayload {
+  @Field(() => [String]) errors: string[];
+
+  @Field(() => Boolean) isSubmitted: boolean;
+}
+
 @InputType()
 export class UndoSubmitAppDraftInput {
   @Field(() => ID) appId: string;
