@@ -2,11 +2,11 @@ import { ForbiddenError, UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import Auth from 'core/graphql/Auth';
-import { MApp, MAppComment } from '../../../db';
-import { TogglePinAppCommentInput } from '../../entities/AppComments';
+import { Context } from '../../../../../core/graphql/_types.js';
+import DefaultMutationPayload from '../../../../base/api/entities/DefaultMutationPayload.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MApp, MAppComment } from '../../../db/index.js';
+import { TogglePinAppCommentInput } from '../../entities/AppComments.js';
 
 @Resolver()
 export default class {

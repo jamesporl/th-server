@@ -1,9 +1,9 @@
 import {
   Resolver, Root, FieldResolver, Ctx,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import { DbAppComment } from '../../db/_types';
-import AppComment from '../entities/AppComment';
+import { Context } from '../../../../core/graphql/_types.js';
+import { DbAppComment } from '../../db/_types.js';
+import AppComment from '../entities/AppComment.js';
 
 @Resolver(() => AppComment)
 export default class {

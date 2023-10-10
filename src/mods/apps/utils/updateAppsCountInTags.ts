@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop, no-restricted-syntax */
 import { Types } from 'mongoose';
-import { MApp, MAppTag } from '../db';
-import { AppStatus } from '../api/entities/_enums';
+import { MApp, MAppTag } from '../db/index.js';
+import { AppStatus } from '../api/entities/_enums.js';
 
 export default async function updateAppsCountInTags() {
   let lastId: Types.ObjectId | undefined;

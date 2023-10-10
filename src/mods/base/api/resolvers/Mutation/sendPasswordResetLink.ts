@@ -1,14 +1,15 @@
 import { randomBytes } from 'crypto';
+import { URL } from 'node:url';
 import { UserInputError } from 'apollo-server-express';
 import { addDays, differenceInSeconds } from 'date-fns';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import config from 'core/config';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { MAccount } from '../../../db';
-import validateEmailByRegex from '../../../utils/validateEmailByRegex';
-import { SendPasswordResetLinkInput } from '../../entities/Auth';
-import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
+import config from '../../../../../core/config.js';
+import sendMail from '../../../../external/sendGrid/utils/sendMail.js';
+import { SendGridTemplateKey } from '../../../../external/sendGrid/utils/sendGridTemplates.js';
+import { MAccount } from '../../../db/index.js';
+import validateEmailByRegex from '../../../utils/validateEmailByRegex.js';
+import { SendPasswordResetLinkInput } from '../../entities/Auth.js';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload.js';
 
 @Resolver()
 export default class {

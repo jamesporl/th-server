@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { DbAppSupport } from './_types';
+import { DbAppSupport } from './_types.js';
 
 const AppSupportSchema = new Schema(
   {

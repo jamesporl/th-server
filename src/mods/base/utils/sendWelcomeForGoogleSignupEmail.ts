@@ -1,6 +1,6 @@
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { Account } from '../db/_types';
+import sendMail from '../../external/sendGrid/utils/sendMail.js';
+import { SendGridTemplateKey } from '../../external/sendGrid/utils/sendGridTemplates.js';
+import { Account } from '../db/_types.js';
 
 export default async function sendWelcomeForGoogleSignupEmail(account: Account) {
   await sendMail({

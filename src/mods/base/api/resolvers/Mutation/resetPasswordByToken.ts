@@ -1,10 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
 import { isBefore } from 'date-fns';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import { MAccount } from 'mods/base/db';
-import hashPassword from '../../../utils/hashPassword';
-import { ResetPasswordByTokenInput } from '../../entities/Auth';
-import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
+import { MAccount } from '../../../db/index.js';
+import hashPassword from '../../../utils/hashPassword.js';
+import { ResetPasswordByTokenInput } from '../../entities/Auth.js';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload.js';
 
 @Resolver()
 export default class {

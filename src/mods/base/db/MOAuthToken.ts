@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { DbOAuthToken } from './_types';
-import { OAUTH_TOKEN_TYPES, OAUTH_WEBSITE_KEYS } from '../api/entities/_enums';
+import { DbOAuthToken } from './_types.js';
+import { OAUTH_TOKEN_TYPES, OAUTH_WEBSITE_KEYS } from '../api/entities/_enums.js';
 
 const OAuthTokenSchema = new Schema(
   {

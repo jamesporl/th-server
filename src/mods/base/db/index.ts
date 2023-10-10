@@ -1,6 +1,6 @@
-import MAccount from './MAccount';
-import MOAuthState from './MOAuthState';
-import MOAuthToken from './MOAuthToken';
+import MAccount from './MAccount.js';
+import MOAuthState from './MOAuthState.js';
+import MOAuthToken from './MOAuthToken.js';
 
 export {
   MAccount, MOAuthState, MOAuthToken,

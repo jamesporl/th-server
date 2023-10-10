@@ -1,16 +1,17 @@
 import { randomBytes } from 'crypto';
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation } from 'type-graphql';
+import { URLSearchParams } from 'node:url';
 import fetch from 'node-fetch';
-import config from 'core/config';
-import { MAccount, MOAuthState } from 'mods/base/db';
-import hashPassword from 'mods/base/utils/hashPassword';
-import generateAuthToken from 'mods/base/utils/generateAuthToken';
-import sendWelcomeForGoogleSignupEmail from 'mods/base/utils/sendWelcomeForGoogleSignupEmail';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { OAuthWebsiteKey } from '../../entities/_enums';
-import { LoginWithGoogleInput } from '../../entities/Auth';
+import config from '../../../../../core/config.js';
+import { MAccount, MOAuthState } from '../../../db/index.js';
+import hashPassword from '../../../utils/hashPassword.js';
+import generateAuthToken from '../../../utils/generateAuthToken.js';
+import sendWelcomeForGoogleSignupEmail from '../../../utils/sendWelcomeForGoogleSignupEmail.js';
+import sendMail from '../../../../external/sendGrid/utils/sendMail.js';
+import { SendGridTemplateKey } from '../../../../external/sendGrid/utils/sendGridTemplates.js';
+import { OAuthWebsiteKey } from '../../entities/_enums.js';
+import { LoginWithGoogleInput } from '../../entities/Auth.js';
 
 export interface GoogleAccessTokenResponseData {
   refresh_token: string;
@@ -66,6 +67,12 @@ export default class {
 
     const profileResp = await fetch(
       `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${tokenBody.access_token}`,
+      {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/x-www-form-urlencoded',
+        },
+      },
     );
 
     const profileBody = await profileResp.json() as GoogleProfileResponseData;

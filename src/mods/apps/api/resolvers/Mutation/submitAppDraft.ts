@@ -2,17 +2,17 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import config from 'core/config';
-import { Context } from 'core/graphql/_types';
-import Auth from 'core/graphql/Auth';
-import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
-import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { MAccount } from 'mods/base/db';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { MApp, MAppDraft } from '../../../db';
-import { SubmitAppDraftInput, SubmitAppDraftPayload } from '../../entities/AppDrafts';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import sendMail from '../../../../external/sendGrid/utils/sendMail.js';
+import { MAccount } from '../../../../base/db/index.js';
+import { SendGridTemplateKey } from '../../../../external/sendGrid/utils/sendGridTemplates.js';
+import serializeEditorContentToText from '../../../utils/serializeEditorContentToText.js';
+import serializeEditorContentToHtml from '../../../utils/serializeEditorContentToHtml.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import config from '../../../../../core/config.js';
+import { MApp, MAppDraft } from '../../../db/index.js';
+import { SubmitAppDraftInput, SubmitAppDraftPayload } from '../../entities/AppDrafts.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

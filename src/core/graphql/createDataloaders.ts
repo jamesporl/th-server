@@ -1,5 +1,5 @@
-import appsDataloaders from 'mods/apps/utils/dataloaders';
-import baseDataloaders from 'mods/base/utils/dataloaders';
+import appsDataloaders from '../../mods/apps/utils/dataloaders/index.js';
+import baseDataloaders from '../../mods/base/utils/dataloaders/index.js';
 
 export default function createDataloaders() {
   return {

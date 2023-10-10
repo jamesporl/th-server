@@ -1,16 +1,16 @@
 import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import {
-  Field, ID, InputType, ObjectType, Int,
+  Field, ID, InputType, ObjectType,
 } from 'type-graphql';
-import Node from 'mods/base/api/entities/Node';
-import NodeConnection from 'mods/base/api/entities/NodeConnection';
-import SocialUrls from 'mods/base/api/entities/SocialUrls';
-import SocialUrlsInput from 'mods/base/api/entities/SocialUrlsInput';
-import { SimpleAccount } from 'mods/base/api/entities/Account';
 import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
-import { AppDraftStatus } from './_enums';
-import { AppTag } from './AppTags';
-import { BannerImg } from './Apps';
+import NodeConnection from '../../../base/api/entities/NodeConnection.js';
+import SocialUrls from '../../../base/api/entities/SocialUrls.js';
+import SocialUrlsInput from '../../../base/api/entities/SocialUrlsInput.js';
+import { SimpleAccount } from '../../../base/api/entities/Account.js';
+import Node from '../../../base/api/entities/Node.js';
+import { AppDraftStatus } from './_enums.js';
+import { AppTag } from './AppTags.js';
+import { BannerImg } from './Apps.js';
 
 @ObjectType()
 export class AppDraftStatusObject {

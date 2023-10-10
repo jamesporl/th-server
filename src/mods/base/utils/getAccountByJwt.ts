@@ -1,8 +1,8 @@
 import { Types } from 'mongoose';
 import { format } from 'date-fns';
 import jwt from 'jsonwebtoken';
-import config from 'core/config';
-import { AccountContext } from 'core/graphql/_types';
+import config from '../../../core/config.js';
+import { AccountContext } from '../../../core/graphql/_types.js';
 
 export default function getAccountByJwt(token: string): AccountContext {
   try {

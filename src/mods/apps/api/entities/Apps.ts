@@ -2,10 +2,10 @@ import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 import {
   Field, InputType, ObjectType, Int, ID,
 } from 'type-graphql';
-import Node from 'mods/base/api/entities/Node';
-import NodeConnection from 'mods/base/api/entities/NodeConnection';
-import SocialUrls from 'mods/base/api/entities/SocialUrls';
-import { SimpleAccount } from 'mods/base/api/entities/Account';
+import Node from '../../../base/api/entities/Node';
+import NodeConnection from '../../../base/api/entities/NodeConnection';
+import SocialUrls from '../../../base/api/entities/SocialUrls';
+import { SimpleAccount } from '../../../base/api/entities/Account';
 import { AppStatus } from './_enums';
 import { AppTag } from './AppTags';
 

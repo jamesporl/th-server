@@ -1,16 +1,16 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import slugify from 'slugify';
-import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
-import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
-import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
-import IsAdmin from 'core/graphql/IsAdmin';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { MAccount } from 'mods/base/db';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
-import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts';
-import { MApp, MAppDraft, MAppTag } from '../../../db';
+import serializeEditorContentToText from '../../../utils/serializeEditorContentToText.js';
+import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace.js';
+import { SendGridTemplateKey } from '../../../../external/sendGrid/utils/sendGridTemplates.js';
+import { MAccount } from '../../../../base/db/index.js';
+import IsAdmin from '../../../../../core/graphql/IsAdmin.js';
+import sendMail from '../../../../external/sendGrid/utils/sendMail.js';
+import serializeEditorContentToHtml from '../../../utils/serializeEditorContentToHtml.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
+import { AppDraft, PublishAppDraftInput } from '../../entities/AppDrafts.js';
+import { MApp, MAppDraft, MAppTag } from '../../../db/index.js';
 
 @Resolver()
 export default class {

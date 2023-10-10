@@ -5,13 +5,13 @@ import sharp from 'sharp';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import config from 'core/config';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import s3Config from 'core/s3Config';
-import { MAppDraft } from '../../../db';
-import { AddAppDraftBannerImgInput } from '../../entities/AppDrafts';
-import { BannerImg } from '../../entities/Apps';
+import config from '../../../../../core/config.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import s3Config from '../../../../../core/s3Config.js';
+import { MAppDraft } from '../../../db/index.js';
+import { AddAppDraftBannerImgInput } from '../../entities/AppDrafts.js';
+import { BannerImg } from '../../entities/Apps.js';
 
 @Resolver()
 export default class {

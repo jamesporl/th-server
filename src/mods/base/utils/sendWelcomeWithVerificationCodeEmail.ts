@@ -1,9 +1,9 @@
 import { addMinutes } from 'date-fns';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import { MAccount } from '../db';
-import generateSixDigitCode from './generateSixDigitCode';
-import { Account } from '../db/_types';
+import { SendGridTemplateKey } from '../../external/sendGrid/utils/sendGridTemplates.js';
+import sendMail from '../../external/sendGrid/utils/sendMail.js';
+import { MAccount } from '../db/index.js';
+import generateSixDigitCode from './generateSixDigitCode.js';
+import { Account } from '../db/_types.js';
 
 export default async function sendWelcomeWithVerificationCodeEmail(account: Account) {
   const verificationCode = generateSixDigitCode();

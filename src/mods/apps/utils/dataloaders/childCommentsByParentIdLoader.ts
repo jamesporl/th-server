@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax, no-await-in-loop */
 import DataLoader from 'dataloader';
-import { MAppComment } from 'mods/apps/db';
+import { MAppComment } from '../../db/index.js';
 
 const batchGetChildCommentsByParentId = async (commentIds: string[]) => {
   const docs = await MAppComment.find(

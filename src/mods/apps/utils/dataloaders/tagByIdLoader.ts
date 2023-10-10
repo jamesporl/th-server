@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader';
-import reorderDocumentsByKeys from 'core/graphql/reorderDocumentsByKeys';
-import { MAppTag } from 'mods/apps/db';
+import reorderDocumentsByKeys from '../../../../core/graphql/reorderDocumentsByKeys.js';
+import { MAppTag } from '../../db/index.js';
 
 const batchGetTagsById = async (tagIds: string[]) => {
   const docs = await MAppTag.find({ _id: { $in: tagIds } });

@@ -3,12 +3,12 @@ import { Types } from 'mongoose';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import generateSixDigitCode from 'mods/base/utils/generateSixDigitCode';
-import { MApp, MAppDraft } from '../../../db';
-import { AddAppInput, App } from '../../entities/Apps';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import { Context } from '../../../../../core/graphql/_types.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import generateSixDigitCode from '../../../../base/utils/generateSixDigitCode.js';
+import { MApp, MAppDraft } from '../../../db/index.js';
+import { AddAppInput, App } from '../../entities/Apps.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

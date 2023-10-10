@@ -1,14 +1,14 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import sendMail from 'mods/external/sendGrid/utils/sendMail';
-import config from 'core/config';
-import { SendGridTemplateKey } from 'mods/external/sendGrid/utils/sendGridTemplates';
-import sendWelcomeWithVerificationCodeEmail from '../../../utils/sendWelcomeWithVerificationCodeEmail';
-import { MAccount } from '../../../db';
-import validateEmailByRegex from '../../../utils/validateEmailByRegex';
-import hashPassword from '../../../utils/hashPassword';
-import { SignupInput } from '../../entities/Auth';
-import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
+import sendMail from '../../../../external/sendGrid/utils/sendMail.js';
+import config from '../../../../../core/config.js';
+import { SendGridTemplateKey } from '../../../../external/sendGrid/utils/sendGridTemplates.js';
+import sendWelcomeWithVerificationCodeEmail from '../../../utils/sendWelcomeWithVerificationCodeEmail.js';
+import { MAccount } from '../../../db/index.js';
+import validateEmailByRegex from '../../../utils/validateEmailByRegex.js';
+import hashPassword from '../../../utils/hashPassword.js';
+import { SignupInput } from '../../entities/Auth.js';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload.js';
 
 @Resolver()
 export default class {

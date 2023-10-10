@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { DbAccount } from './_types';
+import { DbAccount } from './_types.js';
 
 const AccountSchema = new Schema(
   {

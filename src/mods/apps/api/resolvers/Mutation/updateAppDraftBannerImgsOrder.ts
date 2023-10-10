@@ -2,12 +2,12 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import Auth from 'core/graphql/Auth';
-import { MAppDraft } from '../../../db';
-import { AppDraftStatus } from '../../entities/_enums';
-import { UpdateAppDraftBannerImgsOrderInput } from '../../entities/AppDrafts';
+import { Context } from '../../../../../core/graphql/_types.js';
+import DefaultMutationPayload from '../../../../base/api/entities/DefaultMutationPayload.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MAppDraft } from '../../../db/index.js';
+import { AppDraftStatus } from '../../entities/_enums.js';
+import { UpdateAppDraftBannerImgsOrderInput } from '../../entities/AppDrafts.js';
 
 @Resolver()
 export default class {

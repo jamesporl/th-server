@@ -1,8 +1,9 @@
 import { randomBytes } from 'crypto';
-import config from 'core/config';
+import { URL, URLSearchParams } from 'node:url';
 import { Mutation } from 'type-graphql';
-import { MOAuthState } from 'mods/base/db';
-import { OAuthWebsiteKey } from '../../entities/_enums';
+import config from '../../../../../core/config.js';
+import { MOAuthState } from '../../../db/index.js';
+import { OAuthWebsiteKey } from '../../entities/_enums.js';
 
 const GMAIL_SCOPES = ['https://www.googleapis.com/auth/userinfo.email', 'https://www.googleapis.com/auth/userinfo.profile'];
 

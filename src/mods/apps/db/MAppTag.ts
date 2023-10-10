@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { DbAppTag } from './_types';
+import { DbAppTag } from './_types.js';
 
 const AppTagSchema = new Schema(
   {

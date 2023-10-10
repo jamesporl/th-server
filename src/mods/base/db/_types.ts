@@ -1,5 +1,5 @@
 import { Types, Document } from 'mongoose';
-import { OAuthTokenType, OAuthWebsiteKey } from '../api/entities/_enums';
+import { OAuthTokenType, OAuthWebsiteKey } from '../api/entities/_enums.js';
 
 export interface TimeStamps {
   createdAt: Date;

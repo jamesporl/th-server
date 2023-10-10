@@ -1,7 +1,7 @@
 import { Worker, Queue, Job } from 'bullmq';
 import Redis from 'ioredis';
-import config from 'core/config';
-import jobsRegistry from './jobsRegistry';
+import config from '../config.js';
+import jobsRegistry from './jobsRegistry.js';
 
 const { REDIS_HOST, REDIS_PORT } = config;
 

@@ -1,8 +1,8 @@
 import { Field, ObjectType, Int } from 'type-graphql';
 import { GraphQLDateTime } from 'graphql-scalars';
-import Node from 'mods/base/api/entities/Node';
-import { SimpleAccount } from 'mods/base/api/entities/Account';
 import { AppCommentConnection, AppCommentStatusObject } from './AppComments'; // eslint-disable-line import/no-cycle
+import { SimpleAccount } from '../../../base/api/entities/Account.js';
+import Node from '../../../base/api/entities/Node';
 
 // This should be in the same file alongside other appComment entities
 // but having a recursive field, it had to be in a separate file

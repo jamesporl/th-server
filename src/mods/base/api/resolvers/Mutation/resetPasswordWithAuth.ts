@@ -1,12 +1,12 @@
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import { MAccount } from 'mods/base/db';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import { MAccount } from '../../../db/index.js';
 import hashPassword from '../../../utils/hashPassword';
-import { ResetPasswordWithAuthInput } from '../../entities/Auth';
-import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
+import { ResetPasswordWithAuthInput } from '../../entities/Auth.js';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload.js';
 
 @Resolver()
 export default class {

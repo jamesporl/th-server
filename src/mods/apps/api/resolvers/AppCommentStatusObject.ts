@@ -1,7 +1,7 @@
 import { Resolver, Root, FieldResolver } from 'type-graphql';
-import appCommentStatusMap from '../../utils/constants/appCommentStatusMap';
-import { AppCommentStatusObject } from '../entities/AppComments';
-import { AppCommentStatus } from '../entities/_enums';
+import appCommentStatusMap from '../../utils/constants/appCommentStatusMap.js';
+import { AppCommentStatusObject } from '../entities/AppComments.js';
+import { AppCommentStatus } from '../entities/_enums.js';
 
 @Resolver(() => AppCommentStatusObject)
 export default class {

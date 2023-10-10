@@ -2,14 +2,14 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
-import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
-import { MApp, MAppComment } from '../../../db';
-import { AppStatus } from '../../entities/_enums';
-import { AddCommentToAppInput } from '../../entities/AppComments';
-import AppComment from '../../entities/AppComment';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import serializeEditorContentToHtml from '../../../utils/serializeEditorContentToHtml.js';
+import serializeEditorContentToText from '../../../utils/serializeEditorContentToText.js';
+import { MApp, MAppComment } from '../../../db/index.js';
+import { AppStatus } from '../../entities/_enums.js';
+import { AddCommentToAppInput } from '../../entities/AppComments.js';
+import AppComment from '../../entities/AppComment.js';
 
 @Resolver()
 export default class {

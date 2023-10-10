@@ -1,9 +1,9 @@
 import {
   Arg, Resolver, Query, Int, ID,
 } from 'type-graphql';
-import { MApp, MAppComment } from '../../../db';
-import { AppCommentConnection } from '../../entities/AppComments';
-import { AppCommentStatus } from '../../entities/_enums';
+import { MApp, MAppComment } from '../../../db/index.js';
+import { AppCommentConnection } from '../../entities/AppComments.js';
+import { AppCommentStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

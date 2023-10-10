@@ -1,8 +1,8 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Resolver, Query } from 'type-graphql';
-import { MApp } from '../../../db';
-import { App } from '../../entities/Apps';
-import { AppStatus } from '../../entities/_enums';
+import { MApp } from '../../../db/index.js';
+import { App } from '../../entities/Apps.js';
+import { AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

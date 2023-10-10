@@ -1,8 +1,8 @@
 import { Resolver, Ctx, Query } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import Auth from 'core/graphql/Auth';
-import { MAccount } from '../../../db';
-import { Profile } from '../../entities/Profile';
+import { Context } from '../../../../../core/graphql/_types.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MAccount } from '../../../db/index.js';
+import { Profile } from '../../entities/Profile.js';
 
 @Resolver()
 export default class {

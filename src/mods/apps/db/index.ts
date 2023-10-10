@@ -1,9 +1,9 @@
-import MApp from './MApp';
-import MAppComment from './MAppComment';
-import MAppCommentSupport from './MAppCommentSupport';
-import MAppDraft from './MAppDraft';
-import MAppSupport from './MAppSupport';
-import MAppTag from './MAppTag';
+import MApp from './MApp.js';
+import MAppComment from './MAppComment.js';
+import MAppCommentSupport from './MAppCommentSupport.js';
+import MAppDraft from './MAppDraft.js';
+import MAppSupport from './MAppSupport.js';
+import MAppTag from './MAppTag.js';
 
 export {
   MApp, MAppComment, MAppCommentSupport, MAppDraft, MAppSupport, MAppTag,

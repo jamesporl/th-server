@@ -1,7 +1,7 @@
-import config from 'core/config';
 import sgMail from '@sendgrid/mail';
-import logger from 'core/logger';
-import sendGridTemplates, { SendGridTemplateKey } from './sendGridTemplates';
+import logger from '../../../../core/logger.js';
+import config from '../../../../core/config.js';
+import sendGridTemplates, { SendGridTemplateKey } from './sendGridTemplates.js';
 
 export default async function sendMail({ to, templateKey, dynamicTemplateData }: {
   to: string,
