@@ -2,13 +2,13 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import serializeEditorContentToText from 'mods/apps/utils/serializeEditorContentToText';
-import trimEditorJsonContent from 'mods/apps/utils/trimEditorJsonContent';
-import { MApp, MAppDraft, MAppTag } from '../../../db';
-import { UpdateAppDraftInput, AppDraft } from '../../entities/AppDrafts';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import serializeEditorContentToText from '../../../../apps/utils/serializeEditorContentToText.js';
+import trimEditorJsonContent from '../../../../apps/utils/trimEditorJsonContent.js';
+import { MApp, MAppDraft, MAppTag } from '../../../db/index.js';
+import { UpdateAppDraftInput, AppDraft } from '../../entities/AppDrafts.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

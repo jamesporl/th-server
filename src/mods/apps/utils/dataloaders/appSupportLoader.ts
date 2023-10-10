@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax, no-await-in-loop */
 import DataLoader from 'dataloader';
 import { groupBy } from 'lodash';
-import { MAppSupport } from 'mods/apps/db';
+import { MAppSupport } from '../../db/index.js';
 
 const batchGetAppSupports = async (appIdAndAccountIds: string[]) => {
   const idObjs: { appId: string, accountId: string }[] = appIdAndAccountIds.map((s) => {

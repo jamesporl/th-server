@@ -1,5 +1,5 @@
-import { MAccount } from 'mods/base/db';
-import hashPassword from 'mods/base/utils/hashPassword';
+import { MAccount } from '../../mods/base/db/index.js';
+import hashPassword from '../../mods/base/utils/hashPassword.js';
 
 export default async function loadInitialData(): Promise<void> {
   const adminPwHash = await hashPassword('admin123');

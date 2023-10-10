@@ -1,6 +1,6 @@
 import { model, Schema } from 'mongoose';
-import { AppCommentStatus, APP_COMMENT_STATUS_VALUES } from '../api/entities/_enums';
-import { DbAppComment } from './_types';
+import { AppCommentStatus, APP_COMMENT_STATUS_VALUES } from '../api/entities/_enums.js';
+import { DbAppComment } from './_types.js';
 
 const AppCommentSchema = new Schema(
   {

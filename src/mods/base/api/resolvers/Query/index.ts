@@ -1,4 +1,4 @@
-import accounts from './accounts';
-import myProfile from './myProfile';
+import accounts from './accounts.js';
+import myProfile from './myProfile.js';
 
 export default [accounts, myProfile];

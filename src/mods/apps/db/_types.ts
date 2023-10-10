@@ -1,5 +1,5 @@
-import { TimeStamps, AccountStamps, SocialUrls } from 'mods/base/db/_types';
 import { Types, Document } from 'mongoose';
+import { TimeStamps, AccountStamps, SocialUrls } from '../../base/db/_types';
 import { AppDraftStatus, AppStatus } from '../api/entities/_enums';
 
 export interface BannerImg {

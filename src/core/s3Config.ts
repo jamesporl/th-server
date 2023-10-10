@@ -1,5 +1,5 @@
 import aws from 'aws-sdk';
-import config from 'core/config';
+import config from './config.js';
 
 const s3Config = new aws.S3({
   endpoint: config.DO_SPACES_ENDPOINT,

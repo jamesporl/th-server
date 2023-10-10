@@ -3,15 +3,16 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "module": "commonjs",
-    "target": "es2018",
+    "allowJs": true,
+    "maxNodeModuleJsDepth": 10,
+    "lib": ["es2020"],
+    "target": "es2020",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
     "outDir": "./build",
     "baseUrl": "src",
-    "plugins": [
-      {
-        "transform": "@zerollup/ts-transform-paths"
-      }
-    ],
+    "skipLibCheck": true,
     "paths": {
       "*": [
         "*"
@@ -20,6 +21,6 @@
     "typeRoots": [
       "./node_modules/@types",
       "./types"
-    ],
+    ]
   }
 }

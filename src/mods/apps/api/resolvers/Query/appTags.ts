@@ -1,8 +1,8 @@
 import {
   Arg, Resolver, Query, Int,
 } from 'type-graphql';
-import { MAppTag } from '../../../db';
-import { AppTagConnection } from '../../entities/AppTags';
+import { MAppTag } from '../../../db/index.js';
+import { AppTagConnection } from '../../entities/AppTags.js';
 
 @Resolver()
 export default class {

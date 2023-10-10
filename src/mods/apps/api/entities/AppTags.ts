@@ -1,8 +1,8 @@
 import {
   Field, ObjectType, Int, InputType,
 } from 'type-graphql';
-import Node from 'mods/base/api/entities/Node';
-import NodeConnection from 'mods/base/api/entities/NodeConnection';
+import Node from '../../../base/api/entities/Node';
+import NodeConnection from '../../../base/api/entities/NodeConnection';
 
 @ObjectType({ implements: Node })
 export class AppTag extends Node {

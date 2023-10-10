@@ -2,13 +2,13 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import deleteLogoImgFromDOSpace from 'mods/apps/utils/deleteLogoImgsFromDOSpace';
-import { MApp, MAppDraft } from '../../../db';
-import { DeleteAppDraftLogoImgInput } from '../../entities/AppDrafts';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import { Context } from '../../../../../core/graphql/_types.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import DefaultMutationPayload from '../../../../base/api/entities/DefaultMutationPayload.js';
+import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace.js';
+import { MApp, MAppDraft } from '../../../db/index.js';
+import { DeleteAppDraftLogoImgInput } from '../../entities/AppDrafts.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

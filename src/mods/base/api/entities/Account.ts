@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Field, ObjectType } from 'type-graphql';
-import Node from './Node';
-import NodeConnection from './NodeConnection';
+import Node from './Node.js';
+import NodeConnection from './NodeConnection.js';
 
 @ObjectType({ implements: Node })
 export class SimpleAccount extends Node {

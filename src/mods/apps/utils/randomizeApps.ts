@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop, no-restricted-syntax */
 import { Types } from 'mongoose';
-import generateSixDigitCode from 'mods/base/utils/generateSixDigitCode';
-import { MApp } from '../db';
+import generateSixDigitCode from '../../base/utils/generateSixDigitCode.js';
+import { MApp } from '../db/index.js';
 
 export default async function randomizeApps() {
   let lastId: Types.ObjectId | undefined;

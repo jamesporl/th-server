@@ -3,13 +3,13 @@ import sharp from 'sharp';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import config from 'core/config';
-import Auth from 'core/graphql/Auth';
-import { Context } from 'core/graphql/_types';
-import DefaultMutationPayload from 'mods/base/api/entities/DefaultMutationPayload';
-import { MAccount } from 'mods/base/db';
-import s3Config from 'core/s3Config';
-import { UpdateProfilePhotoInput } from '../../entities/Profile';
+import config from '../../../../../core/config.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { Context } from '../../../../../core/graphql/_types.js';
+import DefaultMutationPayload from '../../../../base/api/entities/DefaultMutationPayload.js';
+import { MAccount } from '../../../../base/db/index.js';
+import s3Config from '../../../../../core/s3Config.js';
+import { UpdateProfilePhotoInput } from '../../entities/Profile.js';
 
 @Resolver()
 export default class {

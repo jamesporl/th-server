@@ -1,16 +1,16 @@
-import addJob from './addJob';
-import createGoogleOAuthUrl from './createGoogleOAuthUrl';
-import login from './login';
-import loginWithGoogle from './loginWithGoogle';
-import resetPasswordByToken from './resetPasswordByToken';
-import resetPasswordWithAuth from './resetPasswordWithAuth';
-import sendPasswordResetLink from './sendPasswordResetLink';
-import sendVerificationCode from './sendVerificationCode';
-import signup from './signup';
-import updateEmail from './updateEmail';
-import updatePersonalInfo from './updatePersonalInfo';
-import updateProfilePhoto from './updateProfilePhoto';
-import verifyAccountByCode from './verifyAccountByCode';
+import addJob from './addJob.js';
+import createGoogleOAuthUrl from './createGoogleOAuthUrl.js';
+import login from './login.js';
+import loginWithGoogle from './loginWithGoogle.js';
+import resetPasswordByToken from './resetPasswordByToken.js';
+import resetPasswordWithAuth from './resetPasswordWithAuth.js';
+import sendPasswordResetLink from './sendPasswordResetLink.js';
+import sendVerificationCode from './sendVerificationCode.js';
+import signup from './signup.js';
+import updateEmail from './updateEmail.js';
+import updatePersonalInfo from './updatePersonalInfo.js';
+import updateProfilePhoto from './updateProfilePhoto.js';
+import verifyAccountByCode from './verifyAccountByCode.js';
 
 export default [
   addJob,

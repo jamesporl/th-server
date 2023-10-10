@@ -1,11 +1,11 @@
 import {
   Arg, Resolver, Ctx, Query, Int,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import Auth from 'core/graphql/Auth';
-import { MApp } from '../../../db';
-import { AppConnection } from '../../entities/Apps';
-import { AppStatus } from '../../entities/_enums';
+import { Context } from '../../../../../core/graphql/_types.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MApp } from '../../../db/index.js';
+import { AppConnection } from '../../entities/Apps.js';
+import { AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

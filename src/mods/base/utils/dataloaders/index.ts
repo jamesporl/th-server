@@ -1,3 +1,3 @@
-import accountByIdLoader from './accountByIdLoader';
+import accountByIdLoader from './accountByIdLoader.js';
 
 export default { accountByIdLoader };

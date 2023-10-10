@@ -1,5 +1,5 @@
 import { Types } from 'mongoose';
-import createDataloaders from './createDataloaders';
+import createDataloaders from './createDataloaders.js';
 
 export interface AccountContext {
   isAdmin?: boolean;

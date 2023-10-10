@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-syntax, no-await-in-loop */
 import DataLoader from 'dataloader';
 import { groupBy } from 'lodash';
-import { MAppCommentSupport } from 'mods/apps/db';
+import { MAppCommentSupport } from '../../db/index.js';
 
 const batchGetAppCommentSupports = async (commentIdAndAccountIds: string[]) => {
   const idObjs: { commentId: string, accountId: string }[] = commentIdAndAccountIds.map((s) => {

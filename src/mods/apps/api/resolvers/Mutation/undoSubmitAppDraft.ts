@@ -2,11 +2,11 @@ import { UserInputError } from 'apollo-server-express';
 import {
   Arg, Ctx, Mutation, Resolver,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import Auth from 'core/graphql/Auth';
-import { MApp, MAppDraft } from '../../../db';
-import { AppDraft, UndoSubmitAppDraftInput } from '../../entities/AppDrafts';
-import { AppDraftStatus, AppStatus } from '../../entities/_enums';
+import { Context } from '../../../../../core/graphql/_types.js';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MApp, MAppDraft } from '../../../db/index.js';
+import { AppDraft, UndoSubmitAppDraftInput } from '../../entities/AppDrafts.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

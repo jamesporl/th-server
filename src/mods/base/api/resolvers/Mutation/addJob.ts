@@ -2,11 +2,11 @@ import { UserInputError } from 'apollo-server-express';
 import { Resolver, Mutation, Arg } from 'type-graphql';
 import { Types } from 'mongoose';
 import { isValidCron } from 'cron-validator';
-import { jobQueue } from 'core/jobs/createJobWorker';
-import IsAdmin from 'core/graphql/IsAdmin';
-import jobsRegistry from 'core/jobs/jobsRegistry';
-import DefaultMutationPayload from '../../entities/DefaultMutationPayload';
-import { AddJobInput } from '../../entities/Job';
+import { jobQueue } from '../../../../../core/jobs/createJobWorker.js';
+import IsAdmin from '../../../../../core/graphql/IsAdmin.js';
+import jobsRegistry from '../../../../../core/jobs/jobsRegistry.js';
+import DefaultMutationPayload from '../../entities/DefaultMutationPayload.js';
+import { AddJobInput } from '../../entities/Job.js';
 
 @Resolver()
 export default class {

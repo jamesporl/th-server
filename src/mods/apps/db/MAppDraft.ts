@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose';
-import SocialUrlsSchema from 'mods/base/db/common/SocialUrls';
-import { DbAppDraft } from './_types';
-import BannerImgSchema from './common/BannerImg';
-import { AppDraftStatus, APP_DRAFT_STATUS_VALUES } from '../api/entities/_enums';
+import SocialUrlsSchema from '../../base/db/common/SocialUrls.js';
+import { DbAppDraft } from './_types.js';
+import BannerImgSchema from './common/BannerImg.js';
+import { AppDraftStatus, APP_DRAFT_STATUS_VALUES } from '../api/entities/_enums.js';
 
 const AppDraftSchema = new Schema(
   {

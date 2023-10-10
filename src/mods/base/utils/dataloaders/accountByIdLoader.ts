@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader';
-import reorderDocumentsByKeys from 'core/graphql/reorderDocumentsByKeys';
-import { MAccount } from 'mods/base/db';
+import { MAccount } from '../../db/index.js';
+import reorderDocumentsByKeys from '../../../../core/graphql/reorderDocumentsByKeys.js';
 
 const batchGetAccountsById = async (accountIds: string[]) => {
   const docs = await MAccount.find({ _id: { $in: accountIds } });

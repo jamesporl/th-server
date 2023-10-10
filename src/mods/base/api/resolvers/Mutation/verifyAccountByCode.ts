@@ -1,9 +1,9 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
 import { isAfter } from 'date-fns';
-import generateAuthToken from '../../../utils/generateAuthToken';
-import { MAccount } from '../../../db';
-import { VerifyAccountByCodeInput } from '../../entities/Auth';
+import generateAuthToken from '../../../utils/generateAuthToken.js';
+import { MAccount } from '../../../db/index.js';
+import { VerifyAccountByCodeInput } from '../../entities/Auth.js';
 
 @Resolver()
 export default class {

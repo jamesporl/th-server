@@ -4,9 +4,9 @@ import {
 import { GraphQLDateTime } from 'graphql-scalars';
 import { UserInputError } from 'apollo-server-express';
 import { SortOrder } from 'mongoose';
-import { MApp, MAppTag } from '../../../db';
-import { AppConnection } from '../../entities/Apps';
-import { AppsOtherFilter, AppsSortBy, AppStatus } from '../../entities/_enums';
+import { MApp, MAppTag } from '../../../db/index.js';
+import { AppConnection } from '../../entities/Apps.js';
+import { AppsOtherFilter, AppsSortBy, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {

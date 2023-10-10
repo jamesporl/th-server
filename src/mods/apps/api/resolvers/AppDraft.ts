@@ -1,10 +1,10 @@
 import {
   Resolver, Root, FieldResolver, Ctx,
 } from 'type-graphql';
-import { Context } from 'core/graphql/_types';
-import serializeEditorContentToHtml from 'mods/apps/utils/serializeEditorContentToHtml';
-import { DbAppDraft } from '../../db/_types';
-import { AppDraft } from '../entities/AppDrafts';
+import { Context } from '../../../../core/graphql/_types.js';
+import serializeEditorContentToHtml from '../../utils/serializeEditorContentToHtml.js';
+import { DbAppDraft } from '../../db/_types.js';
+import { AppDraft } from '../entities/AppDrafts.js';
 
 @Resolver(() => AppDraft)
 export default class {

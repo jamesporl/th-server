@@ -1,10 +1,10 @@
 import { UserInputError } from 'apollo-server-express';
 import { Arg, Mutation, Resolver } from 'type-graphql';
-import Auth from 'core/graphql/Auth';
 import slugify from 'slugify';
-import { MAppTag } from '../../../db';
-import { App } from '../../entities/Apps';
-import { AddAppTagInput } from '../../entities/AppTags';
+import Auth from '../../../../../core/graphql/Auth.js';
+import { MAppTag } from '../../../db/index.js';
+import { App } from '../../entities/Apps.js';
+import { AddAppTagInput } from '../../entities/AppTags.js';
 
 @Resolver()
 export default class {

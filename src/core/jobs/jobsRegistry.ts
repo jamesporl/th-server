@@ -1,5 +1,5 @@
-import randomizeApps from 'mods/apps/utils/randomizeApps';
-import updateAppsCountInTags from 'mods/apps/utils/updateAppsCountInTags';
+import updateAppsCountInTags from '../../mods/apps/utils/updateAppsCountInTags.js';
+import randomizeApps from '../../mods/apps/utils/randomizeApps.js';
 
 const jobsRegistry: {
   key: string;
