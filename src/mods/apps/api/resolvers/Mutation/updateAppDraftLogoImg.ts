@@ -7,7 +7,6 @@ import {
 import config from '../../../../../core/config.js';
 import Auth from '../../../../../core/graphql/Auth.js';
 import { Context } from '../../../../../core/graphql/_types.js';
-import DefaultMutationPayload from '../../../../base/api/entities/DefaultMutationPayload.js';
 import s3Config from '../../../../../core/s3Config.js';
 import deleteLogoImgFromDOSpace from '../../../utils/deleteLogoImgsFromDOSpace.js';
 import { MApp, MAppDraft } from '../../../db/index.js';
@@ -17,7 +16,7 @@ import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 @Resolver()
 export default class {
   @Auth()
-  @Mutation(() => DefaultMutationPayload)
+  @Mutation(() => String)
   async updateAppDraftLogoImg(
     @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateAppDraftLogoImgInput) input: UpdateAppDraftLogoImgInput, // eslint-disable-line @typescript-eslint/indent
@@ -67,9 +66,11 @@ export default class {
       })
       .promise();
 
+    const imgUrl = `${config.DO_SPACES_URL}/${imgKey}`;
+
     await MAppDraft.updateOne(
       { _id: appDraft._id },
-      { $set: { logoImg: `${config.DO_SPACES_URL}/${imgKey}` } },
+      { $set: { logoImg: imgUrl } },
     );
 
     // if current logo is not being used in published app, delete them
@@ -82,6 +83,6 @@ export default class {
       await deleteLogoImgFromDOSpace(appDraft.logoImg);
     }
 
-    return { isCompleted: true };
+    return imgUrl;
   }
 }
