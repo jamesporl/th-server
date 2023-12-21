@@ -45,22 +45,7 @@ export default class {
       bannerImgs,
       socialUrls,
       websiteUrl,
-      playStoreUrl,
-      appStoreUrl,
     } = appDraft;
-
-    if (appStoreUrl) {
-      const re = /https:\/\/apps.apple.com\/&?/;
-      if (!re.test(appStoreUrl)) {
-        errors.push('App Store URL is invalid.');
-      }
-    }
-    if (playStoreUrl) {
-      const re = /https:\/\/play.google.com\/&?/;
-      if (!re.test(playStoreUrl)) {
-        errors.push('Play Store URL is invalid.');
-      }
-    }
 
     if (websiteUrl) {
       const re = /https:\/\/?[^/]+\.[^/]+\/?/;
@@ -158,8 +143,6 @@ export default class {
         logoImg: appDraft.logoImg,
         videoUrl: appDraft.videoUrl,
         websiteUrl: appDraft.websiteUrl,
-        playStoreUrl: appDraft.playStoreUrl,
-        appStoreUrl: appDraft.appStoreUrl,
         tagIds: appDraft.tagIds,
         socialUrls: appDraft.socialUrls,
       };

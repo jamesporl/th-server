@@ -26,8 +26,6 @@ export default class {
       tagIds,
       videoUrl: iVideoUrl,
       websiteUrl: iWebsiteUrl,
-      playStoreUrl: iPlayStoreUrl,
-      appStoreUrl: iAppStoreUrl,
       socialUrls: iSocialUrls,
     } = input;
 
@@ -35,8 +33,6 @@ export default class {
     const shortDesc = iShortDesc.trim();
     const jsonDesc = trimEditorJsonContent(iJsonDesc);
     const videoUrl = iVideoUrl?.trim();
-    const appStoreUrl = iAppStoreUrl?.trim();
-    const playStoreUrl = iPlayStoreUrl?.trim();
     const websiteUrl = iWebsiteUrl?.trim();
 
     const {
@@ -91,8 +87,6 @@ export default class {
           jsonDesc,
           tagIds,
           videoUrl,
-          appStoreUrl,
-          playStoreUrl,
           websiteUrl,
           socialUrls,
         },

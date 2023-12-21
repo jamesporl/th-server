@@ -51,10 +51,6 @@ export class App extends Node {
 
   @Field(() => GraphQLDateTime, { nullable: true }) publishedAt?: Date;
 
-  @Field({ nullable: true }) playStoreUrl?: string;
-
-  @Field({ nullable: true }) appStoreUrl?: string;
-
   @Field({ nullable: true }) websiteUrl?: string;
 
   @Field({ nullable: true }) logoImg?: string;

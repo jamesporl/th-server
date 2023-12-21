@@ -46,8 +46,6 @@ export default class {
       logoImg: appDraft.logoImg,
       videoUrl: appDraft.videoUrl,
       websiteUrl: appDraft.websiteUrl,
-      playStoreUrl: appDraft.playStoreUrl,
-      appStoreUrl: appDraft.appStoreUrl,
       tagIds: appDraft.tagIds,
       socialUrls: appDraft.socialUrls,
       slug,
