@@ -36,11 +36,11 @@ export default class {
     const imgId = new Types.ObjectId();
     const imgSizes = {
       large: {
-        height: 1080,
+        height: 1050,
         key: `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/banners/${imgId.toHexString()}.jpg`,
       },
       thumbnail: {
-        height: 180,
+        height: 210,
         key: `${config.DO_SPACES_PATH_PREFIX}/apps/${appId}/banners/${imgId.toHexString()}-tn.jpg`,
       },
     };

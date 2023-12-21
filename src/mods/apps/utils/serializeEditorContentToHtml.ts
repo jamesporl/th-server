@@ -3,6 +3,7 @@ import escapeHtml from 'escape-html';
 function serializeEditorNodeToHtml(node: any, parentType?: string) {
   if (node.type === 'text') {
     let string = escapeHtml(node.text) || '&nbsp;';
+    console.log(node.text, string);
     const classNames = [];
     if (node.bold) {
       classNames.push('text-bold');

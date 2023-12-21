@@ -46,8 +46,6 @@ export default class {
       name: app.name,
       jsonDesc: app.jsonDesc,
       shortDesc: app.shortDesc,
-      playStoreUrl: app.playStoreUrl,
-      appStoreUrl: app.appStoreUrl,
       websiteUrl: app.websiteUrl,
       logoImg: app.logoImg,
       videoUrl: app.videoUrl,

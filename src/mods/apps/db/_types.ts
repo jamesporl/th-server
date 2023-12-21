@@ -22,8 +22,6 @@ export interface App extends TimeStamps, AccountStamps {
   bannerImgs?: BannerImg[];
   ownedBy: Types.ObjectId;
   publishedAt?: Date;
-  playStoreUrl?: string;
-  appStoreUrl?: string;
   websiteUrl?: string;
   status: AppStatus;
   tagIds?: Types.ObjectId[];
@@ -45,8 +43,6 @@ export interface AppDraft extends TimeStamps {
   videoUrl?: string;
   bannerImgs?: BannerImg[];
   ownedBy: Types.ObjectId;
-  playStoreUrl?: string;
-  appStoreUrl?: string;
   websiteUrl?: string;
   tagIds?: Types.ObjectId[];
   socialUrls?: SocialUrls;

@@ -31,10 +31,6 @@ export class AppDraft extends Node {
 
   @Field({ nullable: true }) htmlDesc?: string;
 
-  @Field({ nullable: true }) playStoreUrl?: string;
-
-  @Field({ nullable: true }) appStoreUrl?: string;
-
   @Field({ nullable: true }) websiteUrl?: string;
 
   @Field({ nullable: true }) logoImg?: string;
@@ -105,10 +101,6 @@ export class UpdateAppDraftInput {
   @Field(() => GraphQLJSON, { nullable: true }) jsonDesc?: unknown;
 
   @Field({ nullable: true }) videoUrl?: string;
-
-  @Field({ nullable: true }) playStoreUrl?: string;
-
-  @Field({ nullable: true }) appStoreUrl?: string;
 
   @Field({ nullable: true }) websiteUrl?: string;
 

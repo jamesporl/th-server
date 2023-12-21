@@ -11,8 +11,6 @@ const AppSchema = new Schema(
     jsonDesc: { type: Schema.Types.Mixed },
     htmlDesc: { type: String },
     textDesc: { type: String },
-    playStoreUrl: String,
-    appStoreUrl: String,
     websiteUrl: String,
     publishedAt: Date,
     logoImg: String,

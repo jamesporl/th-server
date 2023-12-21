@@ -10,8 +10,6 @@ const AppDraftSchema = new Schema(
     name: String,
     jsonDesc: { type: Schema.Types.Mixed },
     shortDesc: String,
-    playStoreUrl: String,
-    appStoreUrl: String,
     websiteUrl: String,
     logoImg: String,
     videoUrl: String,
