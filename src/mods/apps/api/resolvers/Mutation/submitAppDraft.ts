@@ -115,7 +115,7 @@ export default class {
 
     const textDesc = serializeEditorContentToText(jsonDesc);
 
-    if (textDesc.length > 100) {
+    if (textDesc.length < 100) {
       errors.push('Description is too short.');
     }
 

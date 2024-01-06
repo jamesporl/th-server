@@ -20,6 +20,7 @@ export default class {
       { _id, status: { $ne: AppStatus.deleted } },
       { status: 1, ownedBy: 1 },
     ).lean();
+
     if (!app) {
       throw new UserInputError('App not found.');
     }
@@ -28,6 +29,7 @@ export default class {
       throw new ForbiddenError('Forbidden');
     }
     const appDraft = await MAppDraft.findOne({ appId: _id }).lean();
+
     return appDraft;
   }
 }
