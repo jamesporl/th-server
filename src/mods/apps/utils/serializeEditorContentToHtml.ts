@@ -1,9 +1,8 @@
 import escapeHtml from 'escape-html';
 
 function serializeEditorNodeToHtml(node: any, parentType?: string) {
-  if (node.type === 'text') {
-    let string = escapeHtml(node.text) || '&nbsp;';
-    console.log(node.text, string);
+  if (!node.type) {
+    let string = escapeHtml(node.text);
     const classNames = [];
     if (node.bold) {
       classNames.push('text-bold');
@@ -23,7 +22,7 @@ function serializeEditorNodeToHtml(node: any, parentType?: string) {
     return string;
   }
 
-  const children = node.children.map((n) => serializeEditorNodeToHtml(n, node.type)).join('');
+  const children = (node.children || []).map((n) => serializeEditorNodeToHtml(n, node.type)).join('');
 
   if (node.type === 'bulleted-list') {
     return `<ul>${children}</ul>`;
@@ -34,6 +33,7 @@ function serializeEditorNodeToHtml(node: any, parentType?: string) {
   if (parentType === 'numbered-list' || parentType === 'bulleted-list') {
     return `<li>${children}</li>`;
   }
+  // console.log('paragraph', children);
   return `<p>${children}</p>`;
 }
 
