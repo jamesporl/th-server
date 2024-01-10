@@ -22,14 +22,6 @@ export enum AppDraftStatus {
 registerEnumType(AppDraftStatus, { name: 'AppDraftStatus' });
 export const APP_DRAFT_STATUS_VALUES = Object.values(AppDraftStatus);
 
-export enum AppCommentStatus {
-  published = 'published',
-  deleted = 'deleted',
-}
-
-registerEnumType(AppCommentStatus, { name: 'AppCommentStatus' });
-export const APP_COMMENT_STATUS_VALUES = Object.values(AppCommentStatus);
-
 export enum AppsOtherFilter {
   isFeatured = 'isFeatured',
   excludeFeatured = 'excludeFeatured',

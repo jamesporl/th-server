@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-syntax, no-await-in-loop */
 import DataLoader from 'dataloader';
 import { groupBy } from 'lodash';
-import { MAppCommentSupport } from '../../db/index.js';
+import MCommentSupport from '../../db/MCommentSupport.js';
 
-const batchGetAppCommentSupports = async (commentIdAndAccountIds: string[]) => {
+const batchGetCommentSupports = async (commentIdAndAccountIds: string[]) => {
   const idObjs: { commentId: string, accountId: string }[] = commentIdAndAccountIds.map((s) => {
     const split = s.split('_');
     return { commentId: split[0], accountId: split[1] };
@@ -14,7 +14,7 @@ const batchGetAppCommentSupports = async (commentIdAndAccountIds: string[]) => {
     const commentIds = idObjsByAccountId[accountId].map(
       (obj) => obj.commentId,
     );
-    const docsForAccountId = await MAppCommentSupport.find(
+    const docsForAccountId = await MCommentSupport.find(
       { accountId, commentId: { $in: commentIds } },
     );
     docs = [...docs, ...docsForAccountId];
@@ -28,6 +28,6 @@ const batchGetAppCommentSupports = async (commentIdAndAccountIds: string[]) => {
   });
 };
 
-const appCommentSupportsLoader = new DataLoader(batchGetAppCommentSupports);
+const commentSupportsLoader = new DataLoader(batchGetCommentSupports);
 
-export default appCommentSupportsLoader;
+export default commentSupportsLoader;

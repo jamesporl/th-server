@@ -2,25 +2,27 @@ import {
   Field, InputType, ObjectType, ID,
 } from 'type-graphql';
 import { GraphQLJSON } from 'graphql-scalars';
-import AppComment from './AppComment'; // eslint-disable-line import/no-cycle
-import { AppCommentStatus } from './_enums';
+import Comment from './Comment'; // eslint-disable-line import/no-cycle
+import { CommentStatus, CommentType } from './_enums';
 import NodeConnection from '../../../base/api/entities/NodeConnection';
 
 @ObjectType()
-export class AppCommentStatusObject {
-  @Field(() => AppCommentStatus) key: AppCommentStatus;
+export class CommentStatusObject {
+  @Field(() => CommentStatus) key: CommentStatus;
 
   @Field() label: string;
 }
 
 @ObjectType({ implements: NodeConnection })
-export class AppCommentConnection extends NodeConnection<AppComment> {
-  @Field(() => [AppComment]) nodes: AppComment[];
+export class CommentConnection extends NodeConnection<Comment> {
+  @Field(() => [Comment]) nodes: Comment[];
 }
 
 @InputType()
-export class AddCommentToAppInput {
-  @Field(() => ID) appId?: string;
+export class AddCommentInput {
+  @Field(() => ID) refId: string;
+
+  @Field(() => CommentType) type: CommentType;
 
   @Field(() => GraphQLJSON) jsonContent: unknown;
 
@@ -28,16 +30,16 @@ export class AddCommentToAppInput {
 }
 
 @InputType()
-export class ToggleAppCommentSupportInput {
+export class ToggleCommentSupportInput {
   @Field(() => ID) commentId: string;
 }
 
 @InputType()
-export class TogglePinAppCommentInput {
+export class TogglePinCommentInput {
   @Field(() => ID) commentId: string;
 }
 
 @InputType()
-export class DeleteAppCommentInput {
+export class DeleteCommentInput {
   @Field(() => ID) commentId: string;
 }

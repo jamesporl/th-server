@@ -66,21 +66,3 @@ export interface AppSupport extends TimeStamps {
 }
 
 export type DbAppSupport = AppSupport & Document;
-
-export interface AppComment extends TimeStamps {
-  appId: Types.ObjectId;
-  parentCommentId?: Types.ObjectId;
-  content?: string;
-  isPinned?: boolean;
-  createdBy: Types.ObjectId,
-}
-
-export type DbAppComment = AppComment & Document;
-
-export interface AppCommentSupport extends TimeStamps {
-  accountId: Types.ObjectId;
-  appId: Types.ObjectId;
-  commentId: Types.ObjectId;
-}
-
-export type DbAppCommentSupport = AppCommentSupport & Document;
