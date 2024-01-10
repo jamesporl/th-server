@@ -2,15 +2,15 @@ import {
   Resolver, Root, FieldResolver, Ctx,
 } from 'type-graphql';
 import { Context } from '../../../../core/graphql/_types.js';
-import { DbAppComment } from '../../db/_types.js';
-import AppComment from '../entities/AppComment.js';
+import Comment from '../entities/Comment.js';
+import { DbComment } from '../../db/_types.js';
 
-@Resolver(() => AppComment)
+@Resolver(() => Comment)
 export default class {
   @FieldResolver()
   createdBy(
     @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
-    @Root() { createdBy }: DbAppComment,
+    @Root() { createdBy }: DbComment,
   ) {
     return dataloaders.accountByIdLoader.load(createdBy.toHexString());
   }
@@ -18,7 +18,7 @@ export default class {
   @FieldResolver()
   async comments(
     @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
-    @Root() { _id }: DbAppComment,
+    @Root() { _id }: DbComment,
   ) {
     const childComments = await dataloaders.childCommentsByParentIdLoader.load(_id.toHexString());
     return {
@@ -30,17 +30,17 @@ export default class {
   @FieldResolver()
   isSupported(
     @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
-    @Root() { _id }: DbAppComment,
+    @Root() { _id }: DbComment,
   ) {
     if (accountId) {
-      return dataloaders.appCommentSupportLoader.load(`${_id}_${accountId}`);
+      return dataloaders.commentSupportLoader.load(`${_id}_${accountId}`);
     }
     return false;
   }
 
   @FieldResolver()
   isParent(
-    @Root() { parentCommentId }: DbAppComment, // eslint-disable-line @typescript-eslint/indent
+    @Root() { parentCommentId }: DbComment, // eslint-disable-line @typescript-eslint/indent
   ) {
     return !parentCommentId;
   }

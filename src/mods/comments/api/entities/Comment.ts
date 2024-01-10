@@ -1,14 +1,14 @@
 import { Field, ObjectType, Int } from 'type-graphql';
 import { GraphQLDateTime } from 'graphql-scalars';
-import { AppCommentConnection, AppCommentStatusObject } from './AppComments'; // eslint-disable-line import/no-cycle
+import { CommentConnection, CommentStatusObject } from './Comments'; // eslint-disable-line import/no-cycle
 import { SimpleAccount } from '../../../base/api/entities/Account.js';
 import Node from '../../../base/api/entities/Node';
 
-// This should be in the same file alongside other appComment entities
+// This should be in the same file alongside other comment entities
 // but having a recursive field, it had to be in a separate file
 // See https://github.com/MichalLytek/type-graphql/issues/57
 @ObjectType({ implements: Node })
-export default class AppComment extends Node {
+export default class Comment extends Node {
   @Field({ nullable: true }) htmlContent?: string;
 
   @Field({ nullable: true }) textContent?: string;
@@ -19,9 +19,9 @@ export default class AppComment extends Node {
 
   @Field(() => SimpleAccount) createdBy: SimpleAccount;
 
-  @Field(() => AppCommentStatusObject) status: AppCommentStatusObject;
+  @Field(() => CommentStatusObject) status: CommentStatusObject;
 
-  @Field(() => AppCommentConnection, { nullable: true }) comments: AppCommentConnection;
+  @Field(() => CommentConnection, { nullable: true }) comments: CommentConnection;
 
   @Field(() => Int) supportsCount: number;
 
