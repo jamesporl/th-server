@@ -16,3 +16,11 @@ export enum CommentType {
 
 registerEnumType(CommentType, { name: 'CommentType' });
 export const COMMENT_TYPE_VALUES = Object.values(CommentType);
+
+export enum UpvoteType {
+  app = 'app',
+  comment = 'comment',
+}
+
+registerEnumType(UpvoteType, { name: 'UpvoteType' });
+export const UPVOTE_TYPE_VALUES = Object.values(UpvoteType);

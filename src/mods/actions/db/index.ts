@@ -1,4 +1,4 @@
 import MComment from './MComment.js';
-import MCommentSupport from './MCommentSupport.js';
+import MUpvote from './MUpvote.js';
 
-export { MComment, MCommentSupport };
+export { MComment, MUpvote };

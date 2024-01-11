@@ -23,9 +23,9 @@ export default class Comment extends Node {
 
   @Field(() => CommentConnection, { nullable: true }) comments: CommentConnection;
 
-  @Field(() => Int) supportsCount: number;
+  @Field(() => Int) upvotesCount: number;
 
-  @Field(() => Boolean) isSupported: boolean;
+  @Field(() => Boolean) isUpvoted: boolean;
 
   @Field(() => GraphQLDateTime) createdAt: Date;
 }

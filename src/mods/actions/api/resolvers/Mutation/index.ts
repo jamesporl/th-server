@@ -1,6 +1,6 @@
 import addComment from './addComment.js';
 import deleteComment from './deleteComment.js';
-import toggleCommentSupport from './toggleCommentSupport.js';
 import togglePinComment from './togglePinComment.js';
+import toggleUpvote from './toggleUpvote.js';
 
-export default [addComment, deleteComment, toggleCommentSupport, togglePinComment];
+export default [addComment, deleteComment, togglePinComment, toggleUpvote];

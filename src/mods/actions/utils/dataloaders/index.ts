@@ -1,7 +1,7 @@
-import commentSupportLoader from './commentSupportLoader.js';
+import upvotesLoader from './upvotesLoader.js';
 import childCommentsByParentIdLoader from './childCommentsByParentIdLoader.js';
 
 export default {
-  commentSupportLoader,
+  upvotesLoader,
   childCommentsByParentIdLoader,
 };

@@ -8,7 +8,6 @@ import deleteAppDraftLogoImg from './deleteAppDraftLogoImg.js';
 import publishAppDraft from './publishAppDraft.js';
 import republishApp from './republishApp.js';
 import submitAppDraft from './submitAppDraft.js';
-import toggleAppSupport from './toggleAppSupport.js';
 import undoSubmitAppDraft from './undoSubmitAppDraft.js';
 import unpublishApp from './unpublishApp.js';
 import updateAppDraft from './updateAppDraft.js';
@@ -26,7 +25,6 @@ export default [
   publishAppDraft,
   republishApp,
   submitAppDraft,
-  toggleAppSupport,
   undoSubmitAppDraft,
   unpublishApp,
   updateAppDraft,

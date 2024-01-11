@@ -63,11 +63,11 @@ export class App extends Node {
 
   @Field(() => [AppTag], { nullable: 'itemsAndList' }) tags?: AppTag[];
 
-  @Field(() => Int) supportsCount: number;
+  @Field(() => Int) upvotesCount: number;
 
   @Field(() => Int) commentsCount: number;
 
-  @Field(() => Boolean) isSupported: boolean;
+  @Field(() => Boolean) isUpvoted: boolean;
 
   @Field(() => Boolean, { nullable: true }) isFeatured?: boolean;
 

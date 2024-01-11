@@ -1,7 +1,5 @@
 import { model, Schema } from 'mongoose';
-import {
-  CommentStatus, COMMENT_STATUS_VALUES, COMMENT_TYPE_VALUES, CommentType,
-} from '../api/entities/_enums.js';
+import { CommentStatus, COMMENT_STATUS_VALUES, COMMENT_TYPE_VALUES } from '../api/entities/_enums.js';
 import { DbComment } from './_types.js';
 
 const CommentSchema = new Schema(
@@ -12,7 +10,7 @@ const CommentSchema = new Schema(
     textContent: String,
     isPinned: Boolean,
     createdBy: Schema.Types.ObjectId,
-    supportsCount: { type: Number, default: 0 },
+    upvotesCount: { type: Number, default: 0 },
     status: {
       type: String,
       enum: COMMENT_STATUS_VALUES,
@@ -24,7 +22,6 @@ const CommentSchema = new Schema(
       type: String,
       required: true,
       enum: COMMENT_TYPE_VALUES,
-      default: CommentType.app,
     },
   },
   {
