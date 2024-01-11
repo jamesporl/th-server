@@ -24,7 +24,7 @@ const AppSchema = new Schema(
     slug: { type: String, index: true, unique: true },
     socialUrls: SocialUrlsSchema,
     commentsCount: { type: Number, default: 0 },
-    supportsCount: { type: Number, default: 0 },
+    upvotesCount: { type: Number, default: 0 },
     tagIds: [Schema.Types.ObjectId],
     isFeatured: Boolean,
     createdBy: Schema.Types.ObjectId,

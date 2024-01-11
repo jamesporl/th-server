@@ -4,6 +4,7 @@ import {
 import { Context } from '../../../../core/graphql/_types.js';
 import Comment from '../entities/Comment.js';
 import { DbComment } from '../../db/_types.js';
+import { UpvoteType } from '../entities/_enums.js';
 
 @Resolver(() => Comment)
 export default class {
@@ -28,12 +29,12 @@ export default class {
   }
 
   @FieldResolver()
-  isSupported(
+  isUpvoted(
     @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Root() { _id }: DbComment,
   ) {
     if (accountId) {
-      return dataloaders.commentSupportLoader.load(`${_id}_${accountId}`);
+      return dataloaders.upvotesLoader.load(`${_id}_${UpvoteType.comment}_${accountId}`);
     }
     return false;
   }

@@ -25,7 +25,7 @@ export interface App extends TimeStamps, AccountStamps {
   websiteUrl?: string;
   status: AppStatus;
   tagIds?: Types.ObjectId[];
-  supportsCount: number;
+  upvotesCount: number;
   commentsCount: number;
   isFeatured?: boolean;
   slug?: string;
@@ -59,10 +59,3 @@ export interface AppTag {
 }
 
 export type DbAppTag = AppTag & Document;
-
-export interface AppSupport extends TimeStamps {
-  accountId: Types.ObjectId;
-  appId: Types.ObjectId;
-}
-
-export type DbAppSupport = AppSupport & Document;

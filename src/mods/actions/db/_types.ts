@@ -1,6 +1,6 @@
 import { Types, Document } from 'mongoose';
 import { TimeStamps } from '../../base/db/_types.js';
-import { CommentStatus, CommentType } from '../api/entities/_enums.js';
+import { CommentStatus, CommentType, UpvoteType } from '../api/entities/_enums.js';
 
 export interface Comment extends TimeStamps {
   refId: Types.ObjectId;
@@ -8,7 +8,7 @@ export interface Comment extends TimeStamps {
   jsonContent?: unknown;
   htmlContent?: string;
   textContent?: string;
-  supportsCount?: number;
+  upvotesCount?: number;
   isPinned?: boolean;
   status: CommentStatus;
   type: CommentType;
@@ -17,11 +17,10 @@ export interface Comment extends TimeStamps {
 
 export type DbComment = Comment & Document;
 
-export interface CommentSupport extends TimeStamps {
+export interface Upvote extends TimeStamps {
   accountId: Types.ObjectId;
   refId: Types.ObjectId;
-  type: CommentType;
-  commentId: Types.ObjectId;
+  type: UpvoteType;
 }
 
-export type DbCommentSupport = CommentSupport & Document;
+export type DbUpvote = Upvote & Document;

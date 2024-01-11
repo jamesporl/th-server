@@ -30,11 +30,6 @@ export class AddCommentInput {
 }
 
 @InputType()
-export class ToggleCommentSupportInput {
-  @Field(() => ID) commentId: string;
-}
-
-@InputType()
 export class TogglePinCommentInput {
   @Field(() => ID) commentId: string;
 }
