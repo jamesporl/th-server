@@ -1,6 +1,6 @@
 import { Field, ObjectType, Int } from 'type-graphql';
 import { GraphQLDateTime } from 'graphql-scalars';
-import { CommentConnection, CommentStatusObject } from './Comments'; // eslint-disable-line import/no-cycle
+import { Comments, CommentStatusObject } from './Comments'; // eslint-disable-line import/no-cycle
 import { SimpleAccount } from '../../../base/api/entities/Account.js';
 import Node from '../../../base/api/entities/Node';
 
@@ -9,9 +9,13 @@ import Node from '../../../base/api/entities/Node';
 // See https://github.com/MichalLytek/type-graphql/issues/57
 @ObjectType({ implements: Node })
 export default class Comment extends Node {
-  @Field({ nullable: true }) htmlContent?: string;
+  @Field() refId: string;
+
+  @Field() htmlContent: string;
 
   @Field({ nullable: true }) textContent?: string;
+
+  @Field({ nullable: true }) parentCommentId?: string;
 
   @Field(() => Boolean, { nullable: true }) isPinned: boolean;
 
@@ -21,7 +25,7 @@ export default class Comment extends Node {
 
   @Field(() => CommentStatusObject) status: CommentStatusObject;
 
-  @Field(() => CommentConnection, { nullable: true }) comments: CommentConnection;
+  @Field(() => Comments, { nullable: true }) comments?: Comments;
 
   @Field(() => Int) upvotesCount: number;
 

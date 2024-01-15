@@ -4,11 +4,11 @@ import { DbComment } from './_types.js';
 
 const CommentSchema = new Schema(
   {
-    parentCommentId: Schema.Types.ObjectId,
+    parentCommentId: { type: Schema.Types.ObjectId, index: true },
     jsonContent: Schema.Types.Mixed,
-    htmlContent: String,
+    htmlContent: { type: String, required: true },
     textContent: String,
-    isPinned: Boolean,
+    isPinned: { type: Boolean, default: false },
     createdBy: Schema.Types.ObjectId,
     upvotesCount: { type: Number, default: 0 },
     status: {

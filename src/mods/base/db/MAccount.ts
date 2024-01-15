@@ -5,9 +5,9 @@ const AccountSchema = new Schema(
   {
     email: { type: String, trim: true, lowercase: true },
     isAdmin: { type: Boolean, default: false },
-    firstName: { type: String, trim: true },
-    lastName: { type: String, trim: true },
-    name: { type: String, trim: true },
+    firstName: { type: String, trim: true, required: true },
+    lastName: { type: String, trim: true, required: true },
+    name: { type: String, trim: true, required: true },
     image: { type: String },
     phone: { type: String, trim: true },
     shortDesc: { type: String, trim: true },

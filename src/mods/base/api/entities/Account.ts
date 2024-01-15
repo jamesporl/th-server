@@ -5,29 +5,22 @@ import NodeConnection from './NodeConnection.js';
 
 @ObjectType({ implements: Node })
 export class SimpleAccount extends Node {
-  @Field({ nullable: true })
-    firstName?: string;
+  @Field() firstName: string;
 
-  @Field({ nullable: true })
-    lastName?: string;
+  @Field() lastName: string;
 
-  @Field({ nullable: true })
-    image?: string;
+  @Field({ nullable: true }) image?: string;
 }
 
 @ObjectType({ implements: Node })
 export class Account extends Node {
-  @Field({ nullable: true })
-    firstName?: string;
+  @Field({ nullable: true }) firstName?: string;
 
-  @Field({ nullable: true })
-    lastName?: string;
+  @Field({ nullable: true }) lastName?: string;
 
-  @Field()
-    email: string;
+  @Field() email: string;
 
-  @Field({ nullable: true })
-    image?: string;
+  @Field({ nullable: true }) image?: string;
 }
 
 @ObjectType({ implements: NodeConnection })

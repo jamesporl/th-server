@@ -4,7 +4,6 @@ import {
 import { GraphQLJSON } from 'graphql-scalars';
 import Comment from './Comment'; // eslint-disable-line import/no-cycle
 import { CommentStatus, CommentType } from './_enums';
-import NodeConnection from '../../../base/api/entities/NodeConnection';
 
 @ObjectType()
 export class CommentStatusObject {
@@ -13,9 +12,11 @@ export class CommentStatusObject {
   @Field() label: string;
 }
 
-@ObjectType({ implements: NodeConnection })
-export class CommentConnection extends NodeConnection<Comment> {
+@ObjectType()
+export class Comments {
   @Field(() => [Comment]) nodes: Comment[];
+
+  @Field(() => Boolean) hasMore: boolean;
 }
 
 @InputType()

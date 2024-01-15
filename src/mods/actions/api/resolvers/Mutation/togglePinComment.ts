@@ -35,6 +35,17 @@ export default class {
       }
     }
 
+    const otherPinnedComments = await MComment.find({
+      refId: comment.refId,
+      type: comment.type,
+      isPinned: true,
+      status: CommentStatus.published,
+    });
+
+    if (otherPinnedComments.length >= 5) {
+      throw new UserInputError('Maximum number of pinned comments has been reached.');
+    }
+
     await MComment.updateOne({ _id: commentId }, { $set: { isPinned: !comment.isPinned } });
 
     return { isCompleted: true };
