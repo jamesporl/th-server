@@ -75,7 +75,7 @@ export class App extends Node {
 
   @Field({ nullable: true }) socialUrls?: SocialUrls;
 
-  @Field(() => SimpleAccount, { nullable: true }) ownedBy?: SimpleAccount;
+  @Field(() => SimpleAccount) ownedBy: SimpleAccount;
 }
 
 @ObjectType({ implements: NodeConnection })

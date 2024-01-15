@@ -17,18 +17,6 @@ export default class {
   }
 
   @FieldResolver()
-  async comments(
-    @Ctx() { dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
-    @Root() { _id }: DbComment,
-  ) {
-    const childComments = await dataloaders.childCommentsByParentIdLoader.load(_id.toHexString());
-    return {
-      nodes: childComments,
-      totalCount: childComments.length,
-    };
-  }
-
-  @FieldResolver()
   isUpvoted(
     @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Root() { _id }: DbComment,

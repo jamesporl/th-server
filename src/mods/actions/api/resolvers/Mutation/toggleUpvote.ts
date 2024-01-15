@@ -28,6 +28,9 @@ export default class {
       }
     } else if (type === UpvoteType.comment) {
       const comment = await MComment.findOne({ _id: refId, status: CommentStatus.published });
+      if (comment.parentCommentId) {
+        dataloaders.childCommentsByParentIdLoader.clear(`${comment.parentCommentId}`);
+      }
       if (!comment) {
         throw new UserInputError('Comment not found');
       }
