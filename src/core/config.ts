@@ -14,8 +14,6 @@ const config = cleanEnv(process.env, {
   DO_SPACES_SECRET: str({ default: 'CHANGE_ME' }),
   DO_SPACES_URL: url({ default: 'https://techhustlers.sgp1.digitaloceanspaces.com' }),
   GOOGLE_OAUTH_CLIENT_ID: str({ default: 'client_id' }),
-  GOOGLE_OAUTH_CLIENT_SECRET: str({ default: 'secret' }),
-  GOOGLE_OAUTH_REDIRECT_URL: url({ default: 'https://techhustlers.ph/account/oauth/google/receive' }),
   JWT_EXPIRATION: num({ default: 24 }),
   JWT_SECRET_AUTH: str({ default: 'ChaNg3MePlea$e' }),
   MONGODB_URI: str({ default: 'mongodb://localhost:27017/th' }),

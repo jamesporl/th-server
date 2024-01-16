@@ -47,11 +47,7 @@ export class SignupInput {
 
 @InputType()
 export class LoginWithGoogleInput {
-  @Field()
-    code: string;
-
-  @Field()
-    state: string;
+  @Field() credential: string;
 }
 
 @InputType()
