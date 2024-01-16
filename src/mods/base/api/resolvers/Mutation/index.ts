@@ -1,5 +1,4 @@
 import addJob from './addJob.js';
-import createGoogleOAuthUrl from './createGoogleOAuthUrl.js';
 import login from './login.js';
 import loginWithGoogle from './loginWithGoogle.js';
 import resetPasswordByToken from './resetPasswordByToken.js';
@@ -14,7 +13,6 @@ import verifyAccountByCode from './verifyAccountByCode.js';
 
 export default [
   addJob,
-  createGoogleOAuthUrl,
   login,
   loginWithGoogle,
   resetPasswordWithAuth,
