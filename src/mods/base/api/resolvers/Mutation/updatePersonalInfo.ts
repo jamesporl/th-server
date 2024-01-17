@@ -14,13 +14,22 @@ export default class {
     @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdatePersonalInfoInput) input: UpdatePersonalInfoInput,
   ) {
-    const { firstName, lastName, shortDesc } = input;
+    const {
+      firstName, lastName, shortDesc, bio, socialUrls, location, websiteUrl,
+    } = input;
 
     const account = await MAccount.findOneAndUpdate(
       { _id: accountId },
       {
         $set: {
-          firstName, lastName, name: `${firstName} ${lastName}`, shortDesc,
+          firstName,
+          lastName,
+          name: `${firstName} ${lastName}`,
+          shortDesc,
+          bio,
+          socialUrls,
+          location,
+          websiteUrl,
         },
       },
       { new: true, lean: true },

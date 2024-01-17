@@ -10,6 +10,14 @@ export interface AccountStamps {
   updatedBy: Types.ObjectId;
 }
 
+export interface SocialUrls {
+  twitter?: string;
+  facebook?: string;
+  linkedIn?: string;
+  github?: string;
+  instagram?: string;
+}
+
 export interface Account {
   _id: Types.ObjectId;
   email: string;
@@ -30,14 +38,10 @@ export interface Account {
   verificationCode?: string;
   verificationCodeExpiry?: Date;
   verificationAttempts?: number;
+  bio?: string;
+  location: string;
+  websiteUrl: string;
+  socialUrls: SocialUrls;
 }
 
 export type DbAccount = Account & Document;
-
-export interface SocialUrls {
-  twitter?: string;
-  facebook?: string;
-  linkedIn?: string;
-  github?: string;
-  instagram?: string;
-}
