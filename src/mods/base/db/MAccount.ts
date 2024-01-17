@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 import { DbAccount } from './_types.js';
+import SocialUrlsSchema from './common/SocialUrls.js';
 
 const AccountSchema = new Schema(
   {
@@ -21,6 +22,10 @@ const AccountSchema = new Schema(
     pwResetLinkSentAt: { type: Date },
     pwResetToken: String,
     pwResetTokenExpiresAt: Date,
+    bio: String,
+    location: String,
+    websiteUrl: String,
+    socialUrls: SocialUrlsSchema,
   },
   { collection: 'Account', timestamps: true },
 );
