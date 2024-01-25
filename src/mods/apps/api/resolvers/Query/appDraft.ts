@@ -6,7 +6,7 @@ import { Context } from '../../../../../core/graphql/_types.js';
 import Auth from '../../../../../core/graphql/Auth.js';
 import { MApp, MAppDraft } from '../../../db/index.js';
 import { AppDraft } from '../../entities/AppDrafts.js';
-import { AppStatus } from '../../entities/_enums.js';
+import { AppDraftStatus, AppStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {
@@ -28,7 +28,9 @@ export default class {
     if (!isAdmin && app.ownedBy.toHexString() !== accountId.toHexString()) {
       throw new ForbiddenError('Forbidden');
     }
-    const appDraft = await MAppDraft.findOne({ appId: _id }).lean();
+    const appDraft = await MAppDraft.findOne({
+      appId: _id, status: AppDraftStatus.inProgress,
+    }).lean();
 
     return appDraft;
   }

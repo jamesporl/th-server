@@ -16,7 +16,7 @@ export default class {
   @Auth()
   @Mutation(() => DefaultMutationPayload)
   async updateProfilePhoto(
-    @Ctx() { accountId }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Ctx() { accountId, dataloaders }: Context, // eslint-disable-line @typescript-eslint/indent
     @Arg('input', () => UpdateProfilePhotoInput) input: UpdateProfilePhotoInput, // eslint-disable-line @typescript-eslint/indent
   ) {
     const { file } = input;
@@ -68,6 +68,9 @@ export default class {
       { _id: accountId },
       { $set: { image: `${config.DO_SPACES_URL}/${imgKey}` } },
     );
+
+    dataloaders.accountByIdLoader.clear(accountId.toHexString());
+
     return { isCompleted: true };
   }
 }
