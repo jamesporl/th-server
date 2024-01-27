@@ -153,7 +153,7 @@ export default class {
     }
 
     await MAppDraft.updateOne(
-      { appId },
+      { _id: appDraft._id },
       { $set: { status: AppDraftStatus.submitted, submittedAt: new Date() } },
       { new: true, lean: true },
     );

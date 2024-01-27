@@ -32,6 +32,8 @@ export default class {
       appId: _id, status: AppDraftStatus.inProgress,
     }).lean();
 
+    console.log(appDraft);
+
     return appDraft;
   }
 }
