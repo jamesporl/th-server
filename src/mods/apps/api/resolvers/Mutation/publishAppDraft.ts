@@ -56,7 +56,7 @@ export default class {
     await MApp.updateOne({ _id: appId }, { $set: appUpdate });
 
     const updatedAppDraft = await MAppDraft.findOneAndUpdate(
-      { appId },
+      { _id: appDraft._id },
       { $set: { status: AppDraftStatus.published } },
       { new: true, lean: true },
     );

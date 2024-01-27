@@ -12,6 +12,7 @@ import s3Config from '../../../../../core/s3Config.js';
 import { MAppDraft } from '../../../db/index.js';
 import { AddAppDraftBannerImgInput } from '../../entities/AppDrafts.js';
 import { BannerImg } from '../../entities/Apps.js';
+import { AppDraftStatus } from '../../entities/_enums.js';
 
 @Resolver()
 export default class {
@@ -23,7 +24,11 @@ export default class {
   ) {
     const { appId, file } = input;
 
-    const appDraft = await MAppDraft.findOne({ appId, ownedBy: accountId }).lean();
+    const appDraft = await MAppDraft.findOne({
+      appId,
+      ownedBy: accountId,
+      status: AppDraftStatus.inProgress,
+    }).lean();
 
     if (!appDraft) {
       throw new UserInputError('App not found.');
@@ -94,11 +99,11 @@ export default class {
 
     if (appDraft.bannerImgs?.length) {
       await MAppDraft.updateOne(
-        { appId },
+        { _id: appDraft._id },
         { $push: { bannerImgs: imgSubDoc } },
       );
     } else {
-      await MAppDraft.updateOne({ appId }, { $set: { bannerImgs: [imgSubDoc] } });
+      await MAppDraft.updateOne({ _id: appDraft._id }, { $set: { bannerImgs: [imgSubDoc] } });
     }
 
     return imgSubDoc;
