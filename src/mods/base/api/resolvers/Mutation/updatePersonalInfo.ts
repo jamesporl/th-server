@@ -30,6 +30,7 @@ export default class {
           socialUrls,
           location,
           websiteUrl,
+          lastSeenAt: new Date(),
         },
       },
       { new: true, lean: true },
