@@ -5,7 +5,7 @@ export default async function loadInitialData(): Promise<void> {
   const adminPwHash = await hashPassword('admin123');
   const adminEmail = 'admin@techhustlers.ph';
 
-  const adminPartner = {
+  const adminAccount = {
     email: adminEmail,
     firstName: 'Tony',
     lastName: 'Guzman',
@@ -13,10 +13,11 @@ export default async function loadInitialData(): Promise<void> {
     isAdmin: true,
     isVerified: true,
     password: adminPwHash,
+    lastSeenAt: new Date(),
   };
 
   const adminAccountDoc = await MAccount.findOne({ email: adminEmail });
   if (!adminAccountDoc) {
-    await new MAccount(adminPartner).save();
+    await new MAccount(adminAccount).save();
   }
 }

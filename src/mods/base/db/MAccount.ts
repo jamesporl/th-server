@@ -26,6 +26,7 @@ const AccountSchema = new Schema(
     location: String,
     websiteUrl: String,
     socialUrls: SocialUrlsSchema,
+    lastSeenAt: { type: Date, required: true },
   },
   { collection: 'Account', timestamps: true },
 );
