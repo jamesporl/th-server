@@ -24,3 +24,11 @@ export enum UpvoteType {
 
 registerEnumType(UpvoteType, { name: 'UpvoteType' });
 export const UPVOTE_TYPE_VALUES = Object.values(UpvoteType);
+
+export enum AnalyticsEventType {
+  appView = 'appView',
+  appWebsiteClick = 'appWebsiteClick',
+}
+
+registerEnumType(AnalyticsEventType, { name: 'AnalyticsEventType' });
+export const ANALYTICS_EVENT_TYPE_VALUES = Object.values(AnalyticsEventType);

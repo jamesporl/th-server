@@ -33,9 +33,17 @@ function buildGqlContext(
   { req }: { req: express.Request & { userContext: Context } },
 ): Context {
   const dataloaders = createDataloaders();
+  let ipAddress = '';
+  const xFF = req.headers['x-forwarded-for'];
+  if (Array.isArray(xFF) && xFF.length) {
+    [ipAddress] = req.headers['x-forwarded-for'];
+  } else if (!Array.isArray(xFF) && xFF) {
+    ipAddress = xFF;
+  }
   return {
     ...req.userContext,
     dataloaders,
+    ipAddress,
   };
 }
 
