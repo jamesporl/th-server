@@ -43,6 +43,7 @@ export default class {
       isVerified: false,
       isAdmin: false,
       isActive: true,
+      lastSeenAt: new Date(),
     }).save();
 
     await sendWelcomeWithVerificationCodeEmail(account);

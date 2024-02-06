@@ -1,5 +1,6 @@
 import { FileUpload, GraphQLUpload } from 'graphql-upload';
 import { Field, ObjectType, InputType } from 'type-graphql';
+import { GraphQLDateTime } from 'graphql-scalars';
 import Node from './Node';
 import SocialUrlsInput from './SocialUrlsInput.js';
 import SocialUrls from './SocialUrls.js';
@@ -25,6 +26,8 @@ export class Profile extends Node {
   @Field({ nullable: true }) location?: string;
 
   @Field({ nullable: true }) bio?: string;
+
+  @Field(() => GraphQLDateTime) lastSeenAt: Date;
 }
 
 @InputType()

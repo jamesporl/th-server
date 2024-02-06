@@ -55,6 +55,7 @@ export default class {
         password: await hashPassword(randomPw),
         isVerified: true,
         isAdmin: false,
+        lastSeenAt: new Date(),
       }).save();
 
       await sendWelcomeForGoogleSignupEmail(account);

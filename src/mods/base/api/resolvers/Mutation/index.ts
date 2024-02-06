@@ -6,6 +6,7 @@ import resetPasswordWithAuth from './resetPasswordWithAuth.js';
 import sendPasswordResetLink from './sendPasswordResetLink.js';
 import sendVerificationCode from './sendVerificationCode.js';
 import signup from './signup.js';
+import updateAccountLastSeenAt from './updateAccountLastSeenAt.js';
 import updateEmail from './updateEmail.js';
 import updatePersonalInfo from './updatePersonalInfo.js';
 import updateProfilePhoto from './updateProfilePhoto.js';
@@ -20,6 +21,7 @@ export default [
   sendPasswordResetLink,
   sendVerificationCode,
   signup,
+  updateAccountLastSeenAt,
   updateEmail,
   updateProfilePhoto,
   updatePersonalInfo,

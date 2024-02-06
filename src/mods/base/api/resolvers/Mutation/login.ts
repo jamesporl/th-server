@@ -35,6 +35,7 @@ export default class {
     let authToken = '';
     if (account.isVerified) {
       authToken = generateAuthToken(account);
+      await MAccount.updateOne({ _id: account._id }, { $set: { lastSeenAt: new Date() } });
     } else {
       await sendVerificationCodeEmail(account);
     }

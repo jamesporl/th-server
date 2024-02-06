@@ -42,6 +42,7 @@ export interface Account {
   location: string;
   websiteUrl: string;
   socialUrls: SocialUrls;
+  lastSeenAt: Date;
 }
 
 export type DbAccount = Account & Document;
