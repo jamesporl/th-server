@@ -68,6 +68,8 @@ export default class {
           email: account.email,
         },
       });
+    } else {
+      await MAccount.updateOne({ _id: account._id }, { $set: { lastSeenAt: new Date() } });
     }
 
     const authToken = generateAuthToken(account);
