@@ -4,6 +4,11 @@ import { AppStatus, APP_STATUS_VALUES } from '../api/entities/_enums.js';
 import { DbApp } from './_types.js';
 import BannerImgSchema from './common/BannerImg.js';
 
+const AppAnalyticsSchema = new Schema({
+  views: { type: Number, default: 0 },
+  websiteClicks: { type: Number, default: 0 },
+}, { _id: false });
+
 const AppSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -27,6 +32,7 @@ const AppSchema = new Schema(
     upvotesCount: { type: Number, default: 0 },
     tagIds: [Schema.Types.ObjectId],
     isFeatured: Boolean,
+    analytics: { type: AppAnalyticsSchema, required: true },
     createdBy: Schema.Types.ObjectId,
     updatedBy: Schema.Types.ObjectId,
   },

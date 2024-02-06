@@ -30,6 +30,10 @@ export interface App extends TimeStamps, AccountStamps {
   isFeatured?: boolean;
   slug?: string;
   socialUrls?: SocialUrls;
+  analytics: {
+    views: number;
+    websiteClicks: number;
+  }
 }
 
 export type DbApp = App & Document;

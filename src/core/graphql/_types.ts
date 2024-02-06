@@ -8,4 +8,5 @@ export interface AccountContext {
 
 export interface Context extends AccountContext {
   dataloaders: ReturnType<typeof createDataloaders>;
+  ipAddress: string;
 }
