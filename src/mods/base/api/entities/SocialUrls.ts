@@ -6,7 +6,7 @@ export default class SocialUrls {
 
   @Field({ nullable: true }) linkedIn?: string;
 
-  @Field({ nullable: true }) twitter?: string;
+  @Field({ nullable: true }) x?: string;
 
   @Field({ nullable: true }) instagram?: string;
 

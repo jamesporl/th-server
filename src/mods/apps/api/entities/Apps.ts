@@ -33,7 +33,7 @@ export class AppAnalytics {
 
   @Field(() => Int) instagramClicks: number;
 
-  @Field(() => Int) twitterClicks: number;
+  @Field(() => Int) xClicks: number;
 
   @Field(() => Int) linkedInClicks: number;
 

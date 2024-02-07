@@ -10,7 +10,7 @@ const AppAnalyticsSchema = new Schema({
   facebookClicks: { type: Number, default: 0 },
   instagramClicks: { type: Number, default: 0 },
   linkedInClicks: { type: Number, default: 0 },
-  twitterClicks: { type: Number, default: 0 },
+  xClicks: { type: Number, default: 0 },
   githubClicks: { type: Number, default: 0 },
 }, { _id: false });
 

@@ -30,7 +30,7 @@ export enum AnalyticsEventType {
   appWebsiteClick = 'appWebsiteClick',
   appFacebookClick = 'appFacebookClick',
   appInstagramClick = 'appInstagramClick',
-  appTwitterClick = 'appTwitterClick',
+  appXClick = 'appXClick',
   appLinkedInClick = 'appLinkedInClick',
   appGithubClick = 'appGithubClick',
 }

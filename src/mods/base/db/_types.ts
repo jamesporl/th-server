@@ -11,7 +11,7 @@ export interface AccountStamps {
 }
 
 export interface SocialUrls {
-  twitter?: string;
+  x?: string;
   facebook?: string;
   linkedIn?: string;
   github?: string;

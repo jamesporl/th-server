@@ -1,7 +1,7 @@
 import { Schema } from 'mongoose';
 
 const SocialUrlsSchema = new Schema({
-  twitter: String,
+  x: String,
   facebook: String,
   linkedIn: String,
   github: String,

@@ -36,14 +36,14 @@ export default class {
     const websiteUrl = iWebsiteUrl?.trim();
 
     const {
-      github, linkedIn, facebook, twitter, instagram,
+      github, linkedIn, facebook, x, instagram,
     } = iSocialUrls || {};
 
     const socialUrls = {
       github: github?.trim(),
       linkedIn: linkedIn?.trim(),
       facebook: facebook?.trim(),
-      twitter: twitter?.trim(),
+      x: x?.trim(),
       instagram: instagram?.trim(),
     };
 

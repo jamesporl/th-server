@@ -40,7 +40,7 @@ export default class {
         facebookClicks: analytics?.facebookClicks || 0,
         instagramClicks: analytics?.instagramClicks || 0,
         linkedInClicks: analytics?.linkedInClicks || 0,
-        twitterClicks: analytics?.twitterClicks || 0,
+        xClicks: analytics?.xClicks || 0,
         githubClicks: analytics?.githubClicks || 0,
       };
     }
@@ -50,7 +50,7 @@ export default class {
       facebookClicks: 0,
       instagramClicks: 0,
       linkedInClicks: 0,
-      twitterClicks: 0,
+      xClicks: 0,
       githubClicks: 0,
     };
   }
