@@ -36,7 +36,7 @@ export interface App extends TimeStamps, AccountStamps {
     facebookClicks?: number;
     instagramClicks?: number;
     linkedInClicks?: number;
-    twitterClicks?: number;
+    xClicks?: number;
     githubClicks?: number;
   }
 }

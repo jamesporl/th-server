@@ -50,8 +50,8 @@ export default class {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.facebookClicks': 1 } });
       } else if (type === AnalyticsEventType.appInstagramClick) {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.instagramClicks': 1 } });
-      } else if (type === AnalyticsEventType.appTwitterClick) {
-        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.twitterClicks': 1 } });
+      } else if (type === AnalyticsEventType.appXClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.xClicks': 1 } });
       } else if (type === AnalyticsEventType.appLinkedInClick) {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.linkedInClicks': 1 } });
       } else if (type === AnalyticsEventType.appGithubClick) {

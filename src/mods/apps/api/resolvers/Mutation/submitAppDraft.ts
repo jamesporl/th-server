@@ -56,7 +56,7 @@ export default class {
 
     if (socialUrls) {
       const {
-        instagram, github, facebook, linkedIn, twitter,
+        instagram, github, facebook, linkedIn, x,
       } = socialUrls;
       if (facebook) {
         const re = /https:\/\/(?:www\.)?facebook.com\/&?/;
@@ -70,10 +70,10 @@ export default class {
           errors.push('Instagram URL is invalid.');
         }
       }
-      if (twitter) {
-        const re = /https:\/\/(?:www\.)?twitter.com\/&?/;
-        if (!re.test(twitter)) {
-          errors.push('Twitter URL is invalid.');
+      if (x) {
+        const re = /https:\/\/(?:www\.)?x.com\/&?/;
+        if (!re.test(x)) {
+          errors.push('X URL is invalid.');
         }
       }
       if (linkedIn) {
