@@ -28,6 +28,11 @@ export const UPVOTE_TYPE_VALUES = Object.values(UpvoteType);
 export enum AnalyticsEventType {
   appView = 'appView',
   appWebsiteClick = 'appWebsiteClick',
+  appFacebookClick = 'appFacebookClick',
+  appInstagramClick = 'appInstagramClick',
+  appTwitterClick = 'appTwitterClick',
+  appLinkedInClick = 'appLinkedInClick',
+  appGithubClick = 'appGithubClick',
 }
 
 registerEnumType(AnalyticsEventType, { name: 'AnalyticsEventType' });

@@ -30,9 +30,14 @@ export interface App extends TimeStamps, AccountStamps {
   isFeatured?: boolean;
   slug?: string;
   socialUrls?: SocialUrls;
-  analytics: {
-    views: number;
-    websiteClicks: number;
+  analytics?: {
+    views?: number;
+    websiteClicks?: number;
+    facebookClicks?: number;
+    instagramClicks?: number;
+    linkedInClicks?: number;
+    twitterClicks?: number;
+    githubClicks?: number;
   }
 }
 

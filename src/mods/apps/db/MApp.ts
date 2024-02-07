@@ -7,6 +7,11 @@ import BannerImgSchema from './common/BannerImg.js';
 const AppAnalyticsSchema = new Schema({
   views: { type: Number, default: 0 },
   websiteClicks: { type: Number, default: 0 },
+  facebookClicks: { type: Number, default: 0 },
+  instagramClicks: { type: Number, default: 0 },
+  linkedInClicks: { type: Number, default: 0 },
+  twitterClicks: { type: Number, default: 0 },
+  githubClicks: { type: Number, default: 0 },
 }, { _id: false });
 
 const AppSchema = new Schema(
@@ -32,7 +37,7 @@ const AppSchema = new Schema(
     upvotesCount: { type: Number, default: 0 },
     tagIds: [Schema.Types.ObjectId],
     isFeatured: Boolean,
-    analytics: { type: AppAnalyticsSchema, required: true },
+    analytics: { type: AppAnalyticsSchema },
     createdBy: Schema.Types.ObjectId,
     updatedBy: Schema.Types.ObjectId,
   },

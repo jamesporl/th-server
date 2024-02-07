@@ -46,6 +46,16 @@ export default class {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.views': 1 } });
       } else if (type === AnalyticsEventType.appWebsiteClick) {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.websiteClicks': 1 } });
+      } else if (type === AnalyticsEventType.appFacebookClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.facebookClicks': 1 } });
+      } else if (type === AnalyticsEventType.appInstagramClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.instagramClicks': 1 } });
+      } else if (type === AnalyticsEventType.appTwitterClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.twitterClicks': 1 } });
+      } else if (type === AnalyticsEventType.appLinkedInClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.linkedInClicks': 1 } });
+      } else if (type === AnalyticsEventType.appGithubClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.githubClicks': 1 } });
       }
       redisConnection.setex(lastEventKey, 3600, 1); // 1 hour expiry
     }

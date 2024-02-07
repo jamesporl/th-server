@@ -29,6 +29,33 @@ export default class {
   }
 
   @FieldResolver()
+  analytics(
+    @Ctx() { accountId, isAdmin }: Context, // eslint-disable-line @typescript-eslint/indent
+    @Root() { ownedBy, analytics }: DbApp,
+  ) {
+    if ((accountId && ownedBy.toHexString() === accountId.toHexString()) || isAdmin) {
+      return {
+        views: analytics?.views || 0,
+        websiteClicks: analytics?.websiteClicks || 0,
+        facebookClicks: analytics?.facebookClicks || 0,
+        instagramClicks: analytics?.instagramClicks || 0,
+        linkedInClicks: analytics?.linkedInClicks || 0,
+        twitterClicks: analytics?.twitterClicks || 0,
+        githubClicks: analytics?.githubClicks || 0,
+      };
+    }
+    return {
+      views: 0,
+      websiteClicks: 0,
+      facebookClicks: 0,
+      instagramClicks: 0,
+      linkedInClicks: 0,
+      twitterClicks: 0,
+      githubClicks: 0,
+    };
+  }
+
+  @FieldResolver()
   isUpvoted(
     @Ctx() { dataloaders, accountId }: Context, // eslint-disable-line @typescript-eslint/indent
     @Root() { _id }: DbApp,
