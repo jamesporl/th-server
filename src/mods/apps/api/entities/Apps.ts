@@ -24,6 +24,23 @@ export class AppStatusObject {
 }
 
 @ObjectType()
+export class AppAnalytics {
+  @Field(() => Int) views: number;
+
+  @Field(() => Int) websiteClicks: number;
+
+  @Field(() => Int) facebookClicks: number;
+
+  @Field(() => Int) instagramClicks: number;
+
+  @Field(() => Int) twitterClicks: number;
+
+  @Field(() => Int) linkedInClicks: number;
+
+  @Field(() => Int) githubClicks: number;
+}
+
+@ObjectType()
 export class BannerImageUrls {
   @Field() large: string;
 
@@ -76,6 +93,8 @@ export class App extends Node {
   @Field({ nullable: true }) socialUrls?: SocialUrls;
 
   @Field(() => SimpleAccount) ownedBy: SimpleAccount;
+
+  @Field(() => AppAnalytics) analytics: AppAnalytics;
 }
 
 @ObjectType({ implements: NodeConnection })

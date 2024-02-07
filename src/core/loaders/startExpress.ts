@@ -34,11 +34,12 @@ function buildGqlContext(
 ): Context {
   const dataloaders = createDataloaders();
   let ipAddress = '';
-  const xFF = req.headers['x-forwarded-for'];
-  if (Array.isArray(xFF) && xFF.length) {
-    [ipAddress] = req.headers['x-forwarded-for'];
-  } else if (!Array.isArray(xFF) && xFF) {
-    ipAddress = xFF;
+  // See the nginx configuration: proxy_set_header X-Real-IP $remote_addr;
+  const xRealIP = req.headers['x-real-ip'];
+  if (Array.isArray(xRealIP) && xRealIP.length) {
+    [ipAddress] = xRealIP;
+  } else if (!Array.isArray(xRealIP) && xRealIP) {
+    ipAddress = xRealIP;
   }
   return {
     ...req.userContext,
