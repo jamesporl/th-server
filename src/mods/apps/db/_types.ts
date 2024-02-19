@@ -38,6 +38,8 @@ export interface App extends TimeStamps, AccountStamps {
     linkedInClicks?: number;
     xClicks?: number;
     githubClicks?: number;
+    threadsClicks?: number;
+    tiktokClicks?: number;
   }
 }
 

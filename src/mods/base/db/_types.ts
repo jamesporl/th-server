@@ -16,6 +16,8 @@ export interface SocialUrls {
   linkedIn?: string;
   github?: string;
   instagram?: string;
+  threads?: string;
+  tiktok?: string;
 }
 
 export interface Account {

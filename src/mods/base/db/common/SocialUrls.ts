@@ -6,6 +6,8 @@ const SocialUrlsSchema = new Schema({
   linkedIn: String,
   github: String,
   instagram: String,
+  threads: String,
+  tiktok: String,
 }, { _id: false });
 
 export default SocialUrlsSchema;

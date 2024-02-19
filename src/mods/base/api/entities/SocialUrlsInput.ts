@@ -11,4 +11,8 @@ export default class SocialUrlsInput {
   @Field({ nullable: true }) instagram?: string;
 
   @Field({ nullable: true }) github?: string;
+
+  @Field({ nullable: true }) threads?: string;
+
+  @Field({ nullable: true }) tiktok?: string;
 }
