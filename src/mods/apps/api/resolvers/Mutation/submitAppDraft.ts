@@ -56,7 +56,7 @@ export default class {
 
     if (socialUrls) {
       const {
-        instagram, github, facebook, linkedIn, x,
+        instagram, github, facebook, linkedIn, x, threads, tiktok,
       } = socialUrls;
       if (facebook) {
         const re = /https:\/\/(?:www\.)?facebook.com\/&?/;
@@ -86,6 +86,18 @@ export default class {
         const re = /https:\/\/(?:www\.)?github.com\/&?/;
         if (!re.test(github)) {
           errors.push('Github URL is invalid.');
+        }
+      }
+      if (threads) {
+        const re = /https:\/\/(?:www\.)?threads.net\/&?/;
+        if (!re.test(tiktok)) {
+          errors.push('Threads URL is invalid.');
+        }
+      }
+      if (tiktok) {
+        const re = /https:\/\/(?:www\.)?tiktok.com\/&?/;
+        if (!re.test(tiktok)) {
+          errors.push('Tiktok URL is invalid.');
         }
       }
     }

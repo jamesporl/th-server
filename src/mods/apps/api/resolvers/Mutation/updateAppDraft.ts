@@ -36,7 +36,7 @@ export default class {
     const websiteUrl = iWebsiteUrl?.trim();
 
     const {
-      github, linkedIn, facebook, x, instagram,
+      github, linkedIn, facebook, x, instagram, threads, tiktok,
     } = iSocialUrls || {};
 
     const socialUrls = {
@@ -45,6 +45,8 @@ export default class {
       facebook: facebook?.trim(),
       x: x?.trim(),
       instagram: instagram?.trim(),
+      threads: threads?.trim(),
+      tiktok: tiktok?.trim(),
     };
 
     if (name.length > 40) {

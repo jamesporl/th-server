@@ -42,6 +42,8 @@ export default class {
         linkedInClicks: analytics?.linkedInClicks || 0,
         xClicks: analytics?.xClicks || 0,
         githubClicks: analytics?.githubClicks || 0,
+        threadsClicks: analytics?.threadsClicks || 0,
+        tiktokClicks: analytics?.tiktokClicks || 0,
       };
     }
     return {
@@ -52,6 +54,8 @@ export default class {
       linkedInClicks: 0,
       xClicks: 0,
       githubClicks: 0,
+      tiktokClicks: 0,
+      threadsClicks: 0,
     };
   }
 

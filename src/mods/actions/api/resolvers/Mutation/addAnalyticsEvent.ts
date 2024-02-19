@@ -56,6 +56,10 @@ export default class {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.linkedInClicks': 1 } });
       } else if (type === AnalyticsEventType.appGithubClick) {
         await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.githubClicks': 1 } });
+      } else if (type === AnalyticsEventType.appThreadsClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.threadsClicks': 1 } });
+      } else if (type === AnalyticsEventType.appTiktokClick) {
+        await MApp.updateOne({ _id: appId }, { $inc: { 'analytics.tiktokClicks': 1 } });
       }
       redisConnection.setex(lastEventKey, 3600, 1); // 1 hour expiry
     }

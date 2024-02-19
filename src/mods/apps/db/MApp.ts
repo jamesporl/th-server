@@ -12,6 +12,8 @@ const AppAnalyticsSchema = new Schema({
   linkedInClicks: { type: Number, default: 0 },
   xClicks: { type: Number, default: 0 },
   githubClicks: { type: Number, default: 0 },
+  threadsClicks: { type: Number, default: 0 },
+  tiktokClicks: { type: Number, default: 0 },
 }, { _id: false });
 
 const AppSchema = new Schema(

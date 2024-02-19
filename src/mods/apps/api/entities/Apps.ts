@@ -38,6 +38,10 @@ export class AppAnalytics {
   @Field(() => Int) linkedInClicks: number;
 
   @Field(() => Int) githubClicks: number;
+
+  @Field(() => Int) threadsClicks: number;
+
+  @Field(() => Int) tiktokClicks: number;
 }
 
 @ObjectType()

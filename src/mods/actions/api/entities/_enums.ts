@@ -33,6 +33,8 @@ export enum AnalyticsEventType {
   appXClick = 'appXClick',
   appLinkedInClick = 'appLinkedInClick',
   appGithubClick = 'appGithubClick',
+  appThreadsClick = 'appThreadsClick',
+  appTiktokClick = 'appTiktokClick',
 }
 
 registerEnumType(AnalyticsEventType, { name: 'AnalyticsEventType' });
